@@ -1,0 +1,161 @@
+{
+  "name": "jpglens",
+  "version": "1.0.0",
+  "description": "🔍 Universal AI-Powered UI Testing - See your interfaces through the lens of intelligence",
+  "keywords": [
+    "ui-testing",
+    "ai-testing", 
+    "visual-testing",
+    "playwright",
+    "cypress",
+    "selenium",
+    "storybook",
+    "accessibility",
+    "user-experience",
+    "design-systems",
+    "contextual-testing",
+    "llm-testing",
+    "openrouter",
+    "gpt-vision",
+    "claude-vision"
+  ],
+  "author": {
+    "name": "Taha Bahrami (Kaito)",
+    "email": "taha@jpgos.com",
+    "url": "https://github.com/kaito"
+  },
+  "contributors": [
+    {
+      "name": "Ashkan",
+      "role": "Support & Guidance"
+    }
+  ],
+  "license": "MIT",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "jpglens": "bin/jpglens.js"
+  },
+  "files": [
+    "dist",
+    "bin",
+    "plugins",
+    "templates",
+    "docs",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:e2e": "echo 'E2E tests require peer dependencies'",
+    "test:compatibility": "node tests/compatibility.js",
+    "test:performance": "node tests/performance.js",
+    "test:security": "npm audit --audit-level moderate",
+    "test:all": "npm run lint && npm run test:coverage && npm run test:compatibility",
+    "lint": "eslint src --ext .js,.ts",
+    "lint:fix": "eslint src --ext .js,.ts --fix",
+    "format": "prettier --write src/",
+    "format:check": "prettier --check src/",
+    "typecheck": "tsc --noEmit",
+    "docs:dev": "echo 'Docs available in README.md'",
+    "docs:build": "echo 'Docs available in README.md'",
+    "docs:validate": "node scripts/validate-docs.js",
+    "validate": "npm run typecheck && npm run lint && npm run test:coverage && npm run build",
+    "clean": "rimraf dist coverage .nyc_output",
+    "prepublishOnly": "npm run clean && npm run validate",
+    "prepack": "npm run build",
+    "release": "echo 'Release process available'",
+    "release:dry": "echo 'Dry run release process available'"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./playwright": {
+      "import": "./dist/playwright.esm.js",
+      "require": "./dist/playwright.js",
+      "types": "./dist/playwright.d.ts"
+    },
+    "./cypress": {
+      "import": "./dist/cypress.esm.js", 
+      "require": "./dist/cypress.js",
+      "types": "./dist/cypress.d.ts"
+    },
+    "./selenium": {
+      "import": "./dist/selenium.esm.js",
+      "require": "./dist/selenium.js", 
+      "types": "./dist/selenium.d.ts"
+    },
+    "./storybook": {
+      "import": "./dist/storybook.esm.js",
+      "require": "./dist/storybook.js",
+      "types": "./dist/storybook.d.ts"
+    },
+    "./testing-library": {
+      "import": "./dist/testing-library.esm.js",
+      "require": "./dist/testing-library.js",
+      "types": "./dist/testing-library.d.ts"
+    }
+  },
+  "peerDependencies": {
+    "@playwright/test": ">=1.40.0",
+    "cypress": ">=12.0.0",
+    "selenium-webdriver": ">=4.0.0",
+    "@storybook/test": ">=7.0.0",
+    "@testing-library/react": ">=13.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@playwright/test": { "optional": true },
+    "cypress": { "optional": true },
+    "selenium-webdriver": { "optional": true },
+    "@storybook/test": { "optional": true },
+    "@testing-library/react": { "optional": true }
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "commander": "^9.5.0",
+    "inquirer": "^8.2.6",
+    "ora": "^5.4.1",
+    "yaml": "^2.3.4",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.5",
+    "@types/jest": "^29.5.8",
+    "@types/node": "^20.9.0",
+    "@typescript-eslint/eslint-plugin": "^6.12.0",
+    "@typescript-eslint/parser": "^6.12.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.54.0",
+    "jest": "^29.7.0",
+    "prettier": "^3.1.0",
+    "rimraf": "^5.0.5",
+    "rollup": "^4.5.0",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.2.2"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jpgos/jpglens.git"
+  },
+  "homepage": "https://jpglens.dev",
+  "bugs": {
+    "url": "https://github.com/jpgos/jpglens/issues"
+  },
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/jpgos"
+  }
+}
