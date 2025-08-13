@@ -286,7 +286,7 @@ export class PlaywrightJPGLens {
 
       // Tailwind CSS
       const element = document.querySelector('*[class*="bg-"], *[class*="text-"], *[class*="p-"], *[class*="m-"]');
-      if (element && element.className.includes('bg-') || element?.className.includes('text-')) {
+      if (element && (element.className?.includes('bg-') || element.className?.includes('text-'))) {
         return 'Tailwind CSS';
       }
 

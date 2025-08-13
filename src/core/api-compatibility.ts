@@ -121,10 +121,10 @@ export class APICompatibilityHandler {
 
     // For OpenRouter, detect based on model name
     if (this.config.provider === 'openrouter') {
-      if (this.config.model.includes('anthropic/') || this.config.model.includes('claude')) {
+      if (this.config.model?.includes('anthropic/') || this.config.model?.includes('claude')) {
         return 'anthropic';
       }
-      if (this.config.model.includes('openai/') || this.config.model.includes('gpt')) {
+      if (this.config.model?.includes('openai/') || this.config.model?.includes('gpt')) {
         return 'openai';
       }
     }

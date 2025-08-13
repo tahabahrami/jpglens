@@ -204,13 +204,15 @@ export class AIAnalyzer {
       return SpecializedPrompts.designSystem(context);
     }
 
-    if (context.userContext.deviceContext.includes('mobile')) {
+    if (context.userContext?.deviceContext?.includes('mobile')) {
       return SpecializedPrompts.mobileApp(context);
     }
 
     // Default to master prompt
     return createMasterPrompt(context, analysisTypes);
   }
+
+
 
   /**
    * Validate analysis inputs
@@ -568,10 +570,13 @@ export class AIAnalyzer {
    * Create error result for failed analyses
    */
   private createErrorResult(error: any, context: AnalysisContext, analysisTime: number): AnalysisResult {
+    // Safely extract page information with proper null checks
+    const pageUrl = context?.pageInfo?.url || context?.stage || 'unknown';
+    
     return {
       id: `jpglens-error-${Date.now()}`,
       timestamp: new Date().toISOString(),
-      page: (context as any).pageInfo?.url || context.stage || 'unknown',
+      page: pageUrl,
       context,
       overallScore: 0,
       scores: {},

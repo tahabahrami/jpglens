@@ -5,6 +5,48 @@ All notable changes to jpglens will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.4] - 2025-01-13
+
+### 🐛 Fixed
+- **Critical Bug Fix**: Fixed multiple undefined `.includes()` calls causing `Cannot read properties of undefined (reading 'includes')` errors:
+  - Added null safety to `context.userContext.deviceContext` in ai-analyzer.ts
+  - Added null safety to `config.analysis.types` in config.ts  
+  - Added null safety to `element.className` in playwright.ts
+  - Added null safety to `config.ai.model` in provider files
+- Improved error handling and null safety across the entire codebase
+
+## [1.0.3] - 2025-01-13
+
+### 🐛 Fixed
+- **Critical Bug Fix**: Fixed `Cannot read properties of undefined (reading 'pageInfo')` error in `AIAnalyzer.createErrorResult` method
+- Reverted to stable single screenshot API (multiple screenshots will be added in future version)
+- Added proper null checks for optional `pageInfo` property in error handling
+- Improved error handling robustness when analysis fails
+
+### 🔧 Technical Details
+- Updated `createErrorResult` method to safely access `context.pageInfo` with proper null coalescing
+- Changed from unsafe type casting `(context as any).pageInfo?.url` to safe optional chaining `context?.pageInfo?.url`
+- Enhanced error result generation to handle missing context properties gracefully
+- Maintained 100% backward compatibility with existing API
+
+## [1.0.2] - 2025-01-13
+
+### 🐛 Fixed
+- **Critical Bug Fix**: Fixed `Cannot read properties of undefined (reading 'pageInfo')` error in `AIAnalyzer.createErrorResult` method
+- Added proper null checks for optional `pageInfo` property in error handling
+- Improved error handling robustness when analysis fails
+
+### 🔧 Technical Details
+- Updated `createErrorResult` method to safely access `context.pageInfo` with proper null coalescing
+- Changed from unsafe type casting `(context as any).pageInfo?.url` to safe optional chaining `context?.pageInfo?.url`
+- Enhanced error result generation to handle missing context properties gracefully
+
+## [1.0.1] - 2025-01-13
+
+### 🐛 Fixed
+- Minor compatibility improvements
+- Enhanced error handling
+
 ## [1.0.0] - 2024-01-15
 
 ### 🎉 Initial Release

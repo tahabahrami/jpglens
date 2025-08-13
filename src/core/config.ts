@@ -227,9 +227,11 @@ export function validateConfig(config: JPGLensConfig): { valid: boolean; errors:
     'mobile-optimization', 'conversion-optimization', 'brand-consistency', 'error-handling'
   ];
 
-  for (const type of config.analysis.types) {
-    if (!validAnalysisTypes.includes(type)) {
-      errors.push(`Invalid analysis type: ${type}. Valid types: ${validAnalysisTypes.join(', ')}`);
+  if (config.analysis?.types) {
+    for (const type of config.analysis.types) {
+      if (!validAnalysisTypes.includes(type)) {
+        errors.push(`Invalid analysis type: ${type}. Valid types: ${validAnalysisTypes.join(', ')}`);
+      }
     }
   }
 

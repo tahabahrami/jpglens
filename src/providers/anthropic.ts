@@ -20,7 +20,7 @@ export class AnthropicProvider implements AIProvider {
 
   constructor(private config: JPGLensConfig) {
     this.apiKey = config.ai.apiKey;
-    this.model = config.ai.model.includes('/') ? config.ai.model.split('/')[1] : config.ai.model;
+    this.model = config.ai.model?.includes('/') ? config.ai.model.split('/')[1] : config.ai.model;
 
     if (!this.apiKey) {
       throw new Error('Anthropic API key is required');
