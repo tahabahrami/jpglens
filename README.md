@@ -12,7 +12,7 @@
 [![Cypress](https://img.shields.io/badge/🌲-Cypress-17202c)](https://cypress.io/)
 [![Storybook](https://img.shields.io/badge/📖-Storybook-ff4785)](https://storybook.js.org/)
 
-*From the creators of [jpgos design system](https://github.com/jpgos/jpgos)*
+*From the creators of [jpgos design system](https://github.com/tahabahrami/jpgos)*
 
 </div>
 
@@ -44,7 +44,7 @@ Traditional UI testing tools can tell you if a button *works*, but they can't te
 1. **The Challenge** - jpgos serves millions of users daily, but traditional testing couldn't catch UX issues
 2. **The Experiment** - We integrated AI analysis into our testing workflow  
 3. **The Breakthrough** - AI could identify usability issues that humans missed
-4. **The Solution** - jpglens was born - making this power available to everyone
+4. **The Solution** - jpglens was born, making this power available to everyone
 
 *Special thanks to **Ashkan** for his invaluable support and guidance throughout this journey.*
 
@@ -439,7 +439,7 @@ jpglens is open source and thrives on community contributions:
 
 ### 🏗️ **Built With jpglens**
 
-Organizations using jpglens to deliver exceptional user experiences:
+Organizations using JPGLens to deliver exceptional user experiences:
 
 - **jpgos Design System** - The original use case that started it all
 - **Enterprise SaaS Platforms** - Ensuring accessibility and usability
@@ -466,7 +466,7 @@ Organizations using jpglens to deliver exceptional user experiences:
 
 ### 💫 **Vision**
 
-*"We envision a world where every digital interface is not just functional, but truly **human-centered**. jpglens is our contribution to making exceptional user experience accessible to every development team."*
+*"We envision a world where every digital interface is not just functional, but truly **human-centered**. jpglens is our contribution to making an exceptional user experience accessible to every development team."*
 
 ---
 
@@ -476,10 +476,10 @@ Organizations using jpglens to deliver exceptional user experiences:
 
 ### 👨‍💻 **Created By**
 **Taha Bahrami (Kaito)** - *Visionary behind jpgos design system and jpglens*  
-🐙 [GitHub](https://github.com/kaito) • 🐦 [Twitter](https://twitter.com/kaito) • 💼 [LinkedIn](https://linkedin.com/in/taha-bahrami)
+🐙 [GitHub](https://github.com/tahabahrami) • 🐦 [Twitter](https://twitter.com/tahabahrami) • 💼 [LinkedIn](https://linkedin.com/in/taha-bahrami)
 
 ### 🙏 **Special Thanks**
-**Ashkan** - *For invaluable support, guidance, and belief in this vision*
+**Ashkan** [github](https://github.com/ashkansirous) - *For invaluable support, and belief in this vision*
 
 ### 🌟 **Powered By**
 - [jpgos](https://github.com/jpgos/jpgos) - The design system that started it all
