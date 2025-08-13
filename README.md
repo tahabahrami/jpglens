@@ -74,6 +74,9 @@ jpglens works with any OpenAI-compatible API:
 # Set your API key (OpenRouter, OpenAI, etc.)
 export JPGLENS_API_KEY="your-api-key-here"
 export JPGLENS_MODEL="openai/gpt-4-vision-preview"
+
+# Optional: Set custom base URL for Azure OpenAI, local servers, or proxies otherwise it works with https://api.openai.com
+export JPGLENS_BASE_URL="https://my-resource.openai.azure.com/v1"
 ```
 
 ### 🎭 **Playwright Integration**
@@ -302,6 +305,7 @@ export default {
     apiKey: process.env.JPGLENS_API_KEY,
     model: 'anthropic/claude-3-5-sonnet',
     fallbackModel: 'openai/gpt-4-vision-preview',
+    baseUrl: 'https://openrouter.ai/api/v1', // Optional: Custom API endpoint
     maxTokens: 4000,
     temperature: 0.1
   },
@@ -339,7 +343,64 @@ export default {
 };
 ```
 
-### 🎯 **Context-Rich Prompts**
+### � **Custom Base URLs**
+
+jpglens supports custom base URLs for AI providers, allowing you to use Azure OpenAI, local AI servers, or proxy endpoints:
+
+#### OpenAI with Azure Deployment
+
+```javascript
+// jpglens.config.js
+export default {
+  ai: {
+    provider: 'openai',
+    apiKey: process.env.AZURE_OPENAI_API_KEY,
+    model: 'gpt-4-vision-preview',
+    baseUrl: 'https://my-resource.openai.azure.com/openai/deployments/my-deployment',
+    maxTokens: 4000
+  }
+  // ... rest of config
+};
+```
+
+#### OpenRouter with Custom Proxy
+
+```javascript
+// jpglens.config.js  
+export default {
+  ai: {
+    provider: 'openrouter',
+    apiKey: process.env.JPGLENS_API_KEY,
+    model: 'anthropic/claude-3.5-sonnet',
+    baseUrl: 'https://my-proxy.openrouter.com/api/v1',
+    maxTokens: 4000
+  }
+  // ... rest of config
+};
+```
+
+#### Local AI Server
+
+```javascript
+// jpglens.config.js
+export default {
+  ai: {
+    provider: 'openai', // Use OpenAI-compatible format
+    apiKey: 'local-key-or-empty',
+    model: 'llava-1.5-7b-hf',
+    baseUrl: 'http://localhost:8080/v1',
+    maxTokens: 2000
+  }
+  // ... rest of config
+};
+```
+
+**Default Base URLs** (when not specified):
+- **OpenAI**: `https://api.openai.com/v1`
+- **OpenRouter**: `https://openrouter.ai/api/v1`
+- **Anthropic**: `https://api.anthropic.com`
+
+### �🎯 **Context-Rich Prompts**
 
 jpglens uses sophisticated prompting to provide contextual analysis:
 

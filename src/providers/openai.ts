@@ -14,13 +14,14 @@ import { AIProvider, AnalysisContext, AnalysisResult, ScreenshotData, JPGLensCon
  */
 export class OpenAIProvider implements AIProvider {
   name = 'OpenAI';
-  private baseUrl = 'https://api.openai.com/v1';
+  private baseUrl: string;
   private apiKey: string;
   private model: string;
 
   constructor(private config: JPGLensConfig) {
     this.apiKey = config.ai.apiKey;
     this.model = config.ai.model?.includes('/') ? config.ai.model.split('/')[1] : config.ai.model;
+    this.baseUrl = config.ai.baseUrl || 'https://api.openai.com/v1';
 
     if (!this.apiKey) {
       throw new Error('OpenAI API key is required');
