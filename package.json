@@ -173,11 +173,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jpgos/jpglens.git"
+    "url": "https://github.com/tahabahrami/jpglens.git"
   },
-  "homepage": "https://jpglens.dev",
+  "homepage": "https://github.com/tahabahrami/jpglens",
   "bugs": {
-    "url": "https://github.com/jpgos/jpglens/issues"
+    "url": "https://github.com/tahabahrami/jpglens/issues"
   },
   "funding": {
     "type": "opencollective",
