@@ -15,6 +15,7 @@ export interface JPGLensConfig {
     maxTokens?: number;
     temperature?: number;
     baseUrl?: string;
+    messageFormat?: 'openai' | 'anthropic' | 'auto';
   };
 
   analysis: {
@@ -25,6 +26,7 @@ export interface JPGLensConfig {
     outputDir?: string;
   };
 
+  reporting?: ReportConfig;
   userPersonas?: Record<string, UserPersona>;
   journeyTemplates?: Record<string, string[]>;
   plugins?: string[];
@@ -70,9 +72,15 @@ export interface BusinessContext {
 export interface TechnicalContext {
   framework?: string;
   designSystem?: string;
-  deviceSupport: 'mobile-first' | 'desktop-first' | 'responsive';
+  deviceSupport?: 'mobile-first' | 'desktop-first' | 'responsive';
   performanceTarget?: string;
   accessibilityTarget?: 'WCAG-A' | 'WCAG-AA' | 'WCAG-AAA';
+  detectedFramework?: string;
+  detectedDesignSystem?: string;
+  testFramework?: string;
+  browser?: string;
+  renderMethod?: string;
+  queryMethods?: string[];
 }
 
 export interface AnalysisContext {
@@ -82,6 +90,9 @@ export interface AnalysisContext {
   stage: string;
   userIntent: string;
   criticalElements?: string[];
+  pageInfo?: any;
+  componentInfo?: any;
+  interactionInfo?: any;
 }
 
 export interface UserJourneyStage {
@@ -136,6 +147,20 @@ export interface AnalysisResult {
   model: string;
   tokensUsed: number;
   analysisTime: number;
+  config?: {
+    provider?: string;
+    model?: string;
+    analysisTypes?: string[];
+    depth?: string;
+  };
+  error?: boolean;
+  journeyContext?: any;
+  browserInfo?: any;
+  storybookInfo?: any;
+  componentCategory?: any;
+  provider?: string;
+  rawAnalysis?: string;
+  reportPath?: string;
 }
 
 export interface Issue {
@@ -166,6 +191,15 @@ export interface ScreenshotData {
     devicePixelRatio: number;
     timestamp: string;
   };
+  stageInfo?: {
+    name?: string;
+    userGoal?: string;
+    actions?: any[];
+    stageName?: string;
+    stageIndex?: number;
+    totalStages?: number;
+  };
+  annotations?: any;
 }
 
 export interface AIProvider {
@@ -195,8 +229,8 @@ export interface PlaywrightIntegration {
 }
 
 export interface CypressIntegration {
-  analyzeUserExperience(context: AnalysisContext): Cypress.Chainable<AnalysisResult>;
-  analyzePageState(context: AnalysisContext): Cypress.Chainable<AnalysisResult>;
+  analyzeUserExperience(context: AnalysisContext): any; // Cypress.Chainable<AnalysisResult>
+  analyzePageState(context: AnalysisContext): any; // Cypress.Chainable<AnalysisResult>
 }
 
 export interface StorybookIntegration {
@@ -211,4 +245,37 @@ export interface StorybookIntegration {
 export interface SeleniumIntegration {
   driver: any; // WebDriver
   analyzeCurrentState(context: AnalysisContext): Promise<AnalysisResult>;
+}
+
+// Reporting System Types
+export type ReportFormat = 'markdown' | 'json' | 'html';
+
+export interface ReportTemplate {
+  name: string;
+  format: ReportFormat;
+  sections: string[];
+  prompts: Record<string, string>;
+}
+
+export interface ReportConfig {
+  enabled: boolean;
+  outputDir: string;
+  template: string;
+  format: ReportFormat;
+  includeScreenshots: boolean;
+  includeRawAnalysis: boolean;
+  timestampFormat: 'ISO' | 'filename' | 'readable';
+  fileNaming: string;
+  customPrompts: Record<string, string>;
+  apiCompatibility: 'openai' | 'anthropic' | 'auto';
+}
+
+export interface AIProviderConfig {
+  provider: 'openrouter' | 'openai' | 'anthropic';
+  model: string;
+  apiKey: string;
+  baseUrl?: string;
+  maxTokens?: number;
+  temperature?: number;
+  messageFormat?: 'openai' | 'anthropic' | 'auto';
 }

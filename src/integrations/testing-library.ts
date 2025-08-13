@@ -302,4 +302,4 @@ export async function analyzeForm(
 }
 
 // Export the class for advanced usage
-export { TestingLibraryJPGLens };
+// TestingLibraryJPGLens already exported above

@@ -3,8 +3,7 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-package-lock.json
-yarn.lock
+pnpm-debug.log*
 
 # Build outputs
 dist/
@@ -19,7 +18,7 @@ coverage/
 .env.test.local
 .env.production.local
 
-# IDE files
+# IDEs and editors
 .vscode/
 .idea/
 *.swp
@@ -36,46 +35,73 @@ ehthumbs.db
 Thumbs.db
 
 # Logs
-*.log
 logs/
+*.log
 
 # Runtime data
-pids
+pids/
 *.pid
 *.seed
 *.pid.lock
 
-# Test results
-test-results/
-screenshots/
-test-reports/
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
 
-# Temporary files
-tmp/
-temp/
-.cache/
+# Dependency directories
+jspm_packages/
 
-# ESLint cache
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
 .eslintcache
 
-# Prettier cache
-.prettierignore
+# Optional REPL history
+.node_repl_history
 
-# Jest cache
-.jest/
+# Output of 'npm pack'
+*.tgz
 
-# TypeScript cache
-*.tsbuildinfo
+# Yarn Integrity file
+.yarn-integrity
 
-# Rollup cache
-.rpt2_cache/
+# dotenv environment variables file
+.env
 
-# Documentation build
-docs/.vitepress/dist/
-docs/.vitepress/cache/
+# parcel-bundler cache (https://parceljs.org/)
+.cache
+.parcel-cache
 
-# Security audit
-.snyk
+# next.js build output
+.next
 
-# Release files
-CHANGELOG.md.bak
+# nuxt.js build output
+.nuxt
+
+# rollup.js default build output
+dist/
+
+# Uncomment the public line in if your project uses Gatsby
+# https://nextjs.org/docs/api-reference/next.config.js/introduction
+# public
+
+# Storybook build outputs
+storybook-static/
+
+# Temporary folders
+tmp/
+temp/
+
+# jpglens specific
+jpglens-reports/
+screenshots/
+test-reports/
+*.screenshot.png
+*.analysis.json
+
+# Testing
+playwright-report/
+test-results/
+cypress/videos/
+cypress/screenshots/

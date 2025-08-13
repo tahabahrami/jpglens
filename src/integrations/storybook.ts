@@ -293,4 +293,4 @@ export async function analyzeDesignSystemConsistency(
 }
 
 // Export the class for advanced usage
-export { StorybookJPGLens };
+// StorybookJPGLens already exported above

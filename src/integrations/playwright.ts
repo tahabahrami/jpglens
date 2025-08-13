@@ -6,7 +6,8 @@
  * @license MIT
  */
 
-import { Page } from '@playwright/test';
+// import { Page } from '@playwright/test'; // Commented to avoid build dependency
+type Page = any; // Generic type for Playwright Page
 import { AnalysisContext, AnalysisResult, UserJourney, UserJourneyStage } from '../core/types.js';
 import { AIAnalyzer } from '../core/ai-analyzer.js';
 import { ScreenshotCapture } from '../core/screenshot-capture.js';
@@ -360,4 +361,85 @@ export async function analyzeCurrentState(page: Page, context: Partial<AnalysisC
 export async function analyzeCompleteJourney(page: Page, journey: UserJourney): Promise<AnalysisResult[]> {
   const jpglens = createJPGLens(page);
   return jpglens.analyzeCompleteJourney(journey);
+}
+
+/**
+ * Main Playwright analyze function (for backward compatibility)
+ * This is the function that was missing from exports
+ */
+export async function playwrightAnalyze(
+  page: Page,
+  options: {
+    screenshot?: Buffer;
+    component?: string;
+    stage?: string;
+    userIntent?: string;
+    userContext?: any;
+    context?: Partial<AnalysisContext>;
+  } = {}
+): Promise<AnalysisResult> {
+  const jpglens = createJPGLens(page);
+  
+  // Take screenshot if not provided
+  let screenshot: Buffer;
+  if (options.screenshot) {
+    screenshot = options.screenshot;
+  } else {
+    screenshot = await page.screenshot({ 
+      fullPage: true,
+      type: 'png'
+    });
+  }
+  
+  // Build analysis context with proper typing
+  const analysisContext: AnalysisContext = {
+    stage: options.stage || options.context?.stage || 'interaction',
+    userIntent: options.userIntent || options.context?.userIntent || 'Navigate and interact with the interface',
+    userContext: options.userContext || options.context?.userContext || {
+      deviceContext: 'desktop',
+      expertise: 'intermediate'
+    },
+    pageInfo: {
+      component: options.component || 'page',
+      page: page.url()
+    },
+    ...(options.context || {})
+  };
+  
+  // Prepare for analysis and call the correct method
+  await jpglens.prepareForAnalysis();
+  
+  // Use analyzeUserJourney which is the correct method for PlaywrightJPGLens
+  return jpglens.analyzeUserJourney(analysisContext);
+}
+
+/**
+ * Analyze current page state (alias for playwrightAnalyze)
+ */
+export async function playwrightAnalyzeState(
+  page: Page,
+  options: {
+    screenshot?: Buffer;
+    component?: string;
+    stage?: string;
+    userIntent?: string;
+    userContext?: any;
+    context?: Partial<AnalysisContext>;
+  } = {}
+): Promise<AnalysisResult> {
+  return playwrightAnalyze(page, options);
+}
+
+/**
+ * Quick analyze function with minimal configuration
+ */
+export async function quickAnalyze(
+  page: Page,
+  component?: string
+): Promise<AnalysisResult> {
+  return playwrightAnalyze(page, {
+    component: component || 'page',
+    stage: 'interaction',
+    userIntent: 'Use the interface effectively'
+  });
 }

@@ -32,6 +32,20 @@ export const DEFAULT_CONFIG: JPGLensConfig = {
     outputDir: './jpglens-reports'
   },
 
+  // Reporting configuration
+  reporting: {
+    enabled: true,
+    outputDir: './jpglens-reports',
+    template: 'detailed',
+    format: 'markdown',
+    includeScreenshots: true,
+    includeRawAnalysis: false,
+    timestampFormat: 'ISO',
+    fileNaming: '{timestamp}-{component}-{page}',
+    customPrompts: {},
+    apiCompatibility: 'auto'
+  },
+
   // Pre-built user personas for common use cases
   userPersonas: {
     'business-user': {

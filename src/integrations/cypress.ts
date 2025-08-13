@@ -6,6 +6,10 @@
  * @license MIT
  */
 
+// Declare global cy and Cypress for TypeScript
+declare const cy: any;
+declare const Cypress: any;
+
 import { AnalysisContext, AnalysisResult, UserJourney } from '../core/types.js';
 import { AIAnalyzer } from '../core/ai-analyzer.js';
 import { ScreenshotCapture } from '../core/screenshot-capture.js';
@@ -17,22 +21,22 @@ declare global {
       /**
        * Analyze current page state with jpglens AI
        */
-      analyzeUserExperience(context: AnalysisContext): Chainable<AnalysisResult>;
+      analyzeUserExperience(context: AnalysisContext): any; // Chainable<AnalysisResult>
       
       /**
        * Analyze page state after user actions
        */
-      analyzePageState(context: Partial<AnalysisContext>): Chainable<AnalysisResult>;
+      analyzePageState(context: Partial<AnalysisContext>): any; // Chainable<AnalysisResult>
       
       /**
        * Analyze complete user journey
        */
-      analyzeCompleteJourney(journey: UserJourney): Chainable<AnalysisResult[]>;
+      analyzeCompleteJourney(journey: UserJourney): any; // Chainable<AnalysisResult[]>
 
       /**
        * Prepare page for optimal AI analysis
        */
-      prepareForJPGLensAnalysis(): Chainable<void>;
+      prepareForJPGLensAnalysis(): any; // Chainable<void>
     }
   }
 }
@@ -291,7 +295,7 @@ class CypressJPGLens {
    * Detect design system using Cypress DOM queries
    */
   private async detectDesignSystem(): Promise<string | null> {
-    return cy.get('body').then(($body) => {
+    return cy.get('body').then(($body: any) => {
       const body = $body[0];
 
       // Material-UI
@@ -350,7 +354,7 @@ Cypress.Commands.add('prepareForJPGLensAnalysis', () => {
   cy.wait(1000);
   
   // Wait for fonts to load
-  cy.document().then((doc) => {
+  cy.document().then((doc: any) => {
     return doc.fonts.ready;
   });
 });

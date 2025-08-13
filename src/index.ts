@@ -12,11 +12,8 @@ export * from './core/config.js';
 export * from './core/ai-analyzer.js';
 export * from './core/screenshot-capture.js';
 
-// Framework integrations
-export * from './integrations/playwright.js';
-export * from './integrations/cypress.js';
-export * from './integrations/selenium.js';
-export * from './integrations/storybook.js';
+// Framework integrations - specific exports to avoid conflicts
+// Note: Using specific exports instead of * to avoid naming conflicts
 
 // AI providers
 export * from './providers/openrouter.js';
@@ -27,18 +24,30 @@ export * from './providers/anthropic.js';
 export { loadConfig, DEFAULT_CONFIG } from './core/config.js';
 export { AIAnalyzer } from './core/ai-analyzer.js';
 export { ScreenshotCapture } from './core/screenshot-capture.js';
+export { ReportGenerator, DEFAULT_REPORT_CONFIG, DEFAULT_REPORT_TEMPLATES } from './core/report-generator.js';
+export { APICompatibilityHandler, createAPICompatibilityHandler } from './core/api-compatibility.js';
+export { ConsoleFormatter } from './core/console-formatter.js';
+
+// Import for internal use
+import { loadConfig } from './core/config.js';
+import { AIAnalyzer } from './core/ai-analyzer.js';
+import { ScreenshotCapture } from './core/screenshot-capture.js';
 
 // Framework-specific convenience exports
 export { 
-  analyzeUserJourney as playwrightAnalyze,
-  analyzeCurrentState as playwrightAnalyzeState,
-  analyzeCompleteJourney as playwrightAnalyzeJourney
+  playwrightAnalyze,
+  playwrightAnalyzeState,
+  quickAnalyze as playwrightQuickAnalyze,
+  analyzeUserJourney,
+  analyzeCurrentState,
+  analyzeCompleteJourney as playwrightAnalyzeJourney 
 } from './integrations/playwright.js';
 
 export {
   analyzeCurrentState as seleniumAnalyze,
   analyze as seleniumAnalyzeQuick,
-  analyzeCrossBrowser as seleniumCrossBrowser
+  analyzeCrossBrowser as seleniumCrossBrowser,
+  analyzeCompleteJourney as seleniumAnalyzeJourney
 } from './integrations/selenium.js';
 
 export {

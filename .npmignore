@@ -1,0 +1,46 @@
+# Source files (only ship built files)
+src/
+tests/
+examples/
+scripts/
+
+# Development files
+.eslintrc.*
+.prettierrc.*
+jest.config.js
+rollup.config.js
+tsconfig.json
+.gitignore
+
+# Documentation (except README)
+docs/
+CONTRIBUTING.md
+CHANGELOG.md
+
+# Development dependencies
+node_modules/
+coverage/
+.nyc_output/
+
+# Build artifacts we don't need to ship
+*.log
+*.tgz
+.DS_Store
+.vscode/
+.idea/
+
+# Test outputs
+test-results/
+playwright-report/
+cypress/videos/
+cypress/screenshots/
+jpglens-reports/
+screenshots/
+test-reports/
+
+# Environment files
+.env*
+
+# Cache
+.cache/
+.parcel-cache/

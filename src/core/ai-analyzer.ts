@@ -13,12 +13,16 @@ import {
   AIProvider, 
   JPGLensConfig,
   Issue,
-  Recommendation
+  Recommendation,
+  ReportConfig
 } from './types.js';
 import { createMasterPrompt, SpecializedPrompts } from './prompts.js';
 import { OpenRouterProvider } from '../providers/openrouter.js';
 import { OpenAIProvider } from '../providers/openai.js';
 import { AnthropicProvider } from '../providers/anthropic.js';
+import { ReportGenerator, DEFAULT_REPORT_CONFIG } from './report-generator.js';
+import { APICompatibilityHandler } from './api-compatibility.js';
+import { ConsoleFormatter } from './console-formatter.js';
 
 /**
  * Core AI analysis engine for jpglens
@@ -28,6 +32,8 @@ export class AIAnalyzer {
   private providers: Map<string, AIProvider> = new Map();
   private primaryProvider: AIProvider;
   private fallbackProvider?: AIProvider;
+  private reportGenerator: ReportGenerator;
+  private apiHandler: APICompatibilityHandler;
 
   constructor(private config: JPGLensConfig) {
     this.initializeProviders();
@@ -36,6 +42,21 @@ export class AIAnalyzer {
     if (config.ai.fallbackModel) {
       this.fallbackProvider = this.getProvider(this.extractProviderFromModel(config.ai.fallbackModel));
     }
+
+    // Initialize reporting system
+    const reportConfig = { ...DEFAULT_REPORT_CONFIG, ...(config.reporting || {}) };
+    this.reportGenerator = new ReportGenerator(reportConfig);
+
+    // Initialize API compatibility handler
+    this.apiHandler = new APICompatibilityHandler({
+      provider: config.ai.provider as any,
+      model: config.ai.model,
+      apiKey: config.ai.apiKey,
+      baseUrl: config.ai.baseUrl,
+      maxTokens: config.ai.maxTokens,
+      temperature: config.ai.temperature,
+      messageFormat: config.ai.messageFormat || 'auto'
+    });
   }
 
   /**
@@ -123,7 +144,11 @@ export class AIAnalyzer {
     } catch (error) {
       const analysisTime = Date.now() - startTime;
       
-      console.error('❌ jpglens analysis failed:', error);
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      ConsoleFormatter.showError(
+        'jpglens analysis failed: ' + errorMessage,
+        'Check your configuration and try again'
+      );
       
       // Return error result instead of throwing
       return this.createErrorResult(error, context, analysisTime);
@@ -229,6 +254,33 @@ export class AIAnalyzer {
     // Validate and score the result
     this.validateResult(structuredResult);
 
+    // Generate report if enabled, otherwise show console output
+    const reportingConfig = this.reportGenerator.getConfig();
+    
+    if (reportingConfig.enabled) {
+      try {
+        const reportPath = await this.reportGenerator.generateReport(structuredResult);
+        if (reportPath) {
+          structuredResult.reportPath = reportPath;
+          ConsoleFormatter.showProgress(`📄 Report saved: ${reportPath}`);
+        }
+      } catch (error) {
+        console.warn('Failed to generate report:', error);
+        // Fallback to console output
+        ConsoleFormatter.formatAnalysisResult(structuredResult, {
+          showTechnicalDetails: true,
+          compact: false
+        });
+      }
+    } else {
+      // Show beautiful console output when reports are disabled
+      ConsoleFormatter.formatAnalysisResult(structuredResult, {
+        showTechnicalDetails: true,
+        showRawAnalysis: false,
+        compact: false
+      });
+    }
+
     return structuredResult;
   }
 
@@ -272,7 +324,7 @@ export class AIAnalyzer {
     return {
       id: `jpglens-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       timestamp: new Date().toISOString(),
-      page: context.pageInfo?.url || 'unknown',
+      page: (context as any).pageInfo?.url || context.stage || 'unknown',
       context,
       overallScore,
       scores: {
@@ -519,7 +571,7 @@ export class AIAnalyzer {
     return {
       id: `jpglens-error-${Date.now()}`,
       timestamp: new Date().toISOString(),
-      page: context.pageInfo?.url || 'unknown',
+      page: (context as any).pageInfo?.url || context.stage || 'unknown',
       context,
       overallScore: 0,
       scores: {},
@@ -540,5 +592,40 @@ export class AIAnalyzer {
       analysisTime,
       error: true
     };
+  }
+
+  /**
+   * Configure reporting system
+   */
+  configureReporting(config: Partial<ReportConfig>): void {
+    this.reportGenerator.updateConfig(config);
+  }
+
+  /**
+   * Get current reporting configuration
+   */
+  getReportingConfig(): ReportConfig {
+    return this.reportGenerator.getConfig();
+  }
+
+  /**
+   * Add custom report template
+   */
+  addReportTemplate(name: string, template: any): void {
+    this.reportGenerator.addTemplate(name, template);
+  }
+
+  /**
+   * Get API compatibility information
+   */
+  getAPICompatibilityInfo(): any {
+    return this.apiHandler.getConfigSummary();
+  }
+
+  /**
+   * Manually generate report for existing result
+   */
+  async generateReport(result: AnalysisResult, config?: Partial<ReportConfig>): Promise<string> {
+    return this.reportGenerator.generateReport(result, config);
   }
 }
