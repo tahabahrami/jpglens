@@ -5,6 +5,23 @@ All notable changes to jpglens will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.5] - 2025-01-14
+
+### ✨ New Features
+- **Custom Base URL Support**: Added `baseUrl` configuration option for AI providers (#1)
+  - Supports Azure OpenAI deployments with custom endpoints
+  - Works with local AI servers and proxy configurations
+  - Enables enterprise deployments behind firewalls
+  - Maintains backward compatibility with default endpoints
+
+### 📚 Documentation
+- Updated README with comprehensive baseURL examples
+- Added Azure OpenAI, local server, and proxy configuration guides
+- Enhanced API documentation with baseURL parameter details
+
+### 🙏 Contributors
+- **Ashkan Sirous** (@ashkansirous) - Custom baseURL implementation
+
 ## [1.0.4] - 2025-01-13
 
 ### 🐛 Fixed

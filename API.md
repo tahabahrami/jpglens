@@ -211,7 +211,7 @@ interface JPGLensConfig {
     provider: 'openrouter' | 'openai' | 'anthropic';
     model: string;
     apiKey: string;
-    baseUrl?: string;
+    baseUrl?: string; // Custom API endpoint (Azure OpenAI, local servers, proxies)
     maxTokens?: number;
     temperature?: number;
   };
@@ -245,6 +245,7 @@ export default {
     provider: 'openrouter',
     model: 'anthropic/claude-3-5-sonnet',
     apiKey: process.env.JPGLENS_API_KEY,
+    baseUrl: 'https://openrouter.ai/api/v1', // Optional: Custom endpoint
     maxTokens: 4000,
     temperature: 0.1
   },
