@@ -6,10 +6,10 @@
  * @license MIT
  */
 
-import { AnalysisContext, AnalysisResult } from '../core/types.js';
+import { AnalysisContext, AnalysisResult, JPGLensConfig } from '../core/types.js';
 import { AIAnalyzer } from '../core/ai-analyzer.js';
 import { ScreenshotCapture } from '../core/screenshot-capture.js';
-import { loadConfig } from '../core/config.js';
+import { loadConfig, DEFAULT_CONFIG } from '../core/config.js';
 
 /**
  * Testing Library integration for jpglens
@@ -18,9 +18,10 @@ import { loadConfig } from '../core/config.js';
 export class TestingLibraryJPGLens {
   private aiAnalyzer: AIAnalyzer;
   private screenshotCapture: ScreenshotCapture;
-  private config = loadConfig();
+  private config: JPGLensConfig;
 
-  constructor() {
+  constructor(config?: JPGLensConfig) {
+    this.config = config || DEFAULT_CONFIG;
     this.aiAnalyzer = new AIAnalyzer(this.config);
     this.screenshotCapture = new ScreenshotCapture();
   }

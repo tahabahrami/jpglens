@@ -12,6 +12,11 @@ export * from './core/config.js';
 export * from './core/ai-analyzer.js';
 export * from './core/screenshot-capture.js';
 
+// Import specific items for internal use
+import * as ConfigModule from './core/config.js';
+import * as AnalyzerModule from './core/ai-analyzer.js';
+import * as ScreenshotModule from './core/screenshot-capture.js';
+
 // Framework integrations - specific exports to avoid conflicts
 // Note: Using specific exports instead of * to avoid naming conflicts
 
@@ -65,9 +70,17 @@ export class JPGLens {
   private config: any;
 
   constructor(config?: any) {
-    this.config = config || loadConfig();
-    this.analyzer = new AIAnalyzer(this.config);
-    this.screenshotCapture = new ScreenshotCapture();
+    this.config = config || ConfigModule.DEFAULT_CONFIG;
+    this.analyzer = new AnalyzerModule.AIAnalyzer(this.config);
+    this.screenshotCapture = new ScreenshotModule.ScreenshotCapture();
+  }
+
+  /**
+   * Initialize with async config loading
+   */
+  static async create(config?: any): Promise<JPGLens> {
+    const finalConfig = config || await ConfigModule.loadConfig();
+    return new JPGLens(finalConfig);
   }
 
   /**

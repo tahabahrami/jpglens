@@ -184,56 +184,9 @@ function compareVersions(a: string, b: string): number {
  * Auto-detect framework versions at runtime
  */
 export async function detectFrameworkVersion(framework: string): Promise<string | null> {
-  try {
-    switch (framework) {
-      case 'playwright':
-        try {
-          const playwright = require('@playwright/test');
-          return playwright.version || null;
-        } catch {
-          // Try alternative detection
-          const pkg = require('@playwright/test/package.json');
-          return pkg.version || null;
-        }
-
-      case 'cypress':
-        try {
-          const cypress = require('cypress');
-          return cypress.version || null;
-        } catch {
-          const pkg = require('cypress/package.json');
-          return pkg.version || null;
-        }
-
-      case 'selenium':
-        try {
-          const selenium = require('selenium-webdriver');
-          return selenium.version || null;
-        } catch {
-          const pkg = require('selenium-webdriver/package.json');
-          return pkg.version || null;
-        }
-
-      case 'storybook':
-        try {
-          const pkg = require('@storybook/core-common/package.json');
-          return pkg.version || null;
-        } catch {
-          try {
-            const pkg = require('@storybook/test/package.json');
-            return pkg.version || null;
-          } catch {
-            return null;
-          }
-        }
-
-      default:
-        return null;
-    }
-  } catch (error) {
-    console.warn(`Failed to detect ${framework} version:`, error);
-    return null;
-  }
+  // For now, return null to avoid build-time dependency resolution issues
+  // This can be enhanced in the future with runtime detection
+  return null;
 }
 
 /**

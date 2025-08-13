@@ -9,6 +9,7 @@
 import { JPGLensConfig, UserPersona } from './types.js';
 import { readFileSync, existsSync } from 'fs';
 import { resolve } from 'path';
+import { pathToFileURL } from 'url';
 
 /**
  * Default configuration for jpglens
@@ -113,7 +114,7 @@ export const DEFAULT_CONFIG: JPGLensConfig = {
 /**
  * Load configuration from file or environment
  */
-export function loadConfig(configPath?: string): JPGLensConfig {
+export async function loadConfig(configPath?: string): Promise<JPGLensConfig> {
   let userConfig: Partial<JPGLensConfig> = {};
 
   // Try to load from file
@@ -125,7 +126,9 @@ export function loadConfig(configPath?: string): JPGLensConfig {
         userConfig = JSON.parse(configContent);
       } else if (configPath.endsWith('.js') || configPath.endsWith('.mjs')) {
         // Dynamic import for ES modules
-        const configModule = require(resolve(configPath));
+        const resolvedPath = resolve(configPath);
+        const fileUrl = pathToFileURL(resolvedPath).href;
+        const configModule = await import(fileUrl);
         userConfig = configModule.default || configModule;
       }
     } catch (error) {
@@ -147,7 +150,9 @@ export function loadConfig(configPath?: string): JPGLensConfig {
             const content = readFileSync(path, 'utf-8');
             userConfig = JSON.parse(content);
           } else {
-            const configModule = require(resolve(path));
+            const resolvedPath = resolve(path);
+            const fileUrl = pathToFileURL(resolvedPath).href;
+            const configModule = await import(fileUrl);
             userConfig = configModule.default || configModule;
           }
           break;

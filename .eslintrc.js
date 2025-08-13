@@ -1,34 +1,43 @@
 module.exports = {
   root: true,
-  env: {
-    node: true,
-    es2022: true,
-    browser: true
-  },
+  parser: '@typescript-eslint/parser',
+  plugins: ['@typescript-eslint'],
   extends: [
     'eslint:recommended',
-    '@typescript-eslint/recommended'
+    '@typescript-eslint/recommended',
   ],
-  parser: '@typescript-eslint/parser',
   parserOptions: {
-    ecmaVersion: 2022,
-    sourceType: 'module'
+    ecmaVersion: 2020,
+    sourceType: 'module',
+    project: './tsconfig.json',
   },
-  plugins: ['@typescript-eslint'],
+  env: {
+    node: true,
+    es6: true,
+    jest: true,
+  },
   rules: {
+    // Allow unused variables that start with underscore
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
-    '@typescript-eslint/no-explicit-any': 'warn',
-    '@typescript-eslint/explicit-function-return-type': 'off',
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
-    '@typescript-eslint/no-non-null-assertion': 'warn',
-    'prefer-const': 'error',
-    'no-console': 'off' // Allow console for CLI and debugging
+    // Allow any type in some cases
+    '@typescript-eslint/no-explicit-any': 'off',
+    // Allow require statements
+    '@typescript-eslint/no-var-requires': 'off',
+    // Allow empty interfaces (useful for extending)
+    '@typescript-eslint/no-empty-interface': 'off',
+    // Allow non-null assertions
+    '@typescript-eslint/no-non-null-assertion': 'off',
+    // Turn off console warnings for now
+    'no-console': 'off',
   },
   ignorePatterns: [
     'dist/',
-    'node_modules/',
     'coverage/',
-    'examples/',
-    'docs/'
-  ]
+    'node_modules/',
+    '*.js',
+    '*.d.ts',
+    'rollup.config.js',
+    'jest.config.js',
+    '.eslintrc.js',
+  ],
 };

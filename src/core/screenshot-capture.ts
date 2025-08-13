@@ -16,7 +16,10 @@ import { ScreenshotData } from './types.js';
  */
 export class ScreenshotCapture {
   constructor(private outputDir: string = './jpglens-screenshots') {
-    this.ensureOutputDir();
+    // Initialize directory creation asynchronously
+    this.ensureOutputDir().catch(error => 
+      console.warn('Failed to initialize screenshot directory:', error)
+    );
   }
 
   /**
@@ -301,9 +304,9 @@ export class ScreenshotCapture {
   /**
    * Ensure output directory exists
    */
-  private ensureOutputDir(): void {
+  private async ensureOutputDir(): Promise<void> {
     try {
-      const fs = require('fs');
+      const fs = await import('fs');
       if (!fs.existsSync(this.outputDir)) {
         fs.mkdirSync(this.outputDir, { recursive: true });
       }
@@ -317,8 +320,8 @@ export class ScreenshotCapture {
    */
   async cleanup(olderThanHours: number = 24): Promise<void> {
     try {
-      const fs = require('fs');
-      const path = require('path');
+      const fs = await import('fs');
+      const path = await import('path');
       
       if (!fs.existsSync(this.outputDir)) return;
 

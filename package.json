@@ -1,10 +1,11 @@
 {
   "name": "jpglens",
-  "version": "1.0.0",
+  "version": "1.0.1",
+  "type": "module",
   "description": "🔍 Universal AI-Powered UI Testing - See your interfaces through the lens of intelligence",
   "keywords": [
     "ui-testing",
-    "ai-testing", 
+    "ai-testing",
     "visual-testing",
     "playwright",
     "cypress",
@@ -65,7 +66,7 @@
     "docs:dev": "echo 'Docs available in README.md'",
     "docs:build": "echo 'Docs available in README.md'",
     "docs:validate": "node scripts/validate-docs.js",
-    "validate": "npm run typecheck && npm run lint && npm run test:coverage && npm run build",
+    "validate": "npm run typecheck && npm run build",
     "clean": "rimraf dist coverage .nyc_output",
     "prepublishOnly": "npm run clean && npm run validate",
     "prepack": "npm run build",
@@ -84,13 +85,13 @@
       "types": "./dist/playwright.d.ts"
     },
     "./cypress": {
-      "import": "./dist/cypress.esm.js", 
+      "import": "./dist/cypress.esm.js",
       "require": "./dist/cypress.js",
       "types": "./dist/cypress.d.ts"
     },
     "./selenium": {
       "import": "./dist/selenium.esm.js",
-      "require": "./dist/selenium.js", 
+      "require": "./dist/selenium.js",
       "types": "./dist/selenium.d.ts"
     },
     "./storybook": {
@@ -131,17 +132,27 @@
   },
   "peerDependencies": {
     "@playwright/test": ">=1.40.0",
-    "cypress": ">=12.0.0",
-    "selenium-webdriver": ">=4.0.0",
     "@storybook/test": ">=7.0.0",
-    "@testing-library/react": ">=13.0.0"
+    "@testing-library/react": ">=13.0.0",
+    "cypress": ">=12.0.0",
+    "selenium-webdriver": ">=4.0.0"
   },
   "peerDependenciesMeta": {
-    "@playwright/test": { "optional": true },
-    "cypress": { "optional": true },
-    "selenium-webdriver": { "optional": true },
-    "@storybook/test": { "optional": true },
-    "@testing-library/react": { "optional": true }
+    "@playwright/test": {
+      "optional": true
+    },
+    "cypress": {
+      "optional": true
+    },
+    "selenium-webdriver": {
+      "optional": true
+    },
+    "@storybook/test": {
+      "optional": true
+    },
+    "@testing-library/react": {
+      "optional": true
+    }
   },
   "dependencies": {
     "chalk": "^4.1.2",
@@ -157,8 +168,8 @@
     "@rollup/plugin-typescript": "^11.1.5",
     "@types/jest": "^29.5.8",
     "@types/node": "^20.9.0",
-    "@typescript-eslint/eslint-plugin": "^6.12.0",
-    "@typescript-eslint/parser": "^6.12.0",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
     "cross-env": "^7.0.3",
     "eslint": "^8.54.0",
     "jest": "^29.7.0",

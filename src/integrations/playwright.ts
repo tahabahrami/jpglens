@@ -8,10 +8,10 @@
 
 // import { Page } from '@playwright/test'; // Commented to avoid build dependency
 type Page = any; // Generic type for Playwright Page
-import { AnalysisContext, AnalysisResult, UserJourney, UserJourneyStage } from '../core/types.js';
+import { AnalysisContext, AnalysisResult, UserJourney, UserJourneyStage, JPGLensConfig } from '../core/types.js';
 import { AIAnalyzer } from '../core/ai-analyzer.js';
 import { ScreenshotCapture } from '../core/screenshot-capture.js';
-import { loadConfig } from '../core/config.js';
+import { loadConfig, DEFAULT_CONFIG } from '../core/config.js';
 
 /**
  * Playwright integration for jpglens AI analysis
@@ -20,11 +20,17 @@ import { loadConfig } from '../core/config.js';
 export class PlaywrightJPGLens {
   private aiAnalyzer: AIAnalyzer;
   private screenshotCapture: ScreenshotCapture;
-  private config = loadConfig();
+  private config: JPGLensConfig;
 
-  constructor(private page: Page) {
+  constructor(private page: Page, config?: JPGLensConfig) {
+    this.config = config || DEFAULT_CONFIG;
     this.aiAnalyzer = new AIAnalyzer(this.config);
     this.screenshotCapture = new ScreenshotCapture();
+  }
+
+  static async create(page: Page, config?: JPGLensConfig): Promise<PlaywrightJPGLens> {
+    const finalConfig = config || await loadConfig();
+    return new PlaywrightJPGLens(page, finalConfig);
   }
 
   /**
@@ -333,8 +339,8 @@ export class PlaywrightJPGLens {
 /**
  * Convenience function to create jpglens analyzer for Playwright page
  */
-export function createJPGLens(page: Page): PlaywrightJPGLens {
-  return new PlaywrightJPGLens(page);
+export function createJPGLens(page: Page, config?: JPGLensConfig): PlaywrightJPGLens {
+  return new PlaywrightJPGLens(page, config);
 }
 
 /**

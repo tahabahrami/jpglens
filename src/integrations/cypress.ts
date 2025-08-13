@@ -10,10 +10,10 @@
 declare const cy: any;
 declare const Cypress: any;
 
-import { AnalysisContext, AnalysisResult, UserJourney } from '../core/types.js';
+import { AnalysisContext, AnalysisResult, UserJourney, JPGLensConfig } from '../core/types.js';
 import { AIAnalyzer } from '../core/ai-analyzer.js';
 import { ScreenshotCapture } from '../core/screenshot-capture.js';
-import { loadConfig } from '../core/config.js';
+import { loadConfig, DEFAULT_CONFIG } from '../core/config.js';
 
 declare global {
   namespace Cypress {
@@ -47,11 +47,17 @@ declare global {
 class CypressJPGLens {
   private aiAnalyzer: AIAnalyzer;
   private screenshotCapture: ScreenshotCapture;
-  private config = loadConfig();
+  private config: JPGLensConfig;
 
-  constructor() {
+  constructor(config?: JPGLensConfig) {
+    this.config = config || DEFAULT_CONFIG;
     this.aiAnalyzer = new AIAnalyzer(this.config);
     this.screenshotCapture = new ScreenshotCapture();
+  }
+
+  static async create(config?: JPGLensConfig): Promise<CypressJPGLens> {
+    const finalConfig = config || await loadConfig();
+    return new CypressJPGLens(finalConfig);
   }
 
   /**
@@ -328,8 +334,8 @@ class CypressJPGLens {
   }
 }
 
-// Create singleton instance
-const cypressJPGLens = new CypressJPGLens();
+// Create singleton instance with default config
+const cypressJPGLens = new CypressJPGLens(DEFAULT_CONFIG);
 
 /**
  * Register Cypress commands

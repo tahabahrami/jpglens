@@ -6,10 +6,10 @@
  * @license MIT
  */
 
-import { AnalysisContext, AnalysisResult, UserJourney } from '../core/types.js';
+import { AnalysisContext, AnalysisResult, UserJourney, JPGLensConfig } from '../core/types.js';
 import { AIAnalyzer } from '../core/ai-analyzer.js';
 import { ScreenshotCapture } from '../core/screenshot-capture.js';
-import { loadConfig } from '../core/config.js';
+import { loadConfig, DEFAULT_CONFIG } from '../core/config.js';
 
 /**
  * Selenium WebDriver integration for jpglens
@@ -18,9 +18,10 @@ import { loadConfig } from '../core/config.js';
 export class SeleniumJPGLens {
   private aiAnalyzer: AIAnalyzer;
   private screenshotCapture: ScreenshotCapture;
-  private config = loadConfig();
+  private config: JPGLensConfig;
 
-  constructor(private driver: any) {
+  constructor(private driver: any, config?: JPGLensConfig) {
+    this.config = config || DEFAULT_CONFIG;
     this.aiAnalyzer = new AIAnalyzer(this.config);
     this.screenshotCapture = new ScreenshotCapture();
   }
