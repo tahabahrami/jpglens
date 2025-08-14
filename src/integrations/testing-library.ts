@@ -1,7 +1,7 @@
 /**
  * 🔍 jpglens - Testing Library Integration
  * Universal AI-Powered UI Testing
- * 
+ *
  * @author Taha Bahrami (Kaito)
  * @license MIT
  */
@@ -29,10 +29,7 @@ export class TestingLibraryJPGLens {
   /**
    * Analyze rendered component with Testing Library
    */
-  async analyzeComponent(
-    container: HTMLElement,
-    context: AnalysisContext
-  ): Promise<AnalysisResult> {
+  async analyzeComponent(container: HTMLElement, context: AnalysisContext): Promise<AnalysisResult> {
     try {
       // Create screenshot from DOM element
       const screenshot = await this.captureElementScreenshot(container);
@@ -43,17 +40,18 @@ export class TestingLibraryJPGLens {
         technicalContext: {
           ...context.technicalContext,
           testFramework: 'Testing Library',
-          renderMethod: 'jsdom'
-        }
+          renderMethod: 'jsdom',
+        },
       };
 
       // Perform AI analysis
       const result = await this.aiAnalyzer.analyze(screenshot, enhancedContext);
 
       return result;
-
     } catch (error) {
-      throw new Error(`Testing Library jpglens analysis failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      throw new Error(
+        `Testing Library jpglens analysis failed: ${error instanceof Error ? error.message : 'Unknown error'}`
+      );
     }
   }
 
@@ -72,7 +70,7 @@ export class TestingLibraryJPGLens {
     const fullContext: AnalysisContext = {
       userContext: context.userContext || {
         deviceContext: 'testing-library-jsdom',
-        expertise: 'intermediate'
+        expertise: 'intermediate',
       },
       stage: context.stage || `after-${interaction.type}`,
       userIntent: context.userIntent || `validate ${interaction.type} interaction`,
@@ -82,8 +80,8 @@ export class TestingLibraryJPGLens {
       interactionInfo: {
         type: interaction.type,
         element: interaction.element,
-        value: interaction.value
-      }
+        value: interaction.value,
+      },
     };
 
     return this.analyzeComponent(container, fullContext);
@@ -105,7 +103,7 @@ export class TestingLibraryJPGLens {
       userContext: {
         persona: 'accessibility-user',
         deviceContext: 'screen-reader-testing',
-        expertise: 'intermediate'
+        expertise: 'intermediate',
       },
       stage: 'accessibility-evaluation',
       userIntent: 'ensure component is accessible via semantic queries',
@@ -113,13 +111,13 @@ export class TestingLibraryJPGLens {
       businessContext: {
         industry: 'accessibility-compliance',
         conversionGoal: 'inclusive-design',
-        targetAudience: 'users-with-disabilities'
+        targetAudience: 'users-with-disabilities',
       },
       technicalContext: {
         testFramework: 'Testing Library',
         accessibilityTarget: 'WCAG-AA',
-        queryMethods: Object.keys(queries)
-      }
+        queryMethods: Object.keys(queries),
+      },
     };
 
     return this.analyzeComponent(container, context);
@@ -135,10 +133,10 @@ export class TestingLibraryJPGLens {
 
     const rect = element.getBoundingClientRect();
     const htmlContent = element.outerHTML;
-    
+
     // Create a simple text representation
     const textRepresentation = this.createTextRepresentation(element);
-    
+
     // Convert to buffer (in real implementation, this would be an actual screenshot)
     const buffer = Buffer.from(textRepresentation, 'utf-8');
 
@@ -146,7 +144,7 @@ export class TestingLibraryJPGLens {
       width: rect.width || 800,
       height: rect.height || 600,
       devicePixelRatio: 1,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
   }
 
@@ -160,18 +158,18 @@ export class TestingLibraryJPGLens {
       const attrs = Array.from(el.attributes)
         .map(attr => `${attr.name}="${attr.value}"`)
         .join(' ');
-      
+
       const text = el.textContent?.trim().slice(0, 50) || '';
       const children = Array.from(el.children);
-      
+
       let result = `${indent}<${tagName}${attrs ? ' ' + attrs : ''}>${text ? ' "' + text + '"' : ''}\n`;
-      
+
       if (children.length > 0 && depth < 3) {
         children.forEach(child => {
           result += getElementInfo(child, depth + 1);
         });
       }
-      
+
       return result;
     };
 
@@ -210,10 +208,7 @@ function getTestingLibraryJPGLens(): TestingLibraryJPGLens {
 /**
  * Analyze component rendered with Testing Library
  */
-export async function analyzeComponent(
-  container: HTMLElement,
-  context: AnalysisContext
-): Promise<AnalysisResult> {
+export async function analyzeComponent(container: HTMLElement, context: AnalysisContext): Promise<AnalysisResult> {
   const jpglens = getTestingLibraryJPGLens();
   return jpglens.analyzeComponent(container, context);
 }
@@ -227,20 +222,20 @@ export async function analyzeRenderedComponent(
   userIntent: string = 'evaluate component usability'
 ): Promise<AnalysisResult> {
   const jpglens = getTestingLibraryJPGLens();
-  
+
   return jpglens.analyzeComponent(container, {
     userContext: {
       persona: 'component-tester',
       deviceContext: 'testing-environment',
-      expertise: 'intermediate'
+      expertise: 'intermediate',
     },
     stage: 'component-test',
     userIntent,
     businessContext: {
       industry: 'software-development',
       conversionGoal: 'component-quality',
-      targetAudience: 'end-users'
-    }
+      targetAudience: 'end-users',
+    },
   });
 }
 
@@ -279,17 +274,14 @@ export async function analyzeAccessibility(
 /**
  * Form-specific analysis
  */
-export async function analyzeForm(
-  container: HTMLElement,
-  formFields: string[]
-): Promise<AnalysisResult> {
+export async function analyzeForm(container: HTMLElement, formFields: string[]): Promise<AnalysisResult> {
   const jpglens = getTestingLibraryJPGLens();
-  
+
   return jpglens.analyzeComponent(container, {
     userContext: {
       persona: 'form-user',
       deviceContext: 'form-completion',
-      expertise: 'novice'
+      expertise: 'novice',
     },
     stage: 'form-evaluation',
     userIntent: 'complete form efficiently and without errors',
@@ -297,8 +289,8 @@ export async function analyzeForm(
     businessContext: {
       industry: 'form-design',
       conversionGoal: 'form-completion',
-      targetAudience: 'general-users'
-    }
+      targetAudience: 'general-users',
+    },
   });
 }
 

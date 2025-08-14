@@ -1,7 +1,7 @@
 /**
  * 🔍 jpglens - Anthropic Provider
  * Universal AI-Powered UI Testing
- * 
+ *
  * @author Taha Bahrami (Kaito)
  * @license MIT
  */
@@ -34,13 +34,13 @@ export class AnthropicProvider implements AIProvider {
         headers: {
           'x-api-key': this.apiKey,
           'content-type': 'application/json',
-          'anthropic-version': '2023-06-01'
+          'anthropic-version': '2023-06-01',
         },
         body: JSON.stringify({
           model: this.model,
           max_tokens: 10,
-          messages: [{ role: 'user', content: 'test' }]
-        })
+          messages: [{ role: 'user', content: 'test' }],
+        }),
       });
       return response.status !== 401; // Not unauthorized
     } catch {
@@ -51,7 +51,7 @@ export class AnthropicProvider implements AIProvider {
   getModelInfo(): { name: string; capabilities: string[] } {
     return {
       name: this.model,
-      capabilities: ['vision', 'text-analysis', 'detailed-reasoning']
+      capabilities: ['vision', 'text-analysis', 'detailed-reasoning'],
     };
   }
 
@@ -70,19 +70,19 @@ export class AnthropicProvider implements AIProvider {
             content: [
               {
                 type: 'text',
-                text: prompt
+                text: prompt,
               },
               {
                 type: 'image',
                 source: {
                   type: 'base64',
                   media_type: 'image/png',
-                  data: base64Image
-                }
-              }
-            ]
-          }
-        ]
+                  data: base64Image,
+                },
+              },
+            ],
+          },
+        ],
       };
 
       const response = await fetch(`${this.baseUrl}/messages`, {
@@ -90,9 +90,9 @@ export class AnthropicProvider implements AIProvider {
         headers: {
           'x-api-key': this.apiKey,
           'content-type': 'application/json',
-          'anthropic-version': '2023-06-01'
+          'anthropic-version': '2023-06-01',
         },
-        body: JSON.stringify(requestBody)
+        body: JSON.stringify(requestBody),
       });
 
       if (!response.ok) {
@@ -105,16 +105,15 @@ export class AnthropicProvider implements AIProvider {
       const tokensUsed = result.usage?.input_tokens + result.usage?.output_tokens || 0;
 
       return this.parseAnalysisResult(analysisText, context, tokensUsed, startTime);
-
     } catch (error) {
       throw new Error(`Anthropic analysis failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   }
 
   private parseAnalysisResult(
-    analysisText: string, 
-    context: AnalysisContext, 
-    tokensUsed: number, 
+    analysisText: string,
+    context: AnalysisContext,
+    tokensUsed: number,
     startTime: number
   ): AnalysisResult {
     const scoreMatch = analysisText.match(/(?:OVERALL UX SCORE|QUALITY SCORE):\s*(\d+)\/10/i);
@@ -130,7 +129,7 @@ export class AnthropicProvider implements AIProvider {
         usability: overallScore,
         accessibility: overallScore,
         visualDesign: overallScore,
-        performance: overallScore
+        performance: overallScore,
       },
       strengths: [],
       criticalIssues: [],
@@ -141,7 +140,7 @@ export class AnthropicProvider implements AIProvider {
       tokensUsed,
       analysisTime: Date.now() - startTime,
       provider: 'Anthropic',
-      rawAnalysis: analysisText
+      rawAnalysis: analysisText,
     };
   }
 }

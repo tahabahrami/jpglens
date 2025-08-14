@@ -1,7 +1,7 @@
 /**
  * 🔍 jpglens - API Compatibility Layer
  * Handles differences between OpenAI and Anthropic API formats
- * 
+ *
  * @author Taha Bahrami (Kaito)
  * @license MIT
  */
@@ -13,24 +13,28 @@ import { AIProviderConfig } from './types.js';
  */
 export interface OpenAIMessage {
   role: 'system' | 'user' | 'assistant';
-  content: string | Array<{
-    type: 'text' | 'image_url';
-    text?: string;
-    image_url?: { url: string };
-  }>;
+  content:
+    | string
+    | Array<{
+        type: 'text' | 'image_url';
+        text?: string;
+        image_url?: { url: string };
+      }>;
 }
 
 export interface AnthropicMessage {
   role: 'user' | 'assistant';
-  content: string | Array<{
-    type: 'text' | 'image';
-    text?: string;
-    source?: {
-      type: 'base64';
-      media_type: string;
-      data: string;
-    };
-  }>;
+  content:
+    | string
+    | Array<{
+        type: 'text' | 'image';
+        text?: string;
+        source?: {
+          type: 'base64';
+          media_type: string;
+          data: string;
+        };
+      }>;
 }
 
 /**
@@ -114,7 +118,7 @@ export class APICompatibilityHandler {
     if (this.config.provider === 'anthropic') {
       return 'anthropic';
     }
-    
+
     if (this.config.provider === 'openai') {
       return 'openai';
     }
@@ -136,11 +140,7 @@ export class APICompatibilityHandler {
   /**
    * Convert prompt and image to appropriate API format
    */
-  formatRequest(
-    prompt: string,
-    imageBase64?: string,
-    systemPrompt?: string
-  ): OpenAIRequest | AnthropicRequest {
+  formatRequest(prompt: string, imageBase64?: string, systemPrompt?: string): OpenAIRequest | AnthropicRequest {
     const apiFormat = this.detectAPIFormat();
 
     if (apiFormat === 'anthropic') {
@@ -153,80 +153,72 @@ export class APICompatibilityHandler {
   /**
    * Format request for OpenAI API
    */
-  private formatOpenAIRequest(
-    prompt: string,
-    imageBase64?: string,
-    systemPrompt?: string
-  ): OpenAIRequest {
+  private formatOpenAIRequest(prompt: string, imageBase64?: string, systemPrompt?: string): OpenAIRequest {
     const messages: OpenAIMessage[] = [];
 
     // Add system message if provided
     if (systemPrompt) {
       messages.push({
         role: 'system',
-        content: systemPrompt
+        content: systemPrompt,
       });
     }
 
     // Format user message with text and optional image
     const userContent: any[] = [{ type: 'text', text: prompt }];
-    
+
     if (imageBase64) {
       userContent.push({
         type: 'image_url',
         image_url: {
-          url: `data:image/png;base64,${imageBase64}`
-        }
+          url: `data:image/png;base64,${imageBase64}`,
+        },
       });
     }
 
     messages.push({
       role: 'user',
-      content: userContent
+      content: userContent,
     });
 
     return {
       model: this.config.model,
       messages,
       max_tokens: this.config.maxTokens || 2000,
-      temperature: this.config.temperature || 0.1
+      temperature: this.config.temperature || 0.1,
     };
   }
 
   /**
    * Format request for Anthropic API
    */
-  private formatAnthropicRequest(
-    prompt: string,
-    imageBase64?: string,
-    systemPrompt?: string
-  ): AnthropicRequest {
+  private formatAnthropicRequest(prompt: string, imageBase64?: string, systemPrompt?: string): AnthropicRequest {
     const messages: AnthropicMessage[] = [];
 
     // Format user message with text and optional image
     const userContent: any[] = [{ type: 'text', text: prompt }];
-    
+
     if (imageBase64) {
       userContent.push({
         type: 'image',
         source: {
           type: 'base64',
           media_type: 'image/png',
-          data: imageBase64
-        }
+          data: imageBase64,
+        },
       });
     }
 
     messages.push({
       role: 'user',
-      content: userContent
+      content: userContent,
     });
 
     const request: AnthropicRequest = {
       model: this.config.model,
       max_tokens: this.config.maxTokens || 2000,
       messages,
-      temperature: this.config.temperature || 0.1
+      temperature: this.config.temperature || 0.1,
     };
 
     // Add system prompt if provided
@@ -265,7 +257,7 @@ export class APICompatibilityHandler {
     return {
       content: response.choices[0]?.message?.content || '',
       tokensUsed: response.usage?.total_tokens || 0,
-      model: response.model
+      model: response.model,
     };
   }
 
@@ -277,17 +269,18 @@ export class APICompatibilityHandler {
     tokensUsed: number;
     model: string;
   } {
-    const content = response.content
-      ?.filter(item => item.type === 'text')
-      ?.map(item => item.text)
-      ?.join('') || '';
+    const content =
+      response.content
+        ?.filter(item => item.type === 'text')
+        ?.map(item => item.text)
+        ?.join('') || '';
 
     const tokensUsed = (response.usage?.input_tokens || 0) + (response.usage?.output_tokens || 0);
 
     return {
       content,
       tokensUsed,
-      model: response.model
+      model: response.model,
     };
   }
 
@@ -297,19 +290,19 @@ export class APICompatibilityHandler {
   getHeaders(): Record<string, string> {
     const apiFormat = this.detectAPIFormat();
     const baseHeaders = {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     };
 
     if (apiFormat === 'anthropic') {
       return {
         ...baseHeaders,
-        'Authorization': `Bearer ${this.config.apiKey}`,
-        'anthropic-version': '2023-06-01'
+        Authorization: `Bearer ${this.config.apiKey}`,
+        'anthropic-version': '2023-06-01',
       };
     } else {
       return {
         ...baseHeaders,
-        'Authorization': `Bearer ${this.config.apiKey}`
+        Authorization: `Bearer ${this.config.apiKey}`,
       };
     }
   }
@@ -373,7 +366,7 @@ export class APICompatibilityHandler {
       provider: this.config.provider,
       model: this.config.model,
       apiFormat: this.detectAPIFormat(),
-      endpoint: this.getEndpoint()
+      endpoint: this.getEndpoint(),
     };
   }
 }

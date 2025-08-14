@@ -1,20 +1,20 @@
 /**
  * 🔍 jpglens - AI Analyzer Core
  * Universal AI-Powered UI Testing
- * 
+ *
  * @author Taha Bahrami (Kaito)
  * @license MIT
  */
 
-import { 
-  AnalysisContext, 
-  AnalysisResult, 
-  ScreenshotData, 
-  AIProvider, 
+import {
+  AnalysisContext,
+  AnalysisResult,
+  ScreenshotData,
+  AIProvider,
   JPGLensConfig,
   Issue,
   Recommendation,
-  ReportConfig
+  ReportConfig,
 } from './types.js';
 import { createMasterPrompt, SpecializedPrompts } from './prompts.js';
 import { OpenRouterProvider } from '../providers/openrouter.js';
@@ -38,7 +38,7 @@ export class AIAnalyzer {
   constructor(private config: JPGLensConfig) {
     this.initializeProviders();
     this.primaryProvider = this.getProvider(config.ai.provider);
-    
+
     if (config.ai.fallbackModel) {
       this.fallbackProvider = this.getProvider(this.extractProviderFromModel(config.ai.fallbackModel));
     }
@@ -55,7 +55,7 @@ export class AIAnalyzer {
       baseUrl: config.ai.baseUrl,
       maxTokens: config.ai.maxTokens,
       temperature: config.ai.temperature,
-      messageFormat: config.ai.messageFormat || 'auto'
+      messageFormat: config.ai.messageFormat || 'auto',
     });
   }
 
@@ -74,7 +74,9 @@ export class AIAnalyzer {
   private getProvider(providerName: string): AIProvider {
     const provider = this.providers.get(providerName);
     if (!provider) {
-      throw new Error(`AI provider '${providerName}' not found. Available: ${Array.from(this.providers.keys()).join(', ')}`);
+      throw new Error(
+        `AI provider '${providerName}' not found. Available: ${Array.from(this.providers.keys()).join(', ')}`
+      );
     }
     return provider;
   }
@@ -95,7 +97,7 @@ export class AIAnalyzer {
    */
   async analyze(screenshot: ScreenshotData, context: AnalysisContext): Promise<AnalysisResult> {
     const startTime = Date.now();
-    
+
     try {
       // Validate inputs
       this.validateInputs(screenshot, context);
@@ -109,7 +111,7 @@ export class AIAnalyzer {
           stage: context.stage,
           userIntent: context.userIntent,
           provider: this.config.ai.provider,
-          model: this.config.ai.model
+          model: this.config.ai.model,
         });
       }
 
@@ -119,7 +121,7 @@ export class AIAnalyzer {
         result = await this.primaryProvider.analyze(screenshot, context, prompt);
       } catch (primaryError) {
         console.warn(`Primary AI provider failed, trying fallback:`, primaryError);
-        
+
         if (this.fallbackProvider) {
           result = await this.fallbackProvider.analyze(screenshot, context, prompt);
         } else {
@@ -135,21 +137,17 @@ export class AIAnalyzer {
         console.log(`✅ jpglens analysis completed:`, {
           score: enhancedResult.overallScore,
           issues: enhancedResult.criticalIssues.length + enhancedResult.majorIssues.length,
-          analysisTime: enhancedResult.analysisTime
+          analysisTime: enhancedResult.analysisTime,
         });
       }
 
       return enhancedResult;
-
     } catch (error) {
       const analysisTime = Date.now() - startTime;
-      
+
       const errorMessage = error instanceof Error ? error.message : String(error);
-      ConsoleFormatter.showError(
-        'jpglens analysis failed: ' + errorMessage,
-        'Check your configuration and try again'
-      );
-      
+      ConsoleFormatter.showError('jpglens analysis failed: ' + errorMessage, 'Check your configuration and try again');
+
       // Return error result instead of throwing
       return this.createErrorResult(error, context, analysisTime);
     }
@@ -158,10 +156,7 @@ export class AIAnalyzer {
   /**
    * Analyze multiple screenshots in parallel (for journey analysis)
    */
-  async analyzeMultiple(
-    screenshots: ScreenshotData[], 
-    contexts: AnalysisContext[]
-  ): Promise<AnalysisResult[]> {
+  async analyzeMultiple(screenshots: ScreenshotData[], contexts: AnalysisContext[]): Promise<AnalysisResult[]> {
     if (screenshots.length !== contexts.length) {
       throw new Error('Screenshots and contexts arrays must have the same length');
     }
@@ -173,11 +168,9 @@ export class AIAnalyzer {
     for (let i = 0; i < screenshots.length; i += concurrencyLimit) {
       const batch = screenshots.slice(i, i + concurrencyLimit);
       const batchContexts = contexts.slice(i, i + concurrencyLimit);
-      
-      const batchPromises = batch.map((screenshot, index) => 
-        this.analyze(screenshot, batchContexts[index])
-      );
-      
+
+      const batchPromises = batch.map((screenshot, index) => this.analyze(screenshot, batchContexts[index]));
+
       const batchResults = await Promise.all(batchPromises);
       results.push(...batchResults);
     }
@@ -212,8 +205,6 @@ export class AIAnalyzer {
     return createMasterPrompt(context, analysisTypes);
   }
 
-
-
   /**
    * Validate analysis inputs
    */
@@ -235,8 +226,8 @@ export class AIAnalyzer {
    * Enhance AI result with additional processing
    */
   private async enhanceResult(
-    result: AnalysisResult, 
-    context: AnalysisContext, 
+    result: AnalysisResult,
+    context: AnalysisContext,
     startTime: number
   ): Promise<AnalysisResult> {
     const analysisTime = Date.now() - startTime;
@@ -250,7 +241,7 @@ export class AIAnalyzer {
       provider: this.config.ai.provider,
       model: this.config.ai.model,
       analysisTypes: this.config.analysis.types,
-      depth: this.config.analysis.depth
+      depth: this.config.analysis.depth,
     };
 
     // Validate and score the result
@@ -258,7 +249,7 @@ export class AIAnalyzer {
 
     // Generate report if enabled, otherwise show console output
     const reportingConfig = this.reportGenerator.getConfig();
-    
+
     if (reportingConfig.enabled) {
       try {
         const reportPath = await this.reportGenerator.generateReport(structuredResult);
@@ -271,7 +262,7 @@ export class AIAnalyzer {
         // Fallback to console output
         ConsoleFormatter.formatAnalysisResult(structuredResult, {
           showTechnicalDetails: true,
-          compact: false
+          compact: false,
         });
       }
     } else {
@@ -279,7 +270,7 @@ export class AIAnalyzer {
       ConsoleFormatter.formatAnalysisResult(structuredResult, {
         showTechnicalDetails: true,
         showRawAnalysis: false,
-        compact: false
+        compact: false,
       });
     }
 
@@ -333,16 +324,16 @@ export class AIAnalyzer {
         usability: this.extractSpecificScore(rawText, 'usability') || overallScore,
         accessibility: this.extractSpecificScore(rawText, 'accessibility') || overallScore,
         visualDesign: this.extractSpecificScore(rawText, 'visual') || overallScore,
-        performance: this.extractSpecificScore(rawText, 'performance') || overallScore
+        performance: this.extractSpecificScore(rawText, 'performance') || overallScore,
       },
       strengths,
       criticalIssues,
-      majorIssues, 
+      majorIssues,
       minorIssues,
       recommendations,
       model: this.config.ai.model,
       tokensUsed: 0, // Will be filled by provider
-      analysisTime: 0 // Will be filled by enhanceResult
+      analysisTime: 0, // Will be filled by enhanceResult
     };
   }
 
@@ -360,7 +351,7 @@ export class AIAnalyzer {
         title: this.extractIssueTitle(item),
         description: item,
         impact: this.assessImpact(item, severity),
-        fix: this.extractFix(item)
+        fix: this.extractFix(item),
       });
     });
 
@@ -373,7 +364,7 @@ export class AIAnalyzer {
   private extractListItems(text: string, sectionName: string): string[] {
     const regex = new RegExp(`${sectionName}[:\\s]*([\\s\\S]*?)(?=\\*\\*[A-Z]|$)`, 'i');
     const match = text.match(regex);
-    
+
     if (!match) return [];
 
     return match[1]
@@ -387,7 +378,7 @@ export class AIAnalyzer {
    */
   private categorizeIssue(issueText: string): any {
     const text = issueText.toLowerCase();
-    
+
     if (text.includes('contrast') || text.includes('accessibility') || text.includes('wcag')) {
       return 'accessibility';
     }
@@ -400,7 +391,7 @@ export class AIAnalyzer {
     if (text.includes('visual') || text.includes('design') || text.includes('color')) {
       return 'visual-design';
     }
-    
+
     return 'usability';
   }
 
@@ -410,9 +401,7 @@ export class AIAnalyzer {
   private extractIssueTitle(issueText: string): string {
     // Take first sentence or first 50 characters
     const firstSentence = issueText.split('.')[0];
-    return firstSentence.length > 50 
-      ? firstSentence.substring(0, 47) + '...'
-      : firstSentence;
+    return firstSentence.length > 50 ? firstSentence.substring(0, 47) + '...' : firstSentence;
   }
 
   /**
@@ -422,7 +411,7 @@ export class AIAnalyzer {
     const impactMap = {
       critical: 'Blocks user task completion or causes significant frustration',
       major: 'Makes the interface difficult or unpleasant to use',
-      minor: 'Small improvement opportunity that would enhance the experience'
+      minor: 'Small improvement opportunity that would enhance the experience',
     };
 
     return impactMap[severity];
@@ -437,7 +426,7 @@ export class AIAnalyzer {
       /fix[:\s]+([^.]+)/i,
       /solution[:\s]+([^.]+)/i,
       /recommend[:\s]+([^.]+)/i,
-      /should[:\s]+([^.]+)/i
+      /should[:\s]+([^.]+)/i,
     ];
 
     for (const pattern of fixPatterns) {
@@ -464,7 +453,7 @@ export class AIAnalyzer {
         description: item,
         implementation: this.extractImplementation(item),
         impact: this.assessRecommendationImpact(item),
-        effort: this.assessRecommendationEffort(item)
+        effort: this.assessRecommendationEffort(item),
       });
     });
 
@@ -476,7 +465,7 @@ export class AIAnalyzer {
    */
   private categorizeRecommendation(text: string): 'code' | 'design' | 'content' | 'process' {
     const lower = text.toLowerCase();
-    
+
     if (lower.includes('css') || lower.includes('html') || lower.includes('javascript') || lower.includes('code')) {
       return 'code';
     }
@@ -486,7 +475,7 @@ export class AIAnalyzer {
     if (lower.includes('process') || lower.includes('workflow') || lower.includes('team')) {
       return 'process';
     }
-    
+
     return 'design';
   }
 
@@ -514,14 +503,14 @@ export class AIAnalyzer {
    */
   private assessRecommendationImpact(text: string): 'high' | 'medium' | 'low' {
     const lower = text.toLowerCase();
-    
+
     if (lower.includes('critical') || lower.includes('conversion') || lower.includes('accessibility')) {
       return 'high';
     }
     if (lower.includes('major') || lower.includes('usability')) {
       return 'medium';
     }
-    
+
     return 'low';
   }
 
@@ -530,14 +519,14 @@ export class AIAnalyzer {
    */
   private assessRecommendationEffort(text: string): 'low' | 'medium' | 'high' {
     const lower = text.toLowerCase();
-    
+
     if (lower.includes('simple') || lower.includes('quick') || lower.includes('css')) {
       return 'low';
     }
     if (lower.includes('redesign') || lower.includes('refactor') || lower.includes('complex')) {
       return 'high';
     }
-    
+
     return 'medium';
   }
 
@@ -572,7 +561,7 @@ export class AIAnalyzer {
   private createErrorResult(error: any, context: AnalysisContext, analysisTime: number): AnalysisResult {
     // Safely extract page information with proper null checks
     const pageUrl = context?.pageInfo?.url || context?.stage || 'unknown';
-    
+
     return {
       id: `jpglens-error-${Date.now()}`,
       timestamp: new Date().toISOString(),
@@ -581,21 +570,23 @@ export class AIAnalyzer {
       overallScore: 0,
       scores: {},
       strengths: [],
-      criticalIssues: [{
-        severity: 'critical',
-        category: 'error-handling',
-        title: 'Analysis Failed',
-        description: `jpglens analysis failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
-        impact: 'Could not analyze user experience',
-        fix: 'Check configuration and try again'
-      }],
+      criticalIssues: [
+        {
+          severity: 'critical',
+          category: 'error-handling',
+          title: 'Analysis Failed',
+          description: `jpglens analysis failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
+          impact: 'Could not analyze user experience',
+          fix: 'Check configuration and try again',
+        },
+      ],
       majorIssues: [],
       minorIssues: [],
       recommendations: [],
       model: this.config.ai.model,
       tokensUsed: 0,
       analysisTime,
-      error: true
+      error: true,
     };
   }
 

@@ -1,7 +1,7 @@
 /**
  * 🔍 jpglens - Universal AI-Powered UI Testing
  * Main entry point for the jpglens library
- * 
+ *
  * @author Taha Bahrami (Kaito)
  * @license MIT
  */
@@ -39,26 +39,26 @@ import { AIAnalyzer } from './core/ai-analyzer.js';
 import { ScreenshotCapture } from './core/screenshot-capture.js';
 
 // Framework-specific convenience exports
-export { 
+export {
   playwrightAnalyze,
   playwrightAnalyzeState,
   quickAnalyze as playwrightQuickAnalyze,
   analyzeUserJourney,
   analyzeCurrentState,
-  analyzeCompleteJourney as playwrightAnalyzeJourney 
+  analyzeCompleteJourney as playwrightAnalyzeJourney,
 } from './integrations/playwright.js';
 
 export {
   analyzeCurrentState as seleniumAnalyze,
   analyze as seleniumAnalyzeQuick,
   analyzeCrossBrowser as seleniumCrossBrowser,
-  analyzeCompleteJourney as seleniumAnalyzeJourney
+  analyzeCompleteJourney as seleniumAnalyzeJourney,
 } from './integrations/selenium.js';
 
 export {
   analyzeComponentStates as storybookAnalyze,
   analyzeComponent as storybookQuickAnalyze,
-  analyzeComponentA11y as storybookA11y
+  analyzeComponentA11y as storybookA11y,
 } from './integrations/storybook.js';
 
 /**
@@ -79,7 +79,7 @@ export class JPGLens {
    * Initialize with async config loading
    */
   static async create(config?: any): Promise<JPGLens> {
-    const finalConfig = config || await ConfigModule.loadConfig();
+    const finalConfig = config || (await ConfigModule.loadConfig());
     return new JPGLens(finalConfig);
   }
 

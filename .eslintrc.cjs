@@ -44,5 +44,6 @@ module.exports = {
     'rollup.config.js',
     'jest.config.js',
     '.eslintrc.js',
+    '.eslintrc.cjs',
   ],
 };

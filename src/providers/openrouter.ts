@@ -1,7 +1,7 @@
 /**
  * 🔍 jpglens - OpenRouter AI Provider
  * Universal AI-Powered UI Testing
- * 
+ *
  * @author Taha Bahrami (Kaito)
  * @license MIT
  */
@@ -35,10 +35,10 @@ export class OpenRouterProvider implements AIProvider {
     try {
       const response = await fetch(`${this.baseUrl}/models`, {
         headers: {
-          'Authorization': `Bearer ${this.apiKey}`,
+          Authorization: `Bearer ${this.apiKey}`,
           'HTTP-Referer': 'https://jpglens.dev',
-          'X-Title': 'jpglens - Universal AI UI Testing'
-        }
+          'X-Title': 'jpglens - Universal AI UI Testing',
+        },
       });
 
       return response.ok;
@@ -54,7 +54,7 @@ export class OpenRouterProvider implements AIProvider {
   getModelInfo(): { name: string; capabilities: string[] } {
     return {
       name: this.model,
-      capabilities: ['vision', 'text-analysis', 'code-generation', 'accessibility-analysis']
+      capabilities: ['vision', 'text-analysis', 'code-generation', 'accessibility-analysis'],
     };
   }
 
@@ -82,33 +82,33 @@ export class OpenRouterProvider implements AIProvider {
             content: [
               {
                 type: 'text',
-                text: prompt
+                text: prompt,
               },
               {
                 type: 'image_url',
                 image_url: {
                   url: `data:image/png;base64,${base64Image}`,
-                  detail: this.config.analysis.depth === 'comprehensive' ? 'high' : 'auto'
-                }
-              }
-            ]
-          }
+                  detail: this.config.analysis.depth === 'comprehensive' ? 'high' : 'auto',
+                },
+              },
+            ],
+          },
         ],
         max_tokens: this.config.ai.maxTokens || 4000,
         temperature: this.config.ai.temperature || 0.1,
-        stream: false
+        stream: false,
       };
 
       // Make API request
       const response = await fetch(`${this.baseUrl}/chat/completions`, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${this.apiKey}`,
+          Authorization: `Bearer ${this.apiKey}`,
           'Content-Type': 'application/json',
           'HTTP-Referer': 'https://jpglens.dev',
-          'X-Title': 'jpglens - Universal AI UI Testing'
+          'X-Title': 'jpglens - Universal AI UI Testing',
         },
-        body: JSON.stringify(requestBody)
+        body: JSON.stringify(requestBody),
       });
 
       if (!response.ok) {
@@ -129,7 +129,6 @@ export class OpenRouterProvider implements AIProvider {
       const structuredResult = this.parseAnalysisResult(analysisText, context, tokensUsed, startTime);
 
       return structuredResult;
-
     } catch (error) {
       console.error('OpenRouter analysis failed:', error);
       throw new Error(`OpenRouter analysis failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
@@ -140,9 +139,9 @@ export class OpenRouterProvider implements AIProvider {
    * Parse AI analysis text into structured result
    */
   private parseAnalysisResult(
-    analysisText: string, 
-    context: AnalysisContext, 
-    tokensUsed: number, 
+    analysisText: string,
+    context: AnalysisContext,
+    tokensUsed: number,
     startTime: number
   ): AnalysisResult {
     const analysisTime = Date.now() - startTime;
@@ -163,7 +162,7 @@ export class OpenRouterProvider implements AIProvider {
       usability: this.extractSpecificScore(analysisText, 'usability') || overallScore,
       accessibility: this.extractSpecificScore(analysisText, 'accessibility') || overallScore,
       visualDesign: this.extractSpecificScore(analysisText, 'visual') || overallScore,
-      performance: this.extractSpecificScore(analysisText, 'performance') || overallScore
+      performance: this.extractSpecificScore(analysisText, 'performance') || overallScore,
     };
 
     return {
@@ -182,7 +181,7 @@ export class OpenRouterProvider implements AIProvider {
       tokensUsed,
       analysisTime,
       provider: 'OpenRouter',
-      rawAnalysis: analysisText // Keep raw text for debugging
+      rawAnalysis: analysisText, // Keep raw text for debugging
     };
   }
 
@@ -192,7 +191,7 @@ export class OpenRouterProvider implements AIProvider {
   private extractSection(text: string, sectionName: string): string[] {
     const regex = new RegExp(`\\*\\*${sectionName}[:\\s]*\\*\\*([\\s\\S]*?)(?=\\*\\*[A-Z]|$)`, 'i');
     const match = text.match(regex);
-    
+
     if (!match) return [];
 
     return match[1]
@@ -206,7 +205,7 @@ export class OpenRouterProvider implements AIProvider {
    */
   private extractIssues(text: string, sectionName: string, severity: 'critical' | 'major' | 'minor'): any[] {
     const items = this.extractSection(text, sectionName);
-    
+
     return items.map(item => ({
       severity,
       category: this.categorizeIssue(item),
@@ -214,7 +213,7 @@ export class OpenRouterProvider implements AIProvider {
       description: item,
       impact: this.getImpactBySeverity(severity),
       selector: this.extractSelector(item),
-      fix: this.extractFix(item)
+      fix: this.extractFix(item),
     }));
   }
 
@@ -223,14 +222,14 @@ export class OpenRouterProvider implements AIProvider {
    */
   private extractRecommendations(text: string): any[] {
     const items = this.extractSection(text, 'RECOMMENDATIONS');
-    
+
     return items.map(item => ({
       type: this.categorizeRecommendation(item),
       title: this.extractTitle(item),
       description: item,
       implementation: this.extractCodeBlock(item) || item,
       impact: this.assessImpact(item),
-      effort: this.assessEffort(item)
+      effort: this.assessEffort(item),
     }));
   }
 
@@ -239,8 +238,13 @@ export class OpenRouterProvider implements AIProvider {
    */
   private categorizeIssue(issueText: string): string {
     const text = issueText.toLowerCase();
-    
-    if (text.includes('contrast') || text.includes('accessibility') || text.includes('wcag') || text.includes('screen reader')) {
+
+    if (
+      text.includes('contrast') ||
+      text.includes('accessibility') ||
+      text.includes('wcag') ||
+      text.includes('screen reader')
+    ) {
       return 'accessibility';
     }
     if (text.includes('mobile') || text.includes('touch') || text.includes('responsive') || text.includes('44px')) {
@@ -255,7 +259,7 @@ export class OpenRouterProvider implements AIProvider {
     if (text.includes('conversion') || text.includes('cta') || text.includes('purchase') || text.includes('signup')) {
       return 'conversion-optimization';
     }
-    
+
     return 'usability';
   }
 
@@ -264,9 +268,7 @@ export class OpenRouterProvider implements AIProvider {
    */
   private extractTitle(text: string): string {
     const firstSentence = text.split('.')[0];
-    return firstSentence.length > 50 
-      ? firstSentence.substring(0, 47) + '...'
-      : firstSentence;
+    return firstSentence.length > 50 ? firstSentence.substring(0, 47) + '...' : firstSentence;
   }
 
   /**
@@ -276,7 +278,7 @@ export class OpenRouterProvider implements AIProvider {
     const impacts = {
       critical: 'Prevents users from completing their tasks or causes significant frustration',
       major: 'Makes the interface difficult or unpleasant to use, reducing user satisfaction',
-      minor: 'Small improvement that would enhance the overall user experience'
+      minor: 'Small improvement that would enhance the overall user experience',
     };
     return impacts[severity];
   }
@@ -286,10 +288,10 @@ export class OpenRouterProvider implements AIProvider {
    */
   private extractSelector(text: string): string | undefined {
     const selectorPatterns = [
-      /\.[\w-]+/g,           // CSS classes
-      /#[\w-]+/g,            // CSS IDs  
-      /\[[\w-]+=[\w-]+\]/g,  // Attribute selectors
-      /button|input|form|div|span|a/gi // HTML elements
+      /\.[\w-]+/g, // CSS classes
+      /#[\w-]+/g, // CSS IDs
+      /\[[\w-]+=[\w-]+\]/g, // Attribute selectors
+      /button|input|form|div|span|a/gi, // HTML elements
     ];
 
     for (const pattern of selectorPatterns) {
@@ -306,11 +308,7 @@ export class OpenRouterProvider implements AIProvider {
    * Extract fix suggestion from text
    */
   private extractFix(text: string): string | undefined {
-    const fixPatterns = [
-      /(?:fix|solution|recommend)[:\s]+([^.]+)/i,
-      /should[:\s]+([^.]+)/i,
-      /change[:\s]+([^.]+)/i
-    ];
+    const fixPatterns = [/(?:fix|solution|recommend)[:\s]+([^.]+)/i, /should[:\s]+([^.]+)/i, /change[:\s]+([^.]+)/i];
 
     for (const pattern of fixPatterns) {
       const match = text.match(pattern);
@@ -327,17 +325,22 @@ export class OpenRouterProvider implements AIProvider {
    */
   private categorizeRecommendation(text: string): 'code' | 'design' | 'content' | 'process' {
     const lower = text.toLowerCase();
-    
+
     if (lower.includes('css') || lower.includes('html') || lower.includes('javascript') || lower.includes('```')) {
       return 'code';
     }
     if (lower.includes('content') || lower.includes('copy') || lower.includes('text') || lower.includes('wording')) {
       return 'content';
     }
-    if (lower.includes('process') || lower.includes('workflow') || lower.includes('team') || lower.includes('testing')) {
+    if (
+      lower.includes('process') ||
+      lower.includes('workflow') ||
+      lower.includes('team') ||
+      lower.includes('testing')
+    ) {
       return 'process';
     }
-    
+
     return 'design';
   }
 
@@ -354,14 +357,19 @@ export class OpenRouterProvider implements AIProvider {
    */
   private assessImpact(text: string): 'high' | 'medium' | 'low' {
     const lower = text.toLowerCase();
-    
-    if (lower.includes('critical') || lower.includes('conversion') || lower.includes('accessibility') || lower.includes('revenue')) {
+
+    if (
+      lower.includes('critical') ||
+      lower.includes('conversion') ||
+      lower.includes('accessibility') ||
+      lower.includes('revenue')
+    ) {
       return 'high';
     }
     if (lower.includes('major') || lower.includes('usability') || lower.includes('satisfaction')) {
       return 'medium';
     }
-    
+
     return 'low';
   }
 
@@ -370,14 +378,24 @@ export class OpenRouterProvider implements AIProvider {
    */
   private assessEffort(text: string): 'low' | 'medium' | 'high' {
     const lower = text.toLowerCase();
-    
-    if (lower.includes('simple') || lower.includes('quick') || lower.includes('css change') || lower.includes('one line')) {
+
+    if (
+      lower.includes('simple') ||
+      lower.includes('quick') ||
+      lower.includes('css change') ||
+      lower.includes('one line')
+    ) {
       return 'low';
     }
-    if (lower.includes('redesign') || lower.includes('refactor') || lower.includes('complex') || lower.includes('major change')) {
+    if (
+      lower.includes('redesign') ||
+      lower.includes('refactor') ||
+      lower.includes('complex') ||
+      lower.includes('major change')
+    ) {
       return 'high';
     }
-    
+
     return 'medium';
   }
 

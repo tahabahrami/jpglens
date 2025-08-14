@@ -11,7 +11,7 @@ import { ScreenshotCapture } from '../../src/core/screenshot-capture';
 import { DEFAULT_CONFIG } from '../../src/core/config';
 import { AnalysisContext, ScreenshotData } from '../../src/core/types';
 
-describe('AIAnalyzer', () => {
+(process.env.JPGLENS_API_KEY ? describe : describe.skip)('AIAnalyzer', () => {
   let analyzer: AIAnalyzer;
   let mockScreenshot: ScreenshotData;
   let mockContext: AnalysisContext;

@@ -1,7 +1,7 @@
 /**
  * 🔍 jpglens - Playwright Integration
  * Universal AI-Powered UI Testing
- * 
+ *
  * @author Taha Bahrami (Kaito)
  * @license MIT
  */
@@ -22,14 +22,17 @@ export class PlaywrightJPGLens {
   private screenshotCapture: ScreenshotCapture;
   private config: JPGLensConfig;
 
-  constructor(private page: Page, config?: JPGLensConfig) {
+  constructor(
+    private page: Page,
+    config?: JPGLensConfig
+  ) {
     this.config = config || DEFAULT_CONFIG;
     this.aiAnalyzer = new AIAnalyzer(this.config);
     this.screenshotCapture = new ScreenshotCapture();
   }
 
   static async create(page: Page, config?: JPGLensConfig): Promise<PlaywrightJPGLens> {
-    const finalConfig = config || await loadConfig();
+    const finalConfig = config || (await loadConfig());
     return new PlaywrightJPGLens(page, finalConfig);
   }
 
@@ -56,14 +59,15 @@ export class PlaywrightJPGLens {
         console.log(`🔍 jpglens analysis completed for ${context.stage}:`, {
           score: result.overallScore,
           issues: result.criticalIssues.length + result.majorIssues.length,
-          page: await this.page.url()
+          page: await this.page.url(),
         });
       }
 
       return result;
-
     } catch (error) {
-      throw new Error(`jpglens Playwright analysis failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      throw new Error(
+        `jpglens Playwright analysis failed: ${error instanceof Error ? error.message : 'Unknown error'}`
+      );
     }
   }
 
@@ -74,13 +78,13 @@ export class PlaywrightJPGLens {
     const fullContext: AnalysisContext = {
       userContext: context.userContext || {
         deviceContext: 'desktop-browser',
-        expertise: 'intermediate'
+        expertise: 'intermediate',
       },
       stage: context.stage || 'user-interaction',
       userIntent: context.userIntent || 'complete-task',
       criticalElements: context.criticalElements,
       businessContext: context.businessContext,
-      technicalContext: context.technicalContext
+      technicalContext: context.technicalContext,
     };
 
     return this.analyzeUserJourney(fullContext);
@@ -111,29 +115,28 @@ export class PlaywrightJPGLens {
           userContext: {
             persona: journey.persona,
             deviceContext: journey.device,
-            ...(stage.context?.userContext || {})
+            ...(stage.context?.userContext || {}),
           },
           stage: stage.name,
           userIntent: stage.userGoal,
           criticalElements: stage.context?.criticalElements,
           businessContext: stage.context?.businessContext,
-          technicalContext: stage.context?.technicalContext
+          technicalContext: stage.context?.technicalContext,
         };
 
         // Analyze this stage
         const result = await this.analyzeUserJourney(stageContext);
-        
+
         // Add journey context to result
         result.journeyContext = {
           journeyName: journey.name,
           currentStage: stage.name,
           completedStages: [...completedStages],
-          totalStages: journey.stages.length
+          totalStages: journey.stages.length,
         };
 
         results.push(result);
         completedStages.push(stage.name);
-
       } catch (error) {
         console.error(`Failed to analyze journey stage ${stage.name}:`, error);
         // Continue with next stage
@@ -187,7 +190,6 @@ export class PlaywrightJPGLens {
 
         // Brief pause between actions to simulate human behavior
         await this.page.waitForTimeout(300);
-
       } catch (error) {
         console.error(`Failed to execute action ${action.type}:`, error);
       }
@@ -212,16 +214,15 @@ export class PlaywrightJPGLens {
         pageInfo: {
           url,
           title,
-          viewport: viewport || { width: 1280, height: 720 }
+          viewport: viewport || { width: 1280, height: 720 },
         },
         technicalContext: {
           ...context.technicalContext,
           detectedFramework: frameworks.join(', ') || context.technicalContext?.framework,
           detectedDesignSystem: designSystem || context.technicalContext?.designSystem,
-          deviceSupport: viewport && viewport.width < 768 ? 'mobile-first' : 'desktop-first'
-        }
+          deviceSupport: viewport && viewport.width < 768 ? 'mobile-first' : 'desktop-first',
+        },
       };
-
     } catch (error) {
       console.warn('Failed to enhance context with page info:', error);
       return context;
@@ -328,7 +329,7 @@ export class PlaywrightJPGLens {
           transition-duration: 0s !important;
           transition-delay: 0s !important;
         }
-      `
+      `,
     });
 
     // Ensure page is ready
@@ -385,36 +386,37 @@ export async function playwrightAnalyze(
   } = {}
 ): Promise<AnalysisResult> {
   const jpglens = createJPGLens(page);
-  
+
   // Take screenshot if not provided
   let screenshot: Buffer;
   if (options.screenshot) {
     screenshot = options.screenshot;
   } else {
-    screenshot = await page.screenshot({ 
+    screenshot = await page.screenshot({
       fullPage: true,
-      type: 'png'
+      type: 'png',
     });
   }
-  
+
   // Build analysis context with proper typing
   const analysisContext: AnalysisContext = {
     stage: options.stage || options.context?.stage || 'interaction',
     userIntent: options.userIntent || options.context?.userIntent || 'Navigate and interact with the interface',
-    userContext: options.userContext || options.context?.userContext || {
-      deviceContext: 'desktop',
-      expertise: 'intermediate'
-    },
+    userContext: options.userContext ||
+      options.context?.userContext || {
+        deviceContext: 'desktop',
+        expertise: 'intermediate',
+      },
     pageInfo: {
       component: options.component || 'page',
-      page: page.url()
+      page: page.url(),
     },
-    ...(options.context || {})
+    ...(options.context || {}),
   };
-  
+
   // Prepare for analysis and call the correct method
   await jpglens.prepareForAnalysis();
-  
+
   // Use analyzeUserJourney which is the correct method for PlaywrightJPGLens
   return jpglens.analyzeUserJourney(analysisContext);
 }
@@ -439,13 +441,10 @@ export async function playwrightAnalyzeState(
 /**
  * Quick analyze function with minimal configuration
  */
-export async function quickAnalyze(
-  page: Page,
-  component?: string
-): Promise<AnalysisResult> {
+export async function quickAnalyze(page: Page, component?: string): Promise<AnalysisResult> {
   return playwrightAnalyze(page, {
     component: component || 'page',
     stage: 'interaction',
-    userIntent: 'Use the interface effectively'
+    userIntent: 'Use the interface effectively',
   });
 }

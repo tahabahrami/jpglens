@@ -1,7 +1,7 @@
 /**
  * 🔍 jpglens - Core Type Definitions
  * Universal AI-Powered UI Testing
- * 
+ *
  * @author Taha Bahrami (Kaito)
  * @license MIT
  */
@@ -32,9 +32,9 @@ export interface JPGLensConfig {
   plugins?: string[];
 }
 
-export type AnalysisType = 
+export type AnalysisType =
   | 'usability'
-  | 'accessibility' 
+  | 'accessibility'
   | 'visual-design'
   | 'performance'
   | 'mobile-optimization'
@@ -125,7 +125,7 @@ export interface AnalysisResult {
   component?: string;
   page: string;
   context: AnalysisContext;
-  
+
   // Analysis Results
   overallScore: number;
   scores: {
@@ -134,14 +134,14 @@ export interface AnalysisResult {
     visualDesign?: number;
     performance?: number;
   };
-  
+
   // Findings
   strengths: string[];
   criticalIssues: Issue[];
   majorIssues: Issue[];
   minorIssues: Issue[];
   recommendations: Recommendation[];
-  
+
   // Metadata
   screenshot?: string;
   model: string;
@@ -213,7 +213,7 @@ export interface JPGLensPlugin {
   name: string;
   version: string;
   description: string;
-  
+
   // Plugin Hooks
   beforeAnalysis?(context: AnalysisContext): Promise<void>;
   afterAnalysis?(result: AnalysisResult): Promise<AnalysisResult>;
@@ -235,11 +235,13 @@ export interface CypressIntegration {
 
 export interface StorybookIntegration {
   canvas: any; // Storybook Canvas
-  analyzeComponentStates(context: AnalysisContext & { 
-    component: string; 
-    states: string[]; 
-    designSystem?: string; 
-  }): Promise<AnalysisResult>;
+  analyzeComponentStates(
+    context: AnalysisContext & {
+      component: string;
+      states: string[];
+      designSystem?: string;
+    }
+  ): Promise<AnalysisResult>;
 }
 
 export interface SeleniumIntegration {

@@ -1,7 +1,7 @@
 /**
  * 🔍 jpglens - Screenshot Capture System
  * Universal AI-Powered UI Testing
- * 
+ *
  * @author Taha Bahrami (Kaito)
  * @license MIT
  */
@@ -17,16 +17,14 @@ import { ScreenshotData } from './types.js';
 export class ScreenshotCapture {
   constructor(private outputDir: string = './jpglens-screenshots') {
     // Initialize directory creation asynchronously
-    this.ensureOutputDir().catch(error => 
-      console.warn('Failed to initialize screenshot directory:', error)
-    );
+    this.ensureOutputDir().catch(error => console.warn('Failed to initialize screenshot directory:', error));
   }
 
   /**
    * Capture screenshot from Playwright page
    */
   async capturePlaywrightPage(
-    page: any, 
+    page: any,
     options: {
       fullPage?: boolean;
       animations?: 'disabled' | 'allow';
@@ -44,7 +42,7 @@ export class ScreenshotCapture {
       fullPage: options.fullPage ?? true,
       animations: options.animations ?? 'disabled',
       mask: options.mask ?? [],
-      type: 'png'
+      type: 'png',
     });
 
     // Get viewport information
@@ -56,9 +54,9 @@ export class ScreenshotCapture {
       metadata: {
         width: viewport.width,
         height: viewport.height,
-        devicePixelRatio: await page.evaluate(() => window.devicePixelRatio) || 1,
-        timestamp
-      }
+        devicePixelRatio: (await page.evaluate(() => window.devicePixelRatio)) || 1,
+        timestamp,
+      },
     };
   }
 
@@ -73,7 +71,7 @@ export class ScreenshotCapture {
     // Capture screenshot with Selenium
     const base64Data = await driver.takeScreenshot();
     const buffer = Buffer.from(base64Data, 'base64');
-    
+
     // Save to file
     writeFileSync(filepath, buffer);
 
@@ -87,8 +85,8 @@ export class ScreenshotCapture {
         width: windowSize.width,
         height: windowSize.height,
         devicePixelRatio: 1, // Selenium doesn't provide this easily
-        timestamp
-      }
+        timestamp,
+      },
     };
   }
 
@@ -96,7 +94,7 @@ export class ScreenshotCapture {
    * Load screenshot from Cypress (which saves to filesystem)
    */
   async loadFromPath(
-    filepath: string, 
+    filepath: string,
     metadata: {
       width: number;
       height: number;
@@ -109,7 +107,7 @@ export class ScreenshotCapture {
     return {
       buffer,
       path: filepath,
-      metadata
+      metadata,
     };
   }
 
@@ -139,8 +137,8 @@ export class ScreenshotCapture {
         width: metadata.width,
         height: metadata.height,
         devicePixelRatio: metadata.devicePixelRatio || 1,
-        timestamp
-      }
+        timestamp,
+      },
     };
   }
 
@@ -157,12 +155,12 @@ export class ScreenshotCapture {
     for (const stage of stages) {
       try {
         const screenshot = await captureFunction();
-        
+
         // Add stage metadata
         screenshot.stageInfo = {
           stageName: stage,
           stageIndex: stages.indexOf(stage),
-          totalStages: stages.length
+          totalStages: stages.length,
         };
 
         screenshots.push(screenshot);
@@ -187,23 +185,22 @@ export class ScreenshotCapture {
       // This is a placeholder for zip creation
       // In a real implementation, you'd use a library like 'adm-zip'
       const zipPath = join(this.outputDir, `journey-${Date.now()}.zip`);
-      
+
       // For now, we'll create a JSON manifest of the screenshots
       // Real implementation would create actual zip file
       const manifest = {
         screenshots: screenshots.map(s => ({
           path: s.path,
           metadata: s.metadata,
-          stageInfo: (s as any).stageInfo
+          stageInfo: (s as any).stageInfo,
         })),
         createdAt: new Date().toISOString(),
-        totalScreenshots: screenshots.length
+        totalScreenshots: screenshots.length,
       };
 
       writeFileSync(zipPath.replace('.zip', '.json'), JSON.stringify(manifest, null, 2));
-      
-      return zipPath;
 
+      return zipPath;
     } catch (error) {
       console.warn('Failed to create screenshot zip:', error);
       return undefined;
@@ -238,10 +235,10 @@ export class ScreenshotCapture {
   ): Promise<ScreenshotData> {
     // This would use a library like 'sharp' or 'jimp' to add annotations
     // For now, we'll store the annotation data in metadata
-    
+
     const annotatedScreenshot = { ...screenshot };
     annotatedScreenshot.annotations = annotations;
-    
+
     return annotatedScreenshot;
   }
 
@@ -292,12 +289,14 @@ export class ScreenshotCapture {
     // Check file size limits (most AI APIs have limits)
     const maxSize = 20 * 1024 * 1024; // 20MB
     if (screenshot.buffer.length > maxSize) {
-      errors.push(`Screenshot file size (${Math.round(screenshot.buffer.length / 1024 / 1024)}MB) exceeds maximum (20MB)`);
+      errors.push(
+        `Screenshot file size (${Math.round(screenshot.buffer.length / 1024 / 1024)}MB) exceeds maximum (20MB)`
+      );
     }
 
     return {
       valid: errors.length === 0,
-      errors
+      errors,
     };
   }
 
@@ -322,18 +321,18 @@ export class ScreenshotCapture {
     try {
       const fs = await import('fs');
       const path = await import('path');
-      
+
       if (!fs.existsSync(this.outputDir)) return;
 
       const files = fs.readdirSync(this.outputDir);
-      const cutoffTime = Date.now() - (olderThanHours * 60 * 60 * 1000);
+      const cutoffTime = Date.now() - olderThanHours * 60 * 60 * 1000;
 
       let deletedCount = 0;
 
       for (const file of files) {
         const filepath = path.join(this.outputDir, file);
         const stats = fs.statSync(filepath);
-        
+
         if (stats.mtime.getTime() < cutoffTime) {
           fs.unlinkSync(filepath);
           deletedCount++;
@@ -343,7 +342,6 @@ export class ScreenshotCapture {
       if (deletedCount > 0) {
         console.log(`🧹 jpglens cleaned up ${deletedCount} old screenshots`);
       }
-
     } catch (error) {
       console.warn('Failed to cleanup old screenshots:', error);
     }

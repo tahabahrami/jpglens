@@ -1,7 +1,7 @@
 /**
  * 🔍 jpglens - Console Output Formatter
  * Beautiful console display for AI analysis results when reports are disabled
- * 
+ *
  * @author Taha Bahrami (Kaito)
  * @license MIT
  */
@@ -17,7 +17,7 @@ export class ConsoleFormatter {
     reset: '\x1b[0m',
     bright: '\x1b[1m',
     dim: '\x1b[2m',
-    
+
     // Foreground colors
     black: '\x1b[30m',
     red: '\x1b[31m',
@@ -27,14 +27,14 @@ export class ConsoleFormatter {
     magenta: '\x1b[35m',
     cyan: '\x1b[36m',
     white: '\x1b[37m',
-    
+
     // Background colors
     bgRed: '\x1b[41m',
     bgGreen: '\x1b[42m',
     bgYellow: '\x1b[43m',
     bgBlue: '\x1b[44m',
     bgMagenta: '\x1b[45m',
-    bgCyan: '\x1b[46m'
+    bgCyan: '\x1b[46m',
   };
 
   private static readonly ICONS = {
@@ -68,39 +68,42 @@ export class ConsoleFormatter {
     star: '⭐',
     arrow: '➤',
     bullet: '•',
-    separator: '─'
+    separator: '─',
   };
 
   /**
    * Format complete analysis result for console display
    */
-  static formatAnalysisResult(result: AnalysisResult, options: {
-    showRawAnalysis?: boolean;
-    showTechnicalDetails?: boolean;
-    compact?: boolean;
-  } = {}): void {
+  static formatAnalysisResult(
+    result: AnalysisResult,
+    options: {
+      showRawAnalysis?: boolean;
+      showTechnicalDetails?: boolean;
+      compact?: boolean;
+    } = {}
+  ): void {
     const { showRawAnalysis = false, showTechnicalDetails = true, compact = false } = options;
 
     // Clear console and show header
     this.showHeader(result);
-    
+
     if (!compact) {
       this.showMetadata(result);
       this.showScores(result);
     }
-    
+
     this.showStrengths(result);
     this.showIssues(result);
     this.showRecommendations(result);
-    
+
     if (showTechnicalDetails && !compact) {
       this.showTechnicalDetails(result);
     }
-    
+
     if (showRawAnalysis && result.rawAnalysis) {
       this.showRawAnalysis(result.rawAnalysis);
     }
-    
+
     this.showFooter(result);
   }
 
@@ -110,7 +113,7 @@ export class ConsoleFormatter {
   private static showHeader(result: AnalysisResult): void {
     const title = `${this.ICONS.success} jpglens AI Analysis Complete`;
     const line = '═'.repeat(60);
-    
+
     console.log(`\n${this.color(line, 'cyan')}`);
     console.log(`${this.color(title, 'bright')}${this.color(' ' + this.ICONS.component, 'cyan')}`);
     console.log(`${this.color(line, 'cyan')}\n`);
@@ -124,7 +127,7 @@ export class ConsoleFormatter {
       `${this.ICONS.component} Component: ${this.color(result.component || 'Unknown', 'bright')}`,
       `${this.ICONS.page} Page: ${this.color(result.page || 'Unknown', 'bright')}`,
       `${this.ICONS.model} Model: ${this.color(result.model, 'cyan')}`,
-      `${this.ICONS.time} Analysis Time: ${this.color(result.analysisTime + 'ms', 'yellow')}`
+      `${this.ICONS.time} Analysis Time: ${this.color(result.analysisTime + 'ms', 'yellow')}`,
     ];
 
     if (result.context?.userContext) {
@@ -149,14 +152,16 @@ export class ConsoleFormatter {
   private static showScores(result: AnalysisResult): void {
     console.log(`${this.color('📊 ANALYSIS SCORES', 'bright')}`);
     console.log(`${this.ICONS.separator.repeat(30)}`);
-    
+
     // Overall score with visual bar
     const overallScore = result.overallScore || 0;
     const scoreBar = this.createScoreBar(overallScore);
     const scoreColor = this.getScoreColor(overallScore);
-    
-    console.log(`${this.ICONS.star} Overall Score: ${this.color(overallScore.toFixed(1) + '/10', scoreColor)} ${scoreBar}`);
-    
+
+    console.log(
+      `${this.ICONS.star} Overall Score: ${this.color(overallScore.toFixed(1) + '/10', scoreColor)} ${scoreBar}`
+    );
+
     // Individual scores
     if (result.scores && Object.keys(result.scores).length > 0) {
       console.log();
@@ -165,11 +170,11 @@ export class ConsoleFormatter {
         const bar = this.createScoreBar(score);
         const color = this.getScoreColor(score);
         const categoryName = this.formatCategoryName(category);
-        
+
         console.log(`  ${icon} ${categoryName}: ${this.color(score.toFixed(1) + '/10', color)} ${bar}`);
       });
     }
-    
+
     console.log();
   }
 
@@ -178,14 +183,14 @@ export class ConsoleFormatter {
    */
   private static showStrengths(result: AnalysisResult): void {
     if (!result.strengths || result.strengths.length === 0) return;
-    
+
     console.log(`${this.color('🎯 STRENGTHS', 'green')}`);
     console.log(`${this.ICONS.separator.repeat(30)}`);
-    
+
     result.strengths.forEach((strength, index) => {
       console.log(`  ${this.color(index + 1 + '.', 'dim')} ${this.ICONS.success} ${strength}`);
     });
-    
+
     console.log();
   }
 
@@ -196,7 +201,7 @@ export class ConsoleFormatter {
     const allIssues = [
       ...(result.criticalIssues || []).map(issue => ({ ...issue, type: 'critical' })),
       ...(result.majorIssues || []).map(issue => ({ ...issue, type: 'major' })),
-      ...(result.minorIssues || []).map(issue => ({ ...issue, type: 'minor' }))
+      ...(result.minorIssues || []).map(issue => ({ ...issue, type: 'minor' })),
     ];
 
     if (allIssues.length === 0) {
@@ -208,7 +213,7 @@ export class ConsoleFormatter {
 
     console.log(`${this.color('🔍 ISSUES FOUND', 'yellow')}`);
     console.log(`${this.ICONS.separator.repeat(30)}`);
-    
+
     // Group by severity
     const critical = allIssues.filter(i => i.type === 'critical');
     const major = allIssues.filter(i => i.type === 'major');
@@ -234,7 +239,7 @@ export class ConsoleFormatter {
         this.formatIssue(issue, index + 1, 'minor');
       });
     }
-    
+
     console.log();
   }
 
@@ -245,25 +250,27 @@ export class ConsoleFormatter {
     const icons = {
       critical: this.ICONS.critical,
       major: this.ICONS.major,
-      minor: this.ICONS.minor
+      minor: this.ICONS.minor,
     };
-    
+
     const colors = {
       critical: 'red',
       major: 'yellow',
-      minor: 'cyan'
+      minor: 'cyan',
     };
 
-    console.log(`    ${this.color(index + '.', 'dim')} ${icons[type]} ${this.color(issue.title, colors[type] as keyof typeof this.COLORS)}`);
-    
+    console.log(
+      `    ${this.color(index + '.', 'dim')} ${icons[type]} ${this.color(issue.title, colors[type] as keyof typeof this.COLORS)}`
+    );
+
     if (issue.description) {
       console.log(`       ${this.color('Description:', 'dim')} ${issue.description}`);
     }
-    
+
     if (issue.impact) {
       console.log(`       ${this.ICONS.impact} ${this.color('Impact:', 'dim')} ${issue.impact}`);
     }
-    
+
     if (issue.fix) {
       console.log(`       ${this.ICONS.fix} ${this.color('Fix:', 'green')} ${issue.fix}`);
     }
@@ -274,28 +281,30 @@ export class ConsoleFormatter {
    */
   private static showRecommendations(result: AnalysisResult): void {
     if (!result.recommendations || result.recommendations.length === 0) return;
-    
+
     console.log(`${this.color('💡 RECOMMENDATIONS', 'blue')}`);
     console.log(`${this.ICONS.separator.repeat(30)}`);
-    
+
     result.recommendations.forEach((rec, index) => {
-      console.log(`  ${this.color(index + 1 + '.', 'dim')} ${this.ICONS.recommendation} ${this.color(rec.title, 'bright')}`);
-      
+      console.log(
+        `  ${this.color(index + 1 + '.', 'dim')} ${this.ICONS.recommendation} ${this.color(rec.title, 'bright')}`
+      );
+
       if (rec.description) {
         console.log(`     ${rec.description}`);
       }
-      
+
       const details = [];
       if (rec.impact) details.push(`${this.ICONS.impact} Impact: ${this.color(rec.impact, 'green')}`);
       if (rec.effort) details.push(`${this.ICONS.effort} Effort: ${this.color(rec.effort, 'yellow')}`);
-      
+
       if (details.length > 0) {
         console.log(`     ${details.join(' | ')}`);
       }
-      
+
       if (index < result.recommendations.length - 1) console.log();
     });
-    
+
     console.log();
   }
 
@@ -305,17 +314,17 @@ export class ConsoleFormatter {
   private static showTechnicalDetails(result: AnalysisResult): void {
     console.log(`${this.color('🔧 TECHNICAL DETAILS', 'dim')}`);
     console.log(`${this.ICONS.separator.repeat(30)}`);
-    
+
     const details = [
       `${this.ICONS.info} Analysis ID: ${result.id}`,
       `${this.ICONS.tokens} Tokens Used: ${result.tokensUsed || 0}`,
-      `${this.ICONS.time} Processing Time: ${result.analysisTime}ms`
+      `${this.ICONS.time} Processing Time: ${result.analysisTime}ms`,
     ];
-    
+
     if (result.provider) {
       details.push(`${this.ICONS.model} Provider: ${result.provider}`);
     }
-    
+
     details.forEach(detail => console.log(`  ${this.color(detail, 'dim')}`));
     console.log();
   }
@@ -335,7 +344,7 @@ export class ConsoleFormatter {
   private static showFooter(result: AnalysisResult): void {
     const line = '═'.repeat(60);
     const timestamp = new Date(result.timestamp).toLocaleString();
-    
+
     console.log(`${this.color(line, 'cyan')}`);
     console.log(`${this.color('Analysis completed at ' + timestamp, 'dim')}`);
     console.log(`${this.color('Powered by jpglens AI 🔍', 'cyan')}`);
@@ -350,7 +359,7 @@ export class ConsoleFormatter {
     const empty = width - filled;
     const filledBar = '█'.repeat(filled);
     const emptyBar = '░'.repeat(empty);
-    
+
     return `[${this.color(filledBar, this.getScoreColor(score))}${this.color(emptyBar, 'dim')}]`;
   }
 
@@ -375,9 +384,9 @@ export class ConsoleFormatter {
       visualDesign: this.ICONS.visual,
       'visual-design': this.ICONS.visual,
       mobile: this.ICONS.mobile,
-      desktop: this.ICONS.desktop
+      desktop: this.ICONS.desktop,
     };
-    
+
     return iconMap[category] || this.ICONS.info;
   }
 
@@ -385,9 +394,10 @@ export class ConsoleFormatter {
    * Format category name
    */
   private static formatCategoryName(category: string): string {
-    return category.split(/[-_]/).map(word => 
-      word.charAt(0).toUpperCase() + word.slice(1)
-    ).join(' ');
+    return category
+      .split(/[-_]/)
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
   }
 
   /**
@@ -404,13 +414,17 @@ export class ConsoleFormatter {
     const score = result.overallScore || 0;
     const scoreColor = this.getScoreColor(score);
     const scoreBar = this.createScoreBar(score, 5);
-    
+
     const criticalCount = result.criticalIssues?.length || 0;
     const majorCount = result.majorIssues?.length || 0;
     const recCount = result.recommendations?.length || 0;
-    
-    console.log(`\n${this.ICONS.success} ${this.color('jpglens Analysis:', 'bright')} ${this.color(score.toFixed(1) + '/10', scoreColor)} ${scoreBar}`);
-    console.log(`${this.ICONS.issue} Issues: ${this.color(criticalCount + ' critical', criticalCount > 0 ? 'red' : 'green')}, ${this.color(majorCount + ' major', majorCount > 0 ? 'yellow' : 'green')}`);
+
+    console.log(
+      `\n${this.ICONS.success} ${this.color('jpglens Analysis:', 'bright')} ${this.color(score.toFixed(1) + '/10', scoreColor)} ${scoreBar}`
+    );
+    console.log(
+      `${this.ICONS.issue} Issues: ${this.color(criticalCount + ' critical', criticalCount > 0 ? 'red' : 'green')}, ${this.color(majorCount + ' major', majorCount > 0 ? 'yellow' : 'green')}`
+    );
     console.log(`${this.ICONS.recommendation} Recommendations: ${this.color(recCount.toString(), 'blue')}\n`);
   }
 
@@ -421,11 +435,11 @@ export class ConsoleFormatter {
     console.log(`\n${this.color('❌ jpglens Analysis Failed', 'red')}`);
     console.log(`${this.ICONS.separator.repeat(40)}`);
     console.log(`${this.ICONS.error} ${error}`);
-    
+
     if (details) {
       console.log(`${this.ICONS.info} ${this.color('Details:', 'dim')} ${details}`);
     }
-    
+
     console.log();
   }
 

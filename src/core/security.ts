@@ -1,7 +1,7 @@
 /**
  * 🔍 jpglens - Security Layer
  * Universal AI-Powered UI Testing
- * 
+ *
  * @author Taha Bahrami (Kaito)
  * @license MIT
  */
@@ -73,7 +73,7 @@ export class SecurityManager {
     const commonFormats = [
       /^sk-[a-zA-Z0-9]{48,}$/, // OpenAI format
       /^sk-or-v1-[a-zA-Z0-9-]{50,}$/, // OpenRouter format
-      /^[a-zA-Z0-9_-]{40,}$/ // Generic long token
+      /^[a-zA-Z0-9_-]{40,}$/, // Generic long token
     ];
 
     const hasValidFormat = commonFormats.some(format => format.test(apiKey));
@@ -83,7 +83,7 @@ export class SecurityManager {
 
     return {
       valid: errors.length === 0,
-      errors
+      errors,
     };
   }
 
@@ -112,18 +112,20 @@ export class SecurityManager {
     if (buffer.length < 8) return false;
 
     // Check PNG signature
-    if (buffer.subarray(0, 8).equals(Buffer.from([0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A]))) {
+    if (buffer.subarray(0, 8).equals(Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]))) {
       return true;
     }
 
     // Check JPEG signature
-    if (buffer.subarray(0, 3).equals(Buffer.from([0xFF, 0xD8, 0xFF]))) {
+    if (buffer.subarray(0, 3).equals(Buffer.from([0xff, 0xd8, 0xff]))) {
       return true;
     }
 
     // Check WebP signature
-    if (buffer.subarray(0, 4).equals(Buffer.from('RIFF', 'ascii')) &&
-        buffer.subarray(8, 12).equals(Buffer.from('WEBP', 'ascii'))) {
+    if (
+      buffer.subarray(0, 4).equals(Buffer.from('RIFF', 'ascii')) &&
+      buffer.subarray(8, 12).equals(Buffer.from('WEBP', 'ascii'))
+    ) {
       return true;
     }
 
@@ -158,14 +160,13 @@ export class SecurityManager {
       if (parsedUrl.protocol !== 'file:' && !this.isDomainAllowed(parsedUrl.hostname)) {
         console.warn(`Warning: ${parsedUrl.hostname} is not in allowed domains list`);
       }
-
     } catch (error) {
       errors.push('Invalid URL format');
     }
 
     return {
       valid: errors.length === 0,
-      errors
+      errors,
     };
   }
 
@@ -177,7 +178,7 @@ export class SecurityManager {
       /[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}/, // Raw IP addresses (except localhost)
       /.*\.onion$/, // Tor hidden services
       /.*\.i2p$/, // I2P domains
-      /[^a-zA-Z0-9.-]/ // Non-standard characters
+      /[^a-zA-Z0-9.-]/, // Non-standard characters
     ];
 
     // Allow localhost IPs
@@ -193,11 +194,11 @@ export class SecurityManager {
    */
   private isDomainAllowed(hostname: string): boolean {
     if (!hostname) return false;
-    
-    return this.allowedDomains.has(hostname) || 
-           Array.from(this.allowedDomains).some(domain => 
-             hostname.endsWith(`.${domain}`)
-           );
+
+    return (
+      this.allowedDomains.has(hostname) ||
+      Array.from(this.allowedDomains).some(domain => hostname.endsWith(`.${domain}`))
+    );
   }
 
   /**
@@ -215,12 +216,12 @@ export class SecurityManager {
     const windowStart = now - windowMs;
 
     const entry = this.rateLimiter.get(identifier);
-    
+
     if (!entry || entry.resetTime <= windowStart) {
       // Reset or create new entry
       this.rateLimiter.set(identifier, {
         count: 1,
-        resetTime: now + windowMs
+        resetTime: now + windowMs,
       });
       return true;
     }
@@ -247,21 +248,21 @@ export class SecurityManager {
 
     // Remove potentially sensitive fields
     const sensitiveFields = ['apiKey', 'token', 'password', 'secret', 'auth', 'credential'];
-    
+
     const removeSensitiveData = (obj: any): any => {
       if (obj && typeof obj === 'object') {
         const cleaned = { ...obj };
-        
+
         for (const key of Object.keys(cleaned)) {
           const lowerKey = key.toLowerCase();
-          
+
           if (sensitiveFields.some(field => lowerKey.includes(field))) {
             delete cleaned[key];
           } else if (typeof cleaned[key] === 'object') {
             cleaned[key] = removeSensitiveData(cleaned[key]);
           }
         }
-        
+
         return cleaned;
       }
       return obj;
@@ -294,7 +295,7 @@ export class SecurityManager {
       /javascript:/gi,
       /data:text\/html/gi,
       /vbscript:/gi,
-      /on\w+\s*=/gi // Event handlers like onclick=
+      /on\w+\s*=/gi, // Event handlers like onclick=
     ];
 
     for (const pattern of suspiciousPatterns) {
@@ -311,7 +312,7 @@ export class SecurityManager {
 
     return {
       valid: warnings.length === 0,
-      warnings
+      warnings,
     };
   }
 
@@ -321,17 +322,20 @@ export class SecurityManager {
   sanitizeLogData(data: any): any {
     if (typeof data === 'string') {
       // Mask API keys in strings
-      return data.replace(/sk-[a-zA-Z0-9]{48,}/g, 'sk-***MASKED***')
-                 .replace(/sk-or-v1-[a-zA-Z0-9-]{50,}/g, 'sk-or-v1-***MASKED***');
+      return data
+        .replace(/sk-[a-zA-Z0-9]{48,}/g, 'sk-***MASKED***')
+        .replace(/sk-or-v1-[a-zA-Z0-9-]{50,}/g, 'sk-or-v1-***MASKED***');
     }
 
     if (data && typeof data === 'object') {
       const sanitized = { ...data };
-      
+
       for (const key of Object.keys(sanitized)) {
-        if (key.toLowerCase().includes('key') || 
-            key.toLowerCase().includes('token') ||
-            key.toLowerCase().includes('secret')) {
+        if (
+          key.toLowerCase().includes('key') ||
+          key.toLowerCase().includes('token') ||
+          key.toLowerCase().includes('secret')
+        ) {
           sanitized[key] = '***MASKED***';
         } else if (typeof sanitized[key] === 'object') {
           sanitized[key] = this.sanitizeLogData(sanitized[key]);
@@ -339,7 +343,7 @@ export class SecurityManager {
           sanitized[key] = this.sanitizeLogData(sanitized[key]);
         }
       }
-      
+
       return sanitized;
     }
 
@@ -354,9 +358,9 @@ export class SecurityManager {
       'User-Agent': userAgent,
       'X-Session-ID': this.sessionId,
       'X-Requested-With': 'jpglens',
-      'Accept': 'application/json',
+      Accept: 'application/json',
       'Cache-Control': 'no-cache',
-      'Pragma': 'no-cache'
+      Pragma: 'no-cache',
     };
   }
 
@@ -370,7 +374,7 @@ export class SecurityManager {
       action,
       success,
       data: this.sanitizeLogData(data),
-      checksum: this.generateCacheKey({ action, success, timestamp: Date.now() })
+      checksum: this.generateCacheKey({ action, success, timestamp: Date.now() }),
     };
   }
 }

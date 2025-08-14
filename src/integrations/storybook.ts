@@ -1,7 +1,7 @@
 /**
  * 🔍 jpglens - Storybook Integration
  * Universal AI-Powered UI Testing
- * 
+ *
  * @author Taha Bahrami (Kaito)
  * @license MIT
  */
@@ -51,13 +51,13 @@ export class StorybookJPGLens {
           ...context.technicalContext,
           framework: 'Storybook',
           designSystem: context.designSystem || 'unknown',
-          deviceSupport: 'responsive'
+          deviceSupport: 'responsive',
         },
         componentInfo: {
           name: context.component,
           states: context.states,
-          framework: 'Storybook'
-        }
+          framework: 'Storybook',
+        },
       };
 
       // Perform AI analysis
@@ -67,11 +67,10 @@ export class StorybookJPGLens {
       result.storybookInfo = {
         component: context.component,
         states: context.states,
-        designSystem: context.designSystem
+        designSystem: context.designSystem,
       };
 
       return result;
-
     } catch (error) {
       throw new Error(`Storybook jpglens analysis failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
@@ -96,7 +95,7 @@ export class StorybookJPGLens {
           userContext: {
             persona: 'design-system-user',
             deviceContext: 'storybook-browser',
-            expertise: 'intermediate'
+            expertise: 'intermediate',
           },
           stage: 'component-evaluation',
           userIntent: `evaluate ${component.name} for design system consistency`,
@@ -105,13 +104,12 @@ export class StorybookJPGLens {
           businessContext: {
             industry: 'design-systems',
             conversionGoal: 'component-adoption',
-            brandPersonality: 'consistent-professional'
-          }
+            brandPersonality: 'consistent-professional',
+          },
         });
 
         result.componentCategory = component.category;
         results.push(result);
-
       } catch (error) {
         console.error(`Failed to analyze component ${component.name}:`, error);
       }
@@ -123,35 +121,31 @@ export class StorybookJPGLens {
   /**
    * Analyze accessibility across component states
    */
-  async analyzeComponentAccessibility(
-    canvas: any,
-    component: string,
-    states: string[]
-  ): Promise<AnalysisResult> {
+  async analyzeComponentAccessibility(canvas: any, component: string, states: string[]): Promise<AnalysisResult> {
     const context: AnalysisContext = {
       userContext: {
         persona: 'accessibility-user',
         deviceContext: 'screen-reader-desktop',
-        expertise: 'intermediate'
+        expertise: 'intermediate',
       },
       stage: 'accessibility-evaluation',
       userIntent: 'ensure component is accessible across all states',
       businessContext: {
         industry: 'accessibility-compliance',
         conversionGoal: 'wcag-compliance',
-        targetAudience: 'users-with-disabilities'
+        targetAudience: 'users-with-disabilities',
       },
       technicalContext: {
         framework: 'Storybook',
         accessibilityTarget: 'WCAG-AA',
-        deviceSupport: 'responsive'
-      }
+        deviceSupport: 'responsive',
+      },
     };
 
     return this.analyzeComponentStates(canvas, {
       ...context,
       component,
-      states
+      states,
     });
   }
 
@@ -161,11 +155,11 @@ export class StorybookJPGLens {
   private async captureCanvasScreenshot(canvasElement: HTMLElement): Promise<any> {
     // This would typically use html2canvas or similar library
     // For now, we'll simulate the screenshot capture
-    
+
     const rect = canvasElement.getBoundingClientRect();
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
-    
+
     if (!ctx) {
       throw new Error('Could not create canvas context for screenshot');
     }
@@ -191,7 +185,7 @@ export class StorybookJPGLens {
       width: canvas.width,
       height: canvas.height,
       devicePixelRatio: window.devicePixelRatio || 1,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
   }
 }
@@ -237,18 +231,18 @@ export async function analyzeComponent(
   } = {}
 ): Promise<AnalysisResult> {
   const jpglens = getStorybookJPGLens();
-  
+
   return jpglens.analyzeComponentStates(canvas, {
     userContext: {
       persona: 'component-user',
       deviceContext: 'storybook-browser',
-      expertise: 'intermediate'
+      expertise: 'intermediate',
     },
     stage: 'component-review',
     userIntent: options.focus || `evaluate ${componentName} component`,
     component: componentName,
     states: options.states || ['default'],
-    designSystem: options.designSystem
+    designSystem: options.designSystem,
   });
 }
 
@@ -273,12 +267,12 @@ export async function analyzeDesignSystemConsistency(
   designSystemName: string
 ): Promise<AnalysisResult> {
   const jpglens = getStorybookJPGLens();
-  
+
   return jpglens.analyzeComponentStates(canvas, {
     userContext: {
       persona: 'design-system-maintainer',
       deviceContext: 'design-review',
-      expertise: 'expert'
+      expertise: 'expert',
     },
     stage: 'design-system-audit',
     userIntent: `ensure ${componentName} follows ${designSystemName} guidelines`,
@@ -288,8 +282,8 @@ export async function analyzeDesignSystemConsistency(
     businessContext: {
       industry: 'design-systems',
       conversionGoal: 'consistency-compliance',
-      brandPersonality: 'systematic-professional'
-    }
+      brandPersonality: 'systematic-professional',
+    },
   });
 }
 

@@ -1,7 +1,7 @@
 /**
  * 🔍 jpglens - Framework Compatibility Layer
  * Universal AI-Powered UI Testing
- * 
+ *
  * @author Taha Bahrami (Kaito)
  * @license MIT
  */
@@ -19,13 +19,13 @@ export const FRAMEWORK_COMPATIBILITY = {
       screenshot: {
         '1.20.0': { animations: false, mask: false },
         '1.30.0': { animations: true, mask: true },
-        '1.40.0': { animations: true, mask: true, clip: true }
+        '1.40.0': { animations: true, mask: true, clip: true },
       },
       viewport: {
         '1.20.0': 'viewportSize',
-        '1.35.0': 'viewportSize' // No changes
-      }
-    }
+        '1.35.0': 'viewportSize', // No changes
+      },
+    },
   },
   cypress: {
     minVersion: '10.0.0',
@@ -34,9 +34,9 @@ export const FRAMEWORK_COMPATIBILITY = {
     features: {
       commands: {
         '10.0.0': { customCommands: true, screenshot: true },
-        '12.0.0': { customCommands: true, screenshot: true, intercept: true }
-      }
-    }
+        '12.0.0': { customCommands: true, screenshot: true, intercept: true },
+      },
+    },
   },
   selenium: {
     minVersion: '4.0.0',
@@ -45,9 +45,9 @@ export const FRAMEWORK_COMPATIBILITY = {
     features: {
       screenshot: {
         '4.0.0': 'takeScreenshot',
-        '4.10.0': 'takeScreenshot' // No API changes
-      }
-    }
+        '4.10.0': 'takeScreenshot', // No API changes
+      },
+    },
   },
   storybook: {
     minVersion: '6.5.0',
@@ -56,14 +56,14 @@ export const FRAMEWORK_COMPATIBILITY = {
     features: {
       testing: {
         '6.5.0': '@storybook/testing-library',
-        '7.0.0': '@storybook/test' // New testing package
+        '7.0.0': '@storybook/test', // New testing package
       },
       interactions: {
         '6.5.0': { play: true, userEvent: 'testing-library' },
-        '7.0.0': { play: true, userEvent: '@storybook/test' }
-      }
-    }
-  }
+        '7.0.0': { play: true, userEvent: '@storybook/test' },
+      },
+    },
+  },
 };
 
 /**
@@ -78,53 +78,45 @@ export const AI_PROVIDER_COMPATIBILITY = {
         'openai/gpt-4-vision-preview',
         'openai/gpt-4o',
         'anthropic/claude-3-5-sonnet',
-        'google/gemini-pro-vision'
-      ]
+        'google/gemini-pro-vision',
+      ],
     },
     imageFormat: 'base64',
     maxImageSize: 20 * 1024 * 1024, // 20MB
     requestFormat: {
       messages: true,
       image_url: true,
-      detail: true
-    }
+      detail: true,
+    },
   },
   openai: {
     apiVersion: 'v1',
     endpoint: 'https://api.openai.com/v1',
     models: {
-      vision: [
-        'gpt-4-vision-preview',
-        'gpt-4o',
-        'gpt-4o-mini'
-      ]
+      vision: ['gpt-4-vision-preview', 'gpt-4o', 'gpt-4o-mini'],
     },
     imageFormat: 'base64',
     maxImageSize: 20 * 1024 * 1024,
     requestFormat: {
       messages: true,
       image_url: true,
-      detail: true
-    }
+      detail: true,
+    },
   },
   anthropic: {
     apiVersion: '2023-06-01',
     endpoint: 'https://api.anthropic.com/v1',
     models: {
-      vision: [
-        'claude-3-5-sonnet-20241022',
-        'claude-3-opus-20240229',
-        'claude-3-haiku-20240307'
-      ]
+      vision: ['claude-3-5-sonnet-20241022', 'claude-3-opus-20240229', 'claude-3-haiku-20240307'],
     },
     imageFormat: 'base64',
     maxImageSize: 5 * 1024 * 1024, // 5MB for Anthropic
     requestFormat: {
       messages: true,
       image: true,
-      source: true
-    }
-  }
+      source: true,
+    },
+  },
 };
 
 /**
@@ -134,8 +126,9 @@ export function isFrameworkSupported(framework: string, version: string): boolea
   const compatibility = FRAMEWORK_COMPATIBILITY[framework as keyof typeof FRAMEWORK_COMPATIBILITY];
   if (!compatibility) return false;
 
-  return compareVersions(version, compatibility.minVersion) >= 0 &&
-         compareVersions(version, compatibility.maxVersion) <= 0;
+  return (
+    compareVersions(version, compatibility.minVersion) >= 0 && compareVersions(version, compatibility.maxVersion) <= 0
+  );
 }
 
 /**
@@ -150,7 +143,7 @@ export function getFrameworkFeatures(framework: string, version: string): any {
 
   for (const [featureName, featureVersions] of Object.entries(features)) {
     const sortedVersions = Object.keys(featureVersions).sort(compareVersions);
-    
+
     for (const featureVersion of sortedVersions) {
       if (compareVersions(version, featureVersion) >= 0) {
         availableFeatures[featureName] = featureVersions[featureVersion];
@@ -168,15 +161,15 @@ function compareVersions(a: string, b: string): number {
   const parseVersion = (v: string) => v.split('.').map(Number);
   const versionA = parseVersion(a);
   const versionB = parseVersion(b);
-  
+
   for (let i = 0; i < Math.max(versionA.length, versionB.length); i++) {
     const numA = versionA[i] || 0;
     const numB = versionB[i] || 0;
-    
+
     if (numA > numB) return 1;
     if (numA < numB) return -1;
   }
-  
+
   return 0;
 }
 
@@ -212,24 +205,24 @@ export class FrameworkAdapter {
     switch (this.framework) {
       case 'playwright':
         const playwrightOptions: any = { ...baseOptions };
-        
+
         // Add animations option if supported
         if (this.features.screenshot?.animations) {
           playwrightOptions.animations = userOptions.animations || 'disabled';
         }
-        
+
         // Add mask option if supported
         if (this.features.screenshot?.mask) {
           playwrightOptions.mask = userOptions.mask || [];
         }
-        
+
         return playwrightOptions;
 
       case 'cypress':
         return {
           capture: 'fullPage',
           disableTimersAndAnimations: true,
-          ...userOptions
+          ...userOptions,
         };
 
       case 'selenium':
@@ -273,7 +266,7 @@ export class CompatibilityChecker {
    */
   async checkAll(): Promise<{ warnings: string[]; errors: string[]; compatible: boolean }> {
     const frameworks = ['playwright', 'cypress', 'selenium', 'storybook'];
-    
+
     for (const framework of frameworks) {
       await this.checkFramework(framework);
     }
@@ -281,7 +274,7 @@ export class CompatibilityChecker {
     return {
       warnings: this.warnings,
       errors: this.errors,
-      compatible: this.errors.length === 0
+      compatible: this.errors.length === 0,
     };
   }
 
@@ -290,7 +283,7 @@ export class CompatibilityChecker {
    */
   async checkFramework(framework: string): Promise<void> {
     const version = await detectFrameworkVersion(framework);
-    
+
     if (!version) {
       this.warnings.push(`${framework} not detected - will use fallback compatibility mode`);
       return;
@@ -300,7 +293,7 @@ export class CompatibilityChecker {
       const compatibility = FRAMEWORK_COMPATIBILITY[framework as keyof typeof FRAMEWORK_COMPATIBILITY];
       this.errors.push(
         `${framework} v${version} is not supported. ` +
-        `Supported range: ${compatibility.minVersion} - ${compatibility.maxVersion}`
+          `Supported range: ${compatibility.minVersion} - ${compatibility.maxVersion}`
       );
     } else {
       console.log(`✅ ${framework} v${version} is compatible with jpglens`);

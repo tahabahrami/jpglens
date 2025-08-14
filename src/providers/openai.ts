@@ -1,7 +1,7 @@
 /**
  * 🔍 jpglens - OpenAI Provider
  * Universal AI-Powered UI Testing
- * 
+ *
  * @author Taha Bahrami (Kaito)
  * @license MIT
  */
@@ -32,9 +32,9 @@ export class OpenAIProvider implements AIProvider {
     try {
       const response = await fetch(`${this.baseUrl}/models`, {
         headers: {
-          'Authorization': `Bearer ${this.apiKey}`,
-          'Content-Type': 'application/json'
-        }
+          Authorization: `Bearer ${this.apiKey}`,
+          'Content-Type': 'application/json',
+        },
       });
       return response.ok;
     } catch {
@@ -45,7 +45,7 @@ export class OpenAIProvider implements AIProvider {
   getModelInfo(): { name: string; capabilities: string[] } {
     return {
       name: this.model,
-      capabilities: ['vision', 'text-analysis', 'code-generation']
+      capabilities: ['vision', 'text-analysis', 'code-generation'],
     };
   }
 
@@ -63,29 +63,29 @@ export class OpenAIProvider implements AIProvider {
             content: [
               {
                 type: 'text',
-                text: prompt
+                text: prompt,
               },
               {
                 type: 'image_url',
                 image_url: {
                   url: `data:image/png;base64,${base64Image}`,
-                  detail: this.config.analysis.depth === 'comprehensive' ? 'high' : 'auto'
-                }
-              }
-            ]
-          }
+                  detail: this.config.analysis.depth === 'comprehensive' ? 'high' : 'auto',
+                },
+              },
+            ],
+          },
         ],
         max_tokens: this.config.ai.maxTokens || 4000,
-        temperature: this.config.ai.temperature || 0.1
+        temperature: this.config.ai.temperature || 0.1,
       };
 
       const response = await fetch(`${this.baseUrl}/chat/completions`, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${this.apiKey}`,
-          'Content-Type': 'application/json'
+          Authorization: `Bearer ${this.apiKey}`,
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(requestBody)
+        body: JSON.stringify(requestBody),
       });
 
       if (!response.ok) {
@@ -98,21 +98,20 @@ export class OpenAIProvider implements AIProvider {
       const tokensUsed = result.usage?.total_tokens || 0;
 
       return this.parseAnalysisResult(analysisText, context, tokensUsed, startTime);
-
     } catch (error) {
       throw new Error(`OpenAI analysis failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   }
 
   private parseAnalysisResult(
-    analysisText: string, 
-    context: AnalysisContext, 
-    tokensUsed: number, 
+    analysisText: string,
+    context: AnalysisContext,
+    tokensUsed: number,
     startTime: number
   ): AnalysisResult {
     // Similar parsing logic as OpenRouter provider
     // This is a simplified version - in production you'd want shared parsing utilities
-    
+
     const scoreMatch = analysisText.match(/(?:OVERALL UX SCORE|QUALITY SCORE):\s*(\d+)\/10/i);
     const overallScore = scoreMatch ? parseInt(scoreMatch[1]) : 5;
 
@@ -126,7 +125,7 @@ export class OpenAIProvider implements AIProvider {
         usability: overallScore,
         accessibility: overallScore,
         visualDesign: overallScore,
-        performance: overallScore
+        performance: overallScore,
       },
       strengths: [],
       criticalIssues: [],
@@ -137,7 +136,7 @@ export class OpenAIProvider implements AIProvider {
       tokensUsed,
       analysisTime: Date.now() - startTime,
       provider: 'OpenAI',
-      rawAnalysis: analysisText
+      rawAnalysis: analysisText,
     };
   }
 }

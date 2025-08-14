@@ -1,7 +1,7 @@
 /**
  * 🔍 jpglens - Cypress Integration
  * Universal AI-Powered UI Testing
- * 
+ *
  * @author Taha Bahrami (Kaito)
  * @license MIT
  */
@@ -22,12 +22,12 @@ declare global {
        * Analyze current page state with jpglens AI
        */
       analyzeUserExperience(context: AnalysisContext): any; // Chainable<AnalysisResult>
-      
+
       /**
        * Analyze page state after user actions
        */
       analyzePageState(context: Partial<AnalysisContext>): any; // Chainable<AnalysisResult>
-      
+
       /**
        * Analyze complete user journey
        */
@@ -56,7 +56,7 @@ class CypressJPGLens {
   }
 
   static async create(config?: JPGLensConfig): Promise<CypressJPGLens> {
-    const finalConfig = config || await loadConfig();
+    const finalConfig = config || (await loadConfig());
     return new CypressJPGLens(finalConfig);
   }
 
@@ -68,27 +68,25 @@ class CypressJPGLens {
       // Get current page information from Cypress
       const url = await cy.url();
       const title = await cy.title();
-      const viewport = Cypress.config('viewportWidth') && Cypress.config('viewportHeight') 
-        ? { width: Cypress.config('viewportWidth'), height: Cypress.config('viewportHeight') }
-        : { width: 1280, height: 720 };
+      const viewport =
+        Cypress.config('viewportWidth') && Cypress.config('viewportHeight')
+          ? { width: Cypress.config('viewportWidth'), height: Cypress.config('viewportHeight') }
+          : { width: 1280, height: 720 };
 
       // Capture screenshot using Cypress
       const screenshotPath = `jpglens-${Date.now()}.png`;
       await cy.screenshot(screenshotPath, {
         capture: 'fullPage',
-        disableTimersAndAnimations: true
+        disableTimersAndAnimations: true,
       });
 
       // Convert Cypress screenshot to our format
-      const screenshot = await this.screenshotCapture.loadFromPath(
-        `cypress/screenshots/${screenshotPath}`,
-        {
-          width: viewport.width,
-          height: viewport.height,
-          devicePixelRatio: 1,
-          timestamp: new Date().toISOString()
-        }
-      );
+      const screenshot = await this.screenshotCapture.loadFromPath(`cypress/screenshots/${screenshotPath}`, {
+        width: viewport.width,
+        height: viewport.height,
+        devicePixelRatio: 1,
+        timestamp: new Date().toISOString(),
+      });
 
       // Enhance context with page information
       const enhancedContext = await this.enhanceContextWithPageInfo(context, url, title, viewport);
@@ -102,7 +100,6 @@ class CypressJPGLens {
       }
 
       return result;
-
     } catch (error) {
       throw new Error(`jpglens Cypress analysis failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
@@ -115,13 +112,13 @@ class CypressJPGLens {
     const fullContext: AnalysisContext = {
       userContext: context.userContext || {
         deviceContext: 'cypress-browser',
-        expertise: 'intermediate'
+        expertise: 'intermediate',
       },
       stage: context.stage || 'cypress-test',
       userIntent: context.userIntent || 'test-validation',
       criticalElements: context.criticalElements,
       businessContext: context.businessContext,
-      technicalContext: context.technicalContext
+      technicalContext: context.technicalContext,
     };
 
     return this.analyzeUserExperience(fullContext);
@@ -152,29 +149,28 @@ class CypressJPGLens {
           userContext: {
             persona: journey.persona,
             deviceContext: journey.device,
-            ...(stage.context?.userContext || {})
+            ...(stage.context?.userContext || {}),
           },
           stage: stage.name,
           userIntent: stage.userGoal,
           criticalElements: stage.context?.criticalElements,
           businessContext: stage.context?.businessContext,
-          technicalContext: stage.context?.technicalContext
+          technicalContext: stage.context?.technicalContext,
         };
 
         // Analyze this stage
         const result = await this.analyzeUserExperience(stageContext);
-        
+
         // Add journey context
         result.journeyContext = {
           journeyName: journey.name,
           currentStage: stage.name,
           completedStages: [...completedStages],
-          totalStages: journey.stages.length
+          totalStages: journey.stages.length,
         };
 
         results.push(result);
         completedStages.push(stage.name);
-
       } catch (error) {
         cy.log(`Failed to analyze journey stage ${stage.name}: ${error}`);
       }
@@ -227,7 +223,6 @@ class CypressJPGLens {
 
         // Brief pause between actions
         cy.wait(300);
-
       } catch (error) {
         cy.log(`Failed to execute action ${action.type}: ${error}`);
       }
@@ -238,9 +233,9 @@ class CypressJPGLens {
    * Enhance context with Cypress page information
    */
   private async enhanceContextWithPageInfo(
-    context: AnalysisContext, 
-    url: string, 
-    title: string, 
+    context: AnalysisContext,
+    url: string,
+    title: string,
     viewport: { width: number; height: number }
   ): Promise<AnalysisContext> {
     try {
@@ -253,17 +248,16 @@ class CypressJPGLens {
         pageInfo: {
           url,
           title,
-          viewport
+          viewport,
         },
         technicalContext: {
           ...context.technicalContext,
           detectedFramework: frameworks.join(', ') || context.technicalContext?.framework,
           detectedDesignSystem: designSystem || context.technicalContext?.designSystem,
           deviceSupport: viewport.width < 768 ? 'mobile-first' : 'desktop-first',
-          testFramework: 'Cypress'
-        }
+          testFramework: 'Cypress',
+        },
       };
-
     } catch (error) {
       cy.log(`Failed to enhance context: ${error}`);
       return context;
@@ -354,11 +348,14 @@ Cypress.Commands.add('analyzeCompleteJourney', (journey: UserJourney) => {
 
 Cypress.Commands.add('prepareForJPGLensAnalysis', () => {
   // Disable animations for consistent screenshots
-  cy.get('head').invoke('append', '<style>*, *::before, *::after { animation-duration: 0s !important; transition-duration: 0s !important; }</style>');
-  
+  cy.get('head').invoke(
+    'append',
+    '<style>*, *::before, *::after { animation-duration: 0s !important; transition-duration: 0s !important; }</style>'
+  );
+
   // Wait for page to stabilize
   cy.wait(1000);
-  
+
   // Wait for fonts to load
   cy.document().then((doc: any) => {
     return doc.fonts.ready;
@@ -400,7 +397,7 @@ export const jpglens = {
    */
   analyzeJourney: (journey: UserJourney) => {
     return cy.analyzeCompleteJourney(journey);
-  }
+  },
 };
 
 // Export for TypeScript support

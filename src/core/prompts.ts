@@ -1,7 +1,7 @@
 /**
  * 🔍 jpglens - Master Prompt System
  * Universal AI-Powered UI Testing
- * 
+ *
  * @author Taha Bahrami (Kaito)
  * @license MIT
  */
@@ -78,9 +78,10 @@ Be specific, actionable, and focused on REAL USER SUCCESS.`;
  * Format user context for the prompt
  */
 function formatUserContext(userContext: any): string {
-  const persona = typeof userContext.persona === 'string' 
-    ? `Persona: ${userContext.persona}` 
-    : formatPersonaDetails(userContext.persona);
+  const persona =
+    typeof userContext.persona === 'string'
+      ? `Persona: ${userContext.persona}`
+      : formatPersonaDetails(userContext.persona);
 
   return `${persona}
 Device Context: ${userContext.deviceContext}
@@ -294,7 +295,7 @@ ${createMasterPrompt(context, ['mobile-optimization', 'usability', 'performance'
 - Offline functionality and sync
 - App store guidelines compliance
 - Battery and performance optimization
-- Push notification integration`
+- Push notification integration`,
 };
 
 /**

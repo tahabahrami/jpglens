@@ -1,7 +1,7 @@
 /**
  * 🔍 jpglens - Configuration Management
  * Universal AI-Powered UI Testing
- * 
+ *
  * @author Taha Bahrami (Kaito)
  * @license MIT
  */
@@ -22,7 +22,7 @@ export const DEFAULT_CONFIG: JPGLensConfig = {
     fallbackModel: 'anthropic/claude-3-5-sonnet',
     maxTokens: 4000,
     temperature: 0.1,
-    baseUrl: 'https://openrouter.ai/api/v1'
+    baseUrl: 'https://openrouter.ai/api/v1',
   },
 
   analysis: {
@@ -30,7 +30,7 @@ export const DEFAULT_CONFIG: JPGLensConfig = {
     depth: 'standard',
     includeScreenshots: true,
     generateReports: true,
-    outputDir: './jpglens-reports'
+    outputDir: './jpglens-reports',
   },
 
   // Reporting configuration
@@ -44,7 +44,7 @@ export const DEFAULT_CONFIG: JPGLensConfig = {
     timestampFormat: 'ISO',
     fileNaming: '{timestamp}-{component}-{page}',
     customPrompts: {},
-    apiCompatibility: 'auto'
+    apiCompatibility: 'auto',
   },
 
   // Pre-built user personas for common use cases
@@ -56,7 +56,7 @@ export const DEFAULT_CONFIG: JPGLensConfig = {
       urgency: 'medium',
       goals: ['efficiency', 'accuracy', 'professional-appearance'],
       painPoints: ['complex interfaces', 'slow loading', 'unclear navigation'],
-      context: 'Professional work environment, needs reliable tools'
+      context: 'Professional work environment, needs reliable tools',
     },
 
     'mobile-consumer': {
@@ -66,7 +66,7 @@ export const DEFAULT_CONFIG: JPGLensConfig = {
       urgency: 'high',
       goals: ['speed', 'simplicity', 'trust'],
       painPoints: ['small touch targets', 'slow loading', 'complex forms'],
-      context: 'On-the-go usage, limited attention, thumb navigation'
+      context: 'On-the-go usage, limited attention, thumb navigation',
     },
 
     'power-user': {
@@ -76,7 +76,7 @@ export const DEFAULT_CONFIG: JPGLensConfig = {
       urgency: 'low',
       goals: ['customization', 'advanced-features', 'keyboard-shortcuts'],
       painPoints: ['lack of shortcuts', 'limited customization', 'dumbed-down interfaces'],
-      context: 'Daily heavy usage, values efficiency over simplicity'
+      context: 'Daily heavy usage, values efficiency over simplicity',
     },
 
     'accessibility-user': {
@@ -86,7 +86,7 @@ export const DEFAULT_CONFIG: JPGLensConfig = {
       urgency: 'medium',
       goals: ['screen-reader-compatibility', 'keyboard-navigation', 'high-contrast'],
       painPoints: ['poor alt text', 'keyboard traps', 'low contrast'],
-      context: 'Uses assistive technologies, relies on semantic HTML'
+      context: 'Uses assistive technologies, relies on semantic HTML',
     },
 
     'first-time-visitor': {
@@ -96,8 +96,8 @@ export const DEFAULT_CONFIG: JPGLensConfig = {
       urgency: 'high',
       goals: ['understand-value', 'quick-trial', 'low-commitment'],
       painPoints: ['unclear value prop', 'complex signup', 'information overload'],
-      context: 'Evaluating product, high bounce risk, needs immediate value'
-    }
+      context: 'Evaluating product, high bounce risk, needs immediate value',
+    },
   },
 
   // Pre-built journey templates for common scenarios
@@ -107,8 +107,8 @@ export const DEFAULT_CONFIG: JPGLensConfig = {
     'content-consumption': ['discovery', 'article-reading', 'engagement', 'sharing', 'related-content'],
     'form-completion': ['form-discovery', 'field-entry', 'validation', 'review', 'submission', 'confirmation'],
     'dashboard-analysis': ['login', 'overview', 'drill-down', 'filter-data', 'export-results'],
-    'mobile-app': ['app-launch', 'onboarding', 'core-feature', 'settings', 'sharing']
-  }
+    'mobile-app': ['app-launch', 'onboarding', 'core-feature', 'settings', 'sharing'],
+  },
 };
 
 /**
@@ -121,7 +121,7 @@ export async function loadConfig(configPath?: string): Promise<JPGLensConfig> {
   if (configPath && existsSync(configPath)) {
     try {
       const configContent = readFileSync(configPath, 'utf-8');
-      
+
       if (configPath.endsWith('.json')) {
         userConfig = JSON.parse(configContent);
       } else if (configPath.endsWith('.js') || configPath.endsWith('.mjs')) {
@@ -136,12 +136,7 @@ export async function loadConfig(configPath?: string): Promise<JPGLensConfig> {
     }
   } else {
     // Try common config file names
-    const commonPaths = [
-      './jpglens.config.js',
-      './jpglens.config.mjs', 
-      './jpglens.config.json',
-      './.jpglensrc.json'
-    ];
+    const commonPaths = ['./jpglens.config.js', './jpglens.config.mjs', './jpglens.config.json', './.jpglensrc.json'];
 
     for (const path of commonPaths) {
       if (existsSync(path)) {
@@ -182,16 +177,16 @@ function mergeConfig(defaultConfig: JPGLensConfig, userConfig: Partial<JPGLensCo
   }
 
   if (userConfig.userPersonas) {
-    merged.userPersonas = { 
-      ...defaultConfig.userPersonas, 
-      ...userConfig.userPersonas 
+    merged.userPersonas = {
+      ...defaultConfig.userPersonas,
+      ...userConfig.userPersonas,
     };
   }
 
   if (userConfig.journeyTemplates) {
-    merged.journeyTemplates = { 
-      ...defaultConfig.journeyTemplates, 
-      ...userConfig.journeyTemplates 
+    merged.journeyTemplates = {
+      ...defaultConfig.journeyTemplates,
+      ...userConfig.journeyTemplates,
     };
   }
 
@@ -223,8 +218,14 @@ export function validateConfig(config: JPGLensConfig): { valid: boolean; errors:
   }
 
   const validAnalysisTypes = [
-    'usability', 'accessibility', 'visual-design', 'performance', 
-    'mobile-optimization', 'conversion-optimization', 'brand-consistency', 'error-handling'
+    'usability',
+    'accessibility',
+    'visual-design',
+    'performance',
+    'mobile-optimization',
+    'conversion-optimization',
+    'brand-consistency',
+    'error-handling',
   ];
 
   if (config.analysis?.types) {
@@ -237,7 +238,7 @@ export function validateConfig(config: JPGLensConfig): { valid: boolean; errors:
 
   return {
     valid: errors.length === 0,
-    errors
+    errors,
   };
 }
 
@@ -251,7 +252,9 @@ export function getUserPersona(config: JPGLensConfig, personaOrName: string | Us
 
   const persona = config.userPersonas?.[personaOrName];
   if (!persona) {
-    throw new Error(`User persona "${personaOrName}" not found. Available personas: ${Object.keys(config.userPersonas || {}).join(', ')}`);
+    throw new Error(
+      `User persona "${personaOrName}" not found. Available personas: ${Object.keys(config.userPersonas || {}).join(', ')}`
+    );
   }
 
   return persona;
@@ -263,7 +266,9 @@ export function getUserPersona(config: JPGLensConfig, personaOrName: string | Us
 export function getJourneyTemplate(config: JPGLensConfig, templateName: string): string[] {
   const template = config.journeyTemplates?.[templateName];
   if (!template) {
-    throw new Error(`Journey template "${templateName}" not found. Available templates: ${Object.keys(config.journeyTemplates || {}).join(', ')}`);
+    throw new Error(
+      `Journey template "${templateName}" not found. Available templates: ${Object.keys(config.journeyTemplates || {}).join(', ')}`
+    );
   }
 
   return template;

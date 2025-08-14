@@ -1,7 +1,7 @@
 /**
  * 🔍 jpglens - Selenium WebDriver Integration
  * Universal AI-Powered UI Testing
- * 
+ *
  * @author Taha Bahrami (Kaito)
  * @license MIT
  */
@@ -20,7 +20,10 @@ export class SeleniumJPGLens {
   private screenshotCapture: ScreenshotCapture;
   private config: JPGLensConfig;
 
-  constructor(private driver: any, config?: JPGLensConfig) {
+  constructor(
+    private driver: any,
+    config?: JPGLensConfig
+  ) {
     this.config = config || DEFAULT_CONFIG;
     this.aiAnalyzer = new AIAnalyzer(this.config);
     this.screenshotCapture = new ScreenshotCapture();
@@ -45,12 +48,11 @@ export class SeleniumJPGLens {
         console.log(`🔍 jpglens Selenium analysis completed for ${context.stage}:`, {
           score: result.overallScore,
           issues: result.criticalIssues.length + result.majorIssues.length,
-          browser: await this.getBrowserInfo()
+          browser: await this.getBrowserInfo(),
         });
       }
 
       return result;
-
     } catch (error) {
       throw new Error(`jpglens Selenium analysis failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
@@ -63,13 +65,13 @@ export class SeleniumJPGLens {
     const fullContext: AnalysisContext = {
       userContext: context.userContext || {
         deviceContext: 'selenium-browser',
-        expertise: 'intermediate'
+        expertise: 'intermediate',
       },
       stage: context.stage || 'selenium-test',
       userIntent: context.userIntent || 'validate-functionality',
       criticalElements: context.criticalElements,
       businessContext: context.businessContext,
-      technicalContext: context.technicalContext
+      technicalContext: context.technicalContext,
     };
 
     return this.analyzeCurrentState(fullContext);
@@ -83,29 +85,28 @@ export class SeleniumJPGLens {
     browsers: string[] = ['chrome', 'firefox', 'safari', 'edge']
   ): Promise<{ browser: string; result: AnalysisResult }[]> {
     const results: { browser: string; result: AnalysisResult }[] = [];
-    
+
     for (const browserName of browsers) {
       try {
         // Note: In real implementation, you'd switch browsers here
         // For now, we'll analyze with current browser but tag the result
-        
+
         const result = await this.analyzeCurrentState({
           ...context,
           technicalContext: {
             ...context.technicalContext,
             browser: browserName,
-            testFramework: 'Selenium WebDriver'
-          }
+            testFramework: 'Selenium WebDriver',
+          },
         });
 
         result.browserInfo = {
           name: browserName,
           version: 'unknown', // Would be detected in real implementation
-          platform: process.platform
+          platform: process.platform,
         };
 
         results.push({ browser: browserName, result });
-
       } catch (error) {
         console.error(`Failed to analyze with ${browserName}:`, error);
       }
@@ -139,7 +140,7 @@ export class SeleniumJPGLens {
           userContext: {
             persona: journey.persona,
             deviceContext: journey.device,
-            ...(stage.context?.userContext || {})
+            ...(stage.context?.userContext || {}),
           },
           stage: stage.name,
           userIntent: stage.userGoal,
@@ -147,24 +148,23 @@ export class SeleniumJPGLens {
           businessContext: stage.context?.businessContext,
           technicalContext: {
             ...stage.context?.technicalContext,
-            testFramework: 'Selenium WebDriver'
-          }
+            testFramework: 'Selenium WebDriver',
+          },
         };
 
         // Analyze this stage
         const result = await this.analyzeCurrentState(stageContext);
-        
+
         // Add journey context
         result.journeyContext = {
           journeyName: journey.name,
           currentStage: stage.name,
           completedStages: [...completedStages],
-          totalStages: journey.stages.length
+          totalStages: journey.stages.length,
         };
 
         results.push(result);
         completedStages.push(stage.name);
-
       } catch (error) {
         console.error(`Failed to analyze journey stage ${stage.name}:`, error);
       }
@@ -223,7 +223,6 @@ export class SeleniumJPGLens {
 
         // Brief pause between actions
         await this.driver.sleep(300);
-
       } catch (error) {
         console.error(`Failed to execute Selenium action ${action.type}:`, error);
       }
@@ -248,7 +247,7 @@ export class SeleniumJPGLens {
         pageInfo: {
           url,
           title,
-          viewport: windowSize
+          viewport: windowSize,
         },
         technicalContext: {
           ...context.technicalContext,
@@ -256,10 +255,9 @@ export class SeleniumJPGLens {
           detectedDesignSystem: designSystem || context.technicalContext?.designSystem,
           deviceSupport: windowSize.width < 768 ? 'mobile-first' : 'desktop-first',
           testFramework: 'Selenium WebDriver',
-          browser: await this.getBrowserInfo()
-        }
+          browser: await this.getBrowserInfo(),
+        },
       };
-
     } catch (error) {
       console.warn('Failed to enhance context with page info:', error);
       return context;
@@ -420,8 +418,8 @@ export async function analyze(driver: any, context: Partial<AnalysisContext>): P
  * Cross-browser analysis
  */
 export async function analyzeCrossBrowser(
-  driver: any, 
-  context: AnalysisContext, 
+  driver: any,
+  context: AnalysisContext,
   browsers?: string[]
 ): Promise<{ browser: string; result: AnalysisResult }[]> {
   const jpglens = createSeleniumJPGLens(driver);

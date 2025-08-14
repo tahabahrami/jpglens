@@ -1,7 +1,7 @@
 /**
  * 🔍 jpglens - Report Generator
  * Configurable AI Analysis Report Generation System
- * 
+ *
  * @author Taha Bahrami (Kaito)
  * @license MIT
  */
@@ -25,7 +25,7 @@ export const DEFAULT_REPORT_TEMPLATES: Record<string, ReportTemplate> = {
       'usability',
       'critical_issues',
       'recommendations',
-      'technical_details'
+      'technical_details',
     ],
     prompts: {
       executive_summary: 'Provide a comprehensive executive summary of the UI analysis',
@@ -35,41 +35,32 @@ export const DEFAULT_REPORT_TEMPLATES: Record<string, ReportTemplate> = {
       usability: 'Assess usability patterns and user experience quality',
       critical_issues: 'Identify critical issues that must be addressed immediately',
       recommendations: 'Provide actionable recommendations for improvement',
-      technical_details: 'Include technical implementation details and metrics'
-    }
+      technical_details: 'Include technical implementation details and metrics',
+    },
   },
-  
+
   summary: {
     name: 'Quick Summary Report',
     format: 'json',
-    sections: [
-      'overall_score',
-      'top_issues',
-      'quick_wins'
-    ],
+    sections: ['overall_score', 'top_issues', 'quick_wins'],
     prompts: {
       overall_score: 'Provide an overall quality score from 1-10',
       top_issues: 'List the top 3 most critical issues',
-      quick_wins: 'Suggest 3 quick improvements that can be implemented immediately'
-    }
+      quick_wins: 'Suggest 3 quick improvements that can be implemented immediately',
+    },
   },
 
   executive: {
     name: 'Executive Dashboard Report',
     format: 'json',
-    sections: [
-      'executive_summary',
-      'key_metrics',
-      'business_impact',
-      'next_actions'
-    ],
+    sections: ['executive_summary', 'key_metrics', 'business_impact', 'next_actions'],
     prompts: {
       executive_summary: 'Provide a business-focused summary suitable for executives',
       key_metrics: 'Present key performance indicators and quality metrics',
       business_impact: 'Explain the business impact of identified issues and improvements',
-      next_actions: 'Recommend prioritized actions with timeline and resource estimates'
-    }
-  }
+      next_actions: 'Recommend prioritized actions with timeline and resource estimates',
+    },
+  },
 };
 
 /**
@@ -85,7 +76,7 @@ export const DEFAULT_REPORT_CONFIG: ReportConfig = {
   timestampFormat: 'ISO',
   fileNaming: '{timestamp}-{component}-{page}',
   customPrompts: {},
-  apiCompatibility: 'auto' // auto-detect based on provider
+  apiCompatibility: 'auto', // auto-detect based on provider
 };
 
 /**
@@ -98,7 +89,7 @@ export class ReportGenerator {
   constructor(config: Partial<ReportConfig> = {}) {
     this.config = { ...DEFAULT_REPORT_CONFIG, ...config };
     this.templates = { ...DEFAULT_REPORT_TEMPLATES };
-    
+
     // Ensure output directory exists
     this.ensureOutputDirectory();
   }
@@ -106,23 +97,20 @@ export class ReportGenerator {
   /**
    * Generate a report from analysis results
    */
-  async generateReport(
-    analysisResult: AnalysisResult, 
-    customConfig?: Partial<ReportConfig>
-  ): Promise<string> {
+  async generateReport(analysisResult: AnalysisResult, customConfig?: Partial<ReportConfig>): Promise<string> {
     if (!this.config.enabled) {
       return '';
     }
 
     const reportConfig = { ...this.config, ...customConfig };
     const template = this.getTemplate(reportConfig.template);
-    
+
     // Generate report content based on format
     const reportContent = await this.generateReportContent(analysisResult, template, reportConfig);
-    
+
     // Save report to file
     const filePath = await this.saveReport(reportContent, analysisResult, reportConfig);
-    
+
     return filePath;
   }
 
@@ -149,11 +137,7 @@ export class ReportGenerator {
   /**
    * Generate markdown report
    */
-  private generateMarkdownReport(
-    result: AnalysisResult,
-    template: ReportTemplate,
-    config: ReportConfig
-  ): string {
+  private generateMarkdownReport(result: AnalysisResult, template: ReportTemplate, config: ReportConfig): string {
     let markdown = `# ${template.name}\n\n`;
     markdown += `**Generated:** ${this.formatTimestamp(result.timestamp, config.timestampFormat)}\n`;
     markdown += `**Component:** ${result.component || 'N/A'}\n`;
@@ -177,11 +161,7 @@ export class ReportGenerator {
   /**
    * Generate JSON report
    */
-  private generateJsonReport(
-    result: AnalysisResult,
-    template: ReportTemplate,
-    config: ReportConfig
-  ): string {
+  private generateJsonReport(result: AnalysisResult, template: ReportTemplate, config: ReportConfig): string {
     const jsonReport: any = {
       metadata: {
         generated: this.formatTimestamp(result.timestamp, config.timestampFormat),
@@ -190,9 +170,9 @@ export class ReportGenerator {
         page: result.page,
         model: result.model,
         analysisTime: result.analysisTime,
-        tokensUsed: result.tokensUsed
+        tokensUsed: result.tokensUsed,
       },
-      analysis: {}
+      analysis: {},
     };
 
     // Add sections based on template
@@ -210,11 +190,7 @@ export class ReportGenerator {
   /**
    * Generate HTML report
    */
-  private generateHtmlReport(
-    result: AnalysisResult,
-    template: ReportTemplate,
-    config: ReportConfig
-  ): string {
+  private generateHtmlReport(result: AnalysisResult, template: ReportTemplate, config: ReportConfig): string {
     let html = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -334,13 +310,13 @@ export class ReportGenerator {
         return result.criticalIssues.slice(0, 3).map(issue => ({
           title: issue.title,
           severity: issue.severity,
-          impact: issue.impact
+          impact: issue.impact,
         }));
       case 'quick_wins':
         return result.recommendations.slice(0, 3).map(rec => ({
           title: rec.title,
           effort: rec.effort,
-          impact: rec.impact
+          impact: rec.impact,
         }));
       default:
         return null;
@@ -350,16 +326,12 @@ export class ReportGenerator {
   /**
    * Save report to file
    */
-  private async saveReport(
-    content: string,
-    result: AnalysisResult,
-    config: ReportConfig
-  ): Promise<string> {
+  private async saveReport(content: string, result: AnalysisResult, config: ReportConfig): Promise<string> {
     const fileName = this.generateFileName(result, config);
     const filePath = path.join(config.outputDir, fileName);
-    
+
     await fs.promises.writeFile(filePath, content, 'utf-8');
-    
+
     return filePath;
   }
 
@@ -370,13 +342,14 @@ export class ReportGenerator {
     const template = config.fileNaming;
     const timestamp = this.formatTimestamp(result.timestamp, 'filename');
     const extension = this.getFileExtension(config.format);
-    
-    return template
-      .replace('{timestamp}', timestamp)
-      .replace('{component}', result.component || 'unknown')
-      .replace('{page}', result.page || 'unknown')
-      .replace('{id}', result.id)
-      + extension;
+
+    return (
+      template
+        .replace('{timestamp}', timestamp)
+        .replace('{component}', result.component || 'unknown')
+        .replace('{page}', result.page || 'unknown')
+        .replace('{id}', result.id) + extension
+    );
   }
 
   /**
@@ -384,10 +357,14 @@ export class ReportGenerator {
    */
   private getFileExtension(format: ReportFormat): string {
     switch (format) {
-      case 'markdown': return '.md';
-      case 'json': return '.json';
-      case 'html': return '.html';
-      default: return '.txt';
+      case 'markdown':
+        return '.md';
+      case 'json':
+        return '.json';
+      case 'html':
+        return '.html';
+      default:
+        return '.txt';
     }
   }
 
@@ -396,7 +373,7 @@ export class ReportGenerator {
    */
   private formatTimestamp(timestamp: string, format: string): string {
     const date = new Date(timestamp);
-    
+
     switch (format) {
       case 'ISO':
         return date.toISOString();
@@ -413,9 +390,10 @@ export class ReportGenerator {
    * Format section title
    */
   private formatSectionTitle(section: string): string {
-    return section.split('_').map(word => 
-      word.charAt(0).toUpperCase() + word.slice(1)
-    ).join(' ');
+    return section
+      .split('_')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
   }
 
   /**
@@ -427,11 +405,13 @@ export class ReportGenerator {
       const match = result.rawAnalysis.match(/EXECUTIVE SUMMARY[:\n]+(.*?)(?=\n\n|\n[A-Z]|$)/s);
       if (match) return match[1].trim();
     }
-    
+
     // Generate summary from available data
-    return `UI analysis completed with an overall score of ${result.overallScore}/10. ` +
-           `${result.criticalIssues.length} critical issues identified. ` +
-           `${result.recommendations.length} recommendations provided for improvement.`;
+    return (
+      `UI analysis completed with an overall score of ${result.overallScore}/10. ` +
+      `${result.criticalIssues.length} critical issues identified. ` +
+      `${result.recommendations.length} recommendations provided for improvement.`
+    );
   }
 
   /**
@@ -439,7 +419,7 @@ export class ReportGenerator {
    */
   private formatIssues(issues: any[], severity: string): string {
     if (!issues.length) return `No ${severity.toLowerCase()} issues found.\n\n`;
-    
+
     let content = '';
     issues.forEach((issue, index) => {
       content += `### ${index + 1}. ${issue.title}\n`;
@@ -448,7 +428,7 @@ export class ReportGenerator {
       if (issue.fix) content += `**Fix:** ${issue.fix}\n`;
       content += '\n';
     });
-    
+
     return content;
   }
 
@@ -457,7 +437,7 @@ export class ReportGenerator {
    */
   private formatRecommendations(recommendations: any[]): string {
     if (!recommendations.length) return `No recommendations available.\n\n`;
-    
+
     let content = '';
     recommendations.forEach((rec, index) => {
       content += `### ${index + 1}. ${rec.title}\n`;
@@ -465,7 +445,7 @@ export class ReportGenerator {
       content += `**Effort:** ${rec.effort}\n`;
       content += `**Description:** ${rec.description}\n\n`;
     });
-    
+
     return content;
   }
 
@@ -473,11 +453,13 @@ export class ReportGenerator {
    * Format technical details
    */
   private formatTechnicalDetails(result: AnalysisResult): string {
-    return `**Analysis ID:** ${result.id}\n` +
-           `**Model Used:** ${result.model}\n` +
-           `**Tokens Used:** ${result.tokensUsed}\n` +
-           `**Analysis Time:** ${result.analysisTime}ms\n` +
-           `**Provider:** ${result.provider || 'Unknown'}\n\n`;
+    return (
+      `**Analysis ID:** ${result.id}\n` +
+      `**Model Used:** ${result.model}\n` +
+      `**Tokens Used:** ${result.tokensUsed}\n` +
+      `**Analysis Time:** ${result.analysisTime}ms\n` +
+      `**Provider:** ${result.provider || 'Unknown'}\n\n`
+    );
   }
 
   /**
