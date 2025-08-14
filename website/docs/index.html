@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - jpglens</title>
+    <meta name="description" content="Complete documentation for jpglens - Universal AI-Powered UI Testing. Learn how to integrate AI testing into your workflow.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/src/styles/main.css">
+    <link rel="stylesheet" href="/src/styles/docs.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="/" class="brand-link">
+                    <span class="brand-icon">🔍</span>
+                    <span class="brand-text">jpglens</span>
+                </a>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="/#features" class="nav-link">Features</a>
+                <a href="/docs/" class="nav-link active">Docs</a>
+                <a href="/examples/" class="nav-link">Examples</a>
+                <a href="/comparison/" class="nav-link">Comparison</a>
+                <a href="/#community" class="nav-link">Community</a>
+                <a href="https://github.com/tahabahrami/jpglens" class="nav-link github-link" target="_blank">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    GitHub
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="docs-layout">
+        <!-- Sidebar -->
+        <aside class="docs-sidebar">
+            <div class="sidebar-content">
+                <nav class="sidebar-nav">
+                    <div class="nav-section">
+                        <h3 class="nav-section-title">Getting Started</h3>
+                        <a href="#installation" class="nav-item active">Installation</a>
+                        <a href="#quick-start" class="nav-item">Quick Start</a>
+                        <a href="#configuration" class="nav-item">Configuration</a>
+                    </div>
+                    
+                    <div class="nav-section">
+                        <h3 class="nav-section-title">Framework Integrations</h3>
+                        <a href="#playwright" class="nav-item">Playwright</a>
+                        <a href="#cypress" class="nav-item">Cypress</a>
+                        <a href="#selenium" class="nav-item">Selenium</a>
+                        <a href="#storybook" class="nav-item">Storybook</a>
+                        <a href="#testing-library" class="nav-item">Testing Library</a>
+                    </div>
+                    
+                    <div class="nav-section">
+                        <h3 class="nav-section-title">Core Concepts</h3>
+                        <a href="#user-journeys" class="nav-item">User Journeys</a>
+                        <a href="#analysis-types" class="nav-item">Analysis Types</a>
+                        <a href="#user-personas" class="nav-item">User Personas</a>
+                        <a href="#reporting" class="nav-item">Reporting</a>
+                    </div>
+                    
+                    <div class="nav-section">
+                        <h3 class="nav-section-title">API Reference</h3>
+                        <a href="#api-core" class="nav-item">Core API</a>
+                        <a href="#api-types" class="nav-item">Types</a>
+                        <a href="#api-utilities" class="nav-item">Utilities</a>
+                    </div>
+                    
+                    <div class="nav-section">
+                        <h3 class="nav-section-title">Advanced</h3>
+                        <a href="#custom-prompts" class="nav-item">Custom Prompts</a>
+                        <a href="#plugins" class="nav-item">Plugins</a>
+                        <a href="#performance" class="nav-item">Performance</a>
+                        <a href="#troubleshooting" class="nav-item">Troubleshooting</a>
+                    </div>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="docs-main">
+            <div class="docs-content">
+                <!-- Header -->
+                <div class="docs-header">
+                    <h1>jpglens Documentation</h1>
+                    <p class="docs-subtitle">Everything you need to know about AI-powered UI testing</p>
+                    
+                    <div class="docs-meta">
+                        <span class="docs-version">v1.1.0</span>
+                        <span class="docs-updated">Updated 3 hours ago</span>
+                    </div>
+                </div>
+
+                <!-- Installation Section -->
+                <section id="installation" class="docs-section">
+                    <h2>Installation</h2>
+                    <p>Get started with jpglens in your project. Choose your preferred package manager:</p>
+                    
+                    <div class="install-tabs">
+                        <div class="tab-buttons">
+                            <button class="tab-button active" data-tab="npm">npm</button>
+                            <button class="tab-button" data-tab="yarn">yarn</button>
+                            <button class="tab-button" data-tab="pnpm">pnpm</button>
+                        </div>
+                        
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="npm">
+                                <pre><code class="language-bash">npm install --save-dev jpglens</code></pre>
+                            </div>
+                            <div class="tab-pane" id="yarn">
+                                <pre><code class="language-bash">yarn add --dev jpglens</code></pre>
+                            </div>
+                            <div class="tab-pane" id="pnpm">
+                                <pre><code class="language-bash">pnpm add -D jpglens</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="callout callout-info">
+                        <h4>📦 Package Information</h4>
+                        <p>jpglens is available on <a href="https://www.npmjs.com/package/jpglens" target="_blank">npm registry</a> with full TypeScript support and comprehensive documentation.</p>
+                    </div>
+                </section>
+
+                <!-- Quick Start Section -->
+                <section id="quick-start" class="docs-section">
+                    <h2>Quick Start</h2>
+                    <p>Get jpglens running in your tests in under 5 minutes.</p>
+                    
+                    <h3>1. Set up your API key</h3>
+                    <p>jpglens works with OpenAI-compatible APIs. Set your API key as an environment variable:</p>
+                    
+                    <pre><code class="language-bash"># .env file
+JPGLENS_API_KEY="your-openrouter-or-openai-key"
+JPGLENS_MODEL="anthropic/claude-3-5-sonnet"</code></pre>
+                    
+                    <h3>2. Add to your tests</h3>
+                    <p>Choose your testing framework and add AI analysis:</p>
+                    
+                    <div class="code-tabs">
+                        <button class="code-tab active" data-code="playwright-quick">Playwright</button>
+                        <button class="code-tab" data-code="cypress-quick">Cypress</button>
+                    </div>
+                    
+                    <div class="code-content">
+                        <div class="code-pane active" id="playwright-quick">
+                            <pre><code class="language-javascript">// tests/example.spec.js
+import { test } from '@playwright/test';
+import { analyzeUserJourney } from 'jpglens/playwright';
+
+test('AI analyzes checkout flow', async ({ page }) => {
+  await page.goto('/checkout');
+  
+  // Your existing test actions
+  await page.fill('[data-testid="email"]', 'user@example.com');
+  await page.click('[data-testid="continue"]');
+  
+  // Add AI analysis
+  await analyzeUserJourney(page, {
+    stage: 'checkout-form',
+    userIntent: 'complete purchase',
+    userContext: {
+      persona: 'first-time-buyer',
+      device: 'mobile'
+    }
+  });
+});</code></pre>
+                        </div>
+                        
+                        <div class="code-pane" id="cypress-quick">
+                            <pre><code class="language-javascript">// cypress/e2e/example.cy.js
+import 'jpglens/cypress';
+
+describe('Checkout Flow', () => {
+  it('analyzes user experience', () => {
+    cy.visit('/checkout');
+    
+    // Your existing test actions
+    cy.get('[data-cy="email"]').type('user@example.com');
+    cy.get('[data-cy="continue"]').click();
+    
+    // Add AI analysis
+    cy.analyzeUserExperience({
+      stage: 'checkout-form',
+      userIntent: 'complete purchase',
+      userContext: {
+        persona: 'first-time-buyer',
+        device: 'mobile'
+      }
+    });
+  });
+});</code></pre>
+                        </div>
+                    </div>
+                    
+                    <h3>3. Run your tests</h3>
+                    <p>Execute your tests as usual. jpglens will provide AI-powered insights:</p>
+                    
+                    <pre><code class="language-bash">npx playwright test
+# or
+npx cypress run</code></pre>
+                    
+                    <div class="callout callout-success">
+                        <h4>✅ That's it!</h4>
+                        <p>jpglens will analyze your UI and provide detailed feedback on usability, accessibility, and user experience. Check your console or generated reports for insights.</p>
+                    </div>
+                </section>
+
+                <!-- Configuration Section -->
+                <section id="configuration" class="docs-section">
+                    <h2>Configuration</h2>
+                    <p>Customize jpglens behavior with a configuration file.</p>
+                    
+                    <h3>Configuration File</h3>
+                    <p>Create a <code>jpglens.config.js</code> file in your project root:</p>
+                    
+                    <pre><code class="language-javascript">// jpglens.config.js
+export default {
+  // AI Provider Configuration
+  ai: {
+    provider: 'openrouter',
+    model: 'anthropic/claude-3-5-sonnet',
+    apiKey: process.env.JPGLENS_API_KEY,
+    maxTokens: 4000,
+    temperature: 0.1
+  },
+
+  // Analysis Configuration
+  analysis: {
+    types: ['usability', 'accessibility', 'visual-design', 'performance'],
+    depth: 'comprehensive', // 'quick' | 'standard' | 'comprehensive'
+    includeScreenshots: true
+  },
+
+  // Reporting Configuration
+  reporting: {
+    enabled: true,
+    outputDir: './jpglens-reports',
+    format: 'markdown', // 'markdown' | 'json' | 'html'
+    template: 'detailed',
+    includeScreenshots: true,
+    customPrompts: {
+      'mobile-focus': 'Analyze specifically for mobile usability',
+      'accessibility-deep': 'Deep dive into WCAG 2.1 compliance'
+    }
+  },
+
+  // User Personas
+  userPersonas: {
+    'power-user': {
+      expertise: 'expert',
+      device: 'desktop',
+      goals: ['efficiency', 'advanced-features']
+    },
+    'mobile-user': {
+      expertise: 'novice',
+      device: 'mobile',
+      goals: ['simplicity', 'speed']
+    }
+  }
+};</code></pre>
+                    
+                    <h3>Environment Variables</h3>
+                    <p>Set these environment variables for configuration:</p>
+                    
+                    <div class="config-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Variable</th>
+                                    <th>Description</th>
+                                    <th>Required</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>JPGLENS_API_KEY</code></td>
+                                    <td>Your OpenRouter, OpenAI, or Anthropic API key</td>
+                                    <td>Yes</td>
+                                </tr>
+                                <tr>
+                                    <td><code>JPGLENS_MODEL</code></td>
+                                    <td>AI model to use (e.g., "anthropic/claude-3-5-sonnet")</td>
+                                    <td>No</td>
+                                </tr>
+                                <tr>
+                                    <td><code>JPGLENS_DEBUG</code></td>
+                                    <td>Enable debug logging</td>
+                                    <td>No</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Playwright Integration -->
+                <section id="playwright" class="docs-section">
+                    <h2>Playwright Integration</h2>
+                    <p>jpglens integrates seamlessly with Playwright for comprehensive browser testing.</p>
+                    
+                    <h3>Basic Usage</h3>
+                    <pre><code class="language-javascript">import { test } from '@playwright/test';
+import { analyzeUserJourney, quickAnalyze } from 'jpglens/playwright';
+
+test('comprehensive analysis', async ({ page }) => {
+  await page.goto('/app');
+  
+  // Detailed analysis with full context
+  await analyzeUserJourney(page, {
+    stage: 'dashboard-overview',
+    userIntent: 'understand key metrics',
+    userContext: {
+      persona: 'business-analyst',
+      deviceContext: 'desktop',
+      expertise: 'intermediate'
+    },
+    criticalElements: ['charts', 'kpi-cards', 'navigation'],
+    businessContext: {
+      industry: 'saas',
+      userRole: 'admin'
+    }
+  });
+  
+  // Quick analysis for rapid feedback
+  await quickAnalyze(page, 'navigation-menu');
+});</code></pre>
+                    
+                    <h3>User Journey Analysis</h3>
+                    <p>Analyze complete user workflows across multiple pages:</p>
+                    
+                    <pre><code class="language-javascript">import { analyzeCompleteJourney } from 'jpglens/playwright';
+
+const userJourney = {
+  name: 'user-onboarding',
+  persona: 'first-time-user',
+  device: 'mobile',
+  stages: [
+    {
+      name: 'landing',
+      page: '/',
+      userGoal: 'understand value proposition',
+      aiAnalysis: 'first-impression and trust signals'
+    },
+    {
+      name: 'signup',
+      page: '/register',
+      userGoal: 'create account with minimal friction',
+      aiAnalysis: 'form usability and conversion optimization'
+    },
+    {
+      name: 'activation',
+      page: '/welcome',
+      userGoal: 'understand next steps',
+      aiAnalysis: 'onboarding clarity and engagement'
+    }
+  ]
+};
+
+test('analyze complete user journey', async ({ page }) => {
+  const results = await analyzeCompleteJourney(userJourney);
+  // Results contain analysis for each stage
+});</code></pre>
+                    
+                    <div class="callout callout-tip">
+                        <h4>💡 Pro Tip</h4>
+                        <p>Use <code>quickAnalyze()</code> for rapid feedback during development, and <code>analyzeUserJourney()</code> for comprehensive analysis in your CI/CD pipeline.</p>
+                    </div>
+                </section>
+
+                <!-- More sections would continue here... -->
+                
+                <!-- Footer Navigation -->
+                <div class="docs-footer-nav">
+                    <a href="#" class="footer-nav-link prev">
+                        <span class="nav-direction">← Previous</span>
+                        <span class="nav-title">Welcome</span>
+                    </a>
+                    <a href="/examples/" class="footer-nav-link next">
+                        <span class="nav-direction">Next →</span>
+                        <span class="nav-title">Examples</span>
+                    </a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script type="module" src="/src/scripts/main.js"></script>
+    <script type="module" src="/src/scripts/docs.js"></script>
+</body>
+</html>

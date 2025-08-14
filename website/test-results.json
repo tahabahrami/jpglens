@@ -1,0 +1,732 @@
+{
+  "config": {
+    "configFile": "C:\\Users\\taha\\Documents\\programming\\craftjpg\\jpglensdev\\playwright.config.js",
+    "rootDir": "C:/Users/taha/Documents/programming/craftjpg/jpglensdev/tests",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 8
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "html",
+        {
+          "outputFolder": "playwright-report"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results.json"
+        }
+      ],
+      [
+        "line",
+        null
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "C:/Users/taha/Documents/programming/craftjpg/jpglensdev/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 8
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/taha/Documents/programming/craftjpg/jpglensdev/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/taha/Documents/programming/craftjpg/jpglensdev/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 8
+        },
+        "id": "mobile-chrome",
+        "name": "mobile-chrome",
+        "testDir": "C:/Users/taha/Documents/programming/craftjpg/jpglensdev/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "C:/Users/taha/Documents/programming/craftjpg/jpglensdev/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 8
+        },
+        "id": "tablet",
+        "name": "tablet",
+        "testDir": "C:/Users/taha/Documents/programming/craftjpg/jpglensdev/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.54.2",
+    "workers": 8,
+    "webServer": {
+      "command": "echo \"Using live site: https://jpglens.dev\"",
+      "url": "https://jpglens.dev",
+      "reuseExistingServer": true
+    }
+  },
+  "suites": [
+    {
+      "title": "footer-analysis.spec.js",
+      "file": "footer-analysis.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "jpglens Website Footer Analysis",
+          "file": "footer-analysis.spec.js",
+          "line": 7,
+          "column": 6,
+          "specs": [
+            {
+              "title": "comprehensive footer UX analysis",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 9013,
+                      "error": {
+                        "message": "Error: locator.hover: Error: strict mode violation: locator('footer a[href*=\"github.com/tahabahrami/jpglens\"]') resolved to 6 elements:\n    1) <a href=\"https://github.com/tahabahrami/jpglens/releases\">Changelog</a> aka getByRole('link', { name: 'Changelog' })\n    2) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens\">GitHub</a> aka getByRole('contentinfo').getByRole('link', { name: 'GitHub' })\n    3) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/issues\">Issues</a> aka getByRole('link', { name: 'Issues', exact: true })\n    4) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/CONTRIBUTING.md\">Contributing</a> aka getByRole('link', { name: 'Contributing', exact: true })\n    5) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/SECURITY.md\">Security</a> aka getByRole('link', { name: 'Security' })\n    6) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/LICENSE\">License</a> aka getByRole('link', { name: 'License' })\n\nCall log:\n\u001b[2m  - waiting for locator('footer a[href*=\"github.com/tahabahrami/jpglens\"]')\u001b[22m\n",
+                        "stack": "Error: locator.hover: Error: strict mode violation: locator('footer a[href*=\"github.com/tahabahrami/jpglens\"]') resolved to 6 elements:\n    1) <a href=\"https://github.com/tahabahrami/jpglens/releases\">Changelog</a> aka getByRole('link', { name: 'Changelog' })\n    2) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens\">GitHub</a> aka getByRole('contentinfo').getByRole('link', { name: 'GitHub' })\n    3) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/issues\">Issues</a> aka getByRole('link', { name: 'Issues', exact: true })\n    4) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/CONTRIBUTING.md\">Contributing</a> aka getByRole('link', { name: 'Contributing', exact: true })\n    5) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/SECURITY.md\">Security</a> aka getByRole('link', { name: 'Security' })\n    6) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/LICENSE\">License</a> aka getByRole('link', { name: 'License' })\n\nCall log:\n\u001b[2m  - waiting for locator('footer a[href*=\"github.com/tahabahrami/jpglens\"]')\u001b[22m\n\n    at C:\\Users\\taha\\Documents\\programming\\craftjpg\\jpglensdev\\tests\\footer-analysis.spec.js:80:24\n    at C:\\Users\\taha\\Documents\\programming\\craftjpg\\jpglensdev\\tests\\footer-analysis.spec.js:77:16",
+                        "location": {
+                          "file": "C:\\Users\\taha\\Documents\\programming\\craftjpg\\jpglensdev\\tests\\footer-analysis.spec.js",
+                          "column": 24,
+                          "line": 80
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 78 |\u001b[39m       \u001b[90m// Hover over GitHub link to test interaction\u001b[39m\n \u001b[90m 79 |\u001b[39m       \u001b[36mconst\u001b[39m githubLink \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'footer a[href*=\"github.com/tahabahrami/jpglens\"]'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 80 |\u001b[39m       \u001b[36mawait\u001b[39m githubLink\u001b[33m.\u001b[39mhover()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 81 |\u001b[39m       \n \u001b[90m 82 |\u001b[39m       \u001b[90m// Quick analysis of GitHub link prominence\u001b[39m\n \u001b[90m 83 |\u001b[39m       \u001b[36mawait\u001b[39m quickAnalyze(page\u001b[33m,\u001b[39m {\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\taha\\Documents\\programming\\craftjpg\\jpglensdev\\tests\\footer-analysis.spec.js",
+                            "column": 24,
+                            "line": 80
+                          },
+                          "message": "Error: locator.hover: Error: strict mode violation: locator('footer a[href*=\"github.com/tahabahrami/jpglens\"]') resolved to 6 elements:\n    1) <a href=\"https://github.com/tahabahrami/jpglens/releases\">Changelog</a> aka getByRole('link', { name: 'Changelog' })\n    2) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens\">GitHub</a> aka getByRole('contentinfo').getByRole('link', { name: 'GitHub' })\n    3) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/issues\">Issues</a> aka getByRole('link', { name: 'Issues', exact: true })\n    4) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/CONTRIBUTING.md\">Contributing</a> aka getByRole('link', { name: 'Contributing', exact: true })\n    5) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/SECURITY.md\">Security</a> aka getByRole('link', { name: 'Security' })\n    6) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/LICENSE\">License</a> aka getByRole('link', { name: 'License' })\n\nCall log:\n\u001b[2m  - waiting for locator('footer a[href*=\"github.com/tahabahrami/jpglens\"]')\u001b[22m\n\n\n\u001b[0m \u001b[90m 78 |\u001b[39m       \u001b[90m// Hover over GitHub link to test interaction\u001b[39m\n \u001b[90m 79 |\u001b[39m       \u001b[36mconst\u001b[39m githubLink \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'footer a[href*=\"github.com/tahabahrami/jpglens\"]'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 80 |\u001b[39m       \u001b[36mawait\u001b[39m githubLink\u001b[33m.\u001b[39mhover()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 81 |\u001b[39m       \n \u001b[90m 82 |\u001b[39m       \u001b[90m// Quick analysis of GitHub link prominence\u001b[39m\n \u001b[90m 83 |\u001b[39m       \u001b[36mawait\u001b[39m quickAnalyze(page\u001b[33m,\u001b[39m {\u001b[0m\n\u001b[2m    at C:\\Users\\taha\\Documents\\programming\\craftjpg\\jpglensdev\\tests\\footer-analysis.spec.js:80:24\u001b[22m\n\u001b[2m    at C:\\Users\\taha\\Documents\\programming\\craftjpg\\jpglensdev\\tests\\footer-analysis.spec.js:77:16\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "\n\u001b[31m❌ jpglens Analysis Failed\u001b[0m\n"
+                        },
+                        {
+                          "text": "────────────────────────────────────────\n"
+                        },
+                        {
+                          "text": "❌ jpglens analysis failed: Cannot read properties of undefined (reading 'includes')\n"
+                        },
+                        {
+                          "text": "ℹ️ \u001b[2mDetails:\u001b[0m Check your configuration and try again\n"
+                        },
+                        {
+                          "text": "\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Analyze footer link interactions",
+                          "duration": 138,
+                          "error": {
+                            "message": "Error: locator.hover: Error: strict mode violation: locator('footer a[href*=\"github.com/tahabahrami/jpglens\"]') resolved to 6 elements:\n    1) <a href=\"https://github.com/tahabahrami/jpglens/releases\">Changelog</a> aka getByRole('link', { name: 'Changelog' })\n    2) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens\">GitHub</a> aka getByRole('contentinfo').getByRole('link', { name: 'GitHub' })\n    3) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/issues\">Issues</a> aka getByRole('link', { name: 'Issues', exact: true })\n    4) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/CONTRIBUTING.md\">Contributing</a> aka getByRole('link', { name: 'Contributing', exact: true })\n    5) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/SECURITY.md\">Security</a> aka getByRole('link', { name: 'Security' })\n    6) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/LICENSE\">License</a> aka getByRole('link', { name: 'License' })\n\nCall log:\n\u001b[2m  - waiting for locator('footer a[href*=\"github.com/tahabahrami/jpglens\"]')\u001b[22m\n",
+                            "stack": "Error: locator.hover: Error: strict mode violation: locator('footer a[href*=\"github.com/tahabahrami/jpglens\"]') resolved to 6 elements:\n    1) <a href=\"https://github.com/tahabahrami/jpglens/releases\">Changelog</a> aka getByRole('link', { name: 'Changelog' })\n    2) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens\">GitHub</a> aka getByRole('contentinfo').getByRole('link', { name: 'GitHub' })\n    3) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/issues\">Issues</a> aka getByRole('link', { name: 'Issues', exact: true })\n    4) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/CONTRIBUTING.md\">Contributing</a> aka getByRole('link', { name: 'Contributing', exact: true })\n    5) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/SECURITY.md\">Security</a> aka getByRole('link', { name: 'Security' })\n    6) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/LICENSE\">License</a> aka getByRole('link', { name: 'License' })\n\nCall log:\n\u001b[2m  - waiting for locator('footer a[href*=\"github.com/tahabahrami/jpglens\"]')\u001b[22m\n\n    at C:\\Users\\taha\\Documents\\programming\\craftjpg\\jpglensdev\\tests\\footer-analysis.spec.js:80:24\n    at C:\\Users\\taha\\Documents\\programming\\craftjpg\\jpglensdev\\tests\\footer-analysis.spec.js:77:16",
+                            "location": {
+                              "file": "C:\\Users\\taha\\Documents\\programming\\craftjpg\\jpglensdev\\tests\\footer-analysis.spec.js",
+                              "column": 24,
+                              "line": 80
+                            },
+                            "snippet": "\u001b[0m \u001b[90m 78 |\u001b[39m       \u001b[90m// Hover over GitHub link to test interaction\u001b[39m\n \u001b[90m 79 |\u001b[39m       \u001b[36mconst\u001b[39m githubLink \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'footer a[href*=\"github.com/tahabahrami/jpglens\"]'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 80 |\u001b[39m       \u001b[36mawait\u001b[39m githubLink\u001b[33m.\u001b[39mhover()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 81 |\u001b[39m       \n \u001b[90m 82 |\u001b[39m       \u001b[90m// Quick analysis of GitHub link prominence\u001b[39m\n \u001b[90m 83 |\u001b[39m       \u001b[36mawait\u001b[39m quickAnalyze(page\u001b[33m,\u001b[39m {\u001b[0m"
+                          }
+                        }
+                      ],
+                      "startTime": "2025-08-13T05:17:38.012Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\taha\\Documents\\programming\\craftjpg\\jpglensdev\\test-results\\footer-analysis-jpglens-We-c58b7-ehensive-footer-UX-analysis-chromium\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "C:\\Users\\taha\\Documents\\programming\\craftjpg\\jpglensdev\\test-results\\footer-analysis-jpglens-We-c58b7-ehensive-footer-UX-analysis-chromium\\video.webm"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\taha\\Documents\\programming\\craftjpg\\jpglensdev\\tests\\footer-analysis.spec.js",
+                        "column": 24,
+                        "line": 80
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "79f57f582a9fd3b624f9-36c6e1d2e618dba0a3bf",
+              "file": "footer-analysis.spec.js",
+              "line": 8,
+              "column": 3
+            },
+            {
+              "title": "footer community engagement analysis",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 7455,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "\n\u001b[31m❌ jpglens Analysis Failed\u001b[0m\n"
+                        },
+                        {
+                          "text": "────────────────────────────────────────\n"
+                        },
+                        {
+                          "text": "❌ jpglens analysis failed: Cannot read properties of undefined (reading 'includes')\n"
+                        },
+                        {
+                          "text": "ℹ️ \u001b[2mDetails:\u001b[0m Check your configuration and try again\n"
+                        },
+                        {
+                          "text": "\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-13T05:17:38.037Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "79f57f582a9fd3b624f9-d0b497a8a8f44f959aed",
+              "file": "footer-analysis.spec.js",
+              "line": 201,
+              "column": 3
+            },
+            {
+              "title": "footer brand consistency analysis",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 7694,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "\n\u001b[31m❌ jpglens Analysis Failed\u001b[0m\n"
+                        },
+                        {
+                          "text": "────────────────────────────────────────\n"
+                        },
+                        {
+                          "text": "❌ jpglens analysis failed: Cannot read properties of undefined (reading 'includes')\n"
+                        },
+                        {
+                          "text": "ℹ️ \u001b[2mDetails:\u001b[0m Check your configuration and try again\n"
+                        },
+                        {
+                          "text": "\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-13T05:17:38.069Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "79f57f582a9fd3b624f9-604be59b59b989386fbc",
+              "file": "footer-analysis.spec.js",
+              "line": 247,
+              "column": 3
+            },
+            {
+              "title": "comprehensive footer UX analysis",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "failed",
+                      "duration": 10411,
+                      "error": {
+                        "message": "Error: locator.hover: Error: strict mode violation: locator('footer a[href*=\"github.com/tahabahrami/jpglens\"]') resolved to 6 elements:\n    1) <a href=\"https://github.com/tahabahrami/jpglens/releases\">Changelog</a> aka getByRole('link', { name: 'Changelog' })\n    2) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens\">GitHub</a> aka getByRole('link', { name: 'GitHub', exact: true })\n    3) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/issues\">Issues</a> aka getByRole('link', { name: 'Issues', exact: true })\n    4) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/CONTRIBUTING.md\">Contributing</a> aka getByRole('link', { name: 'Contributing', exact: true })\n    5) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/SECURITY.md\">Security</a> aka getByRole('link', { name: 'Security' })\n    6) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/LICENSE\">License</a> aka getByRole('link', { name: 'License' })\n\nCall log:\n\u001b[2m  - waiting for locator('footer a[href*=\"github.com/tahabahrami/jpglens\"]')\u001b[22m\n",
+                        "stack": "Error: locator.hover: Error: strict mode violation: locator('footer a[href*=\"github.com/tahabahrami/jpglens\"]') resolved to 6 elements:\n    1) <a href=\"https://github.com/tahabahrami/jpglens/releases\">Changelog</a> aka getByRole('link', { name: 'Changelog' })\n    2) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens\">GitHub</a> aka getByRole('link', { name: 'GitHub', exact: true })\n    3) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/issues\">Issues</a> aka getByRole('link', { name: 'Issues', exact: true })\n    4) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/CONTRIBUTING.md\">Contributing</a> aka getByRole('link', { name: 'Contributing', exact: true })\n    5) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/SECURITY.md\">Security</a> aka getByRole('link', { name: 'Security' })\n    6) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/LICENSE\">License</a> aka getByRole('link', { name: 'License' })\n\nCall log:\n\u001b[2m  - waiting for locator('footer a[href*=\"github.com/tahabahrami/jpglens\"]')\u001b[22m\n\n    at C:\\Users\\taha\\Documents\\programming\\craftjpg\\jpglensdev\\tests\\footer-analysis.spec.js:80:24\n    at C:\\Users\\taha\\Documents\\programming\\craftjpg\\jpglensdev\\tests\\footer-analysis.spec.js:77:16",
+                        "location": {
+                          "file": "C:\\Users\\taha\\Documents\\programming\\craftjpg\\jpglensdev\\tests\\footer-analysis.spec.js",
+                          "column": 24,
+                          "line": 80
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 78 |\u001b[39m       \u001b[90m// Hover over GitHub link to test interaction\u001b[39m\n \u001b[90m 79 |\u001b[39m       \u001b[36mconst\u001b[39m githubLink \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'footer a[href*=\"github.com/tahabahrami/jpglens\"]'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 80 |\u001b[39m       \u001b[36mawait\u001b[39m githubLink\u001b[33m.\u001b[39mhover()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 81 |\u001b[39m       \n \u001b[90m 82 |\u001b[39m       \u001b[90m// Quick analysis of GitHub link prominence\u001b[39m\n \u001b[90m 83 |\u001b[39m       \u001b[36mawait\u001b[39m quickAnalyze(page\u001b[33m,\u001b[39m {\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\taha\\Documents\\programming\\craftjpg\\jpglensdev\\tests\\footer-analysis.spec.js",
+                            "column": 24,
+                            "line": 80
+                          },
+                          "message": "Error: locator.hover: Error: strict mode violation: locator('footer a[href*=\"github.com/tahabahrami/jpglens\"]') resolved to 6 elements:\n    1) <a href=\"https://github.com/tahabahrami/jpglens/releases\">Changelog</a> aka getByRole('link', { name: 'Changelog' })\n    2) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens\">GitHub</a> aka getByRole('link', { name: 'GitHub', exact: true })\n    3) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/issues\">Issues</a> aka getByRole('link', { name: 'Issues', exact: true })\n    4) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/CONTRIBUTING.md\">Contributing</a> aka getByRole('link', { name: 'Contributing', exact: true })\n    5) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/SECURITY.md\">Security</a> aka getByRole('link', { name: 'Security' })\n    6) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/LICENSE\">License</a> aka getByRole('link', { name: 'License' })\n\nCall log:\n\u001b[2m  - waiting for locator('footer a[href*=\"github.com/tahabahrami/jpglens\"]')\u001b[22m\n\n\n\u001b[0m \u001b[90m 78 |\u001b[39m       \u001b[90m// Hover over GitHub link to test interaction\u001b[39m\n \u001b[90m 79 |\u001b[39m       \u001b[36mconst\u001b[39m githubLink \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'footer a[href*=\"github.com/tahabahrami/jpglens\"]'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 80 |\u001b[39m       \u001b[36mawait\u001b[39m githubLink\u001b[33m.\u001b[39mhover()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 81 |\u001b[39m       \n \u001b[90m 82 |\u001b[39m       \u001b[90m// Quick analysis of GitHub link prominence\u001b[39m\n \u001b[90m 83 |\u001b[39m       \u001b[36mawait\u001b[39m quickAnalyze(page\u001b[33m,\u001b[39m {\u001b[0m\n\u001b[2m    at C:\\Users\\taha\\Documents\\programming\\craftjpg\\jpglensdev\\tests\\footer-analysis.spec.js:80:24\u001b[22m\n\u001b[2m    at C:\\Users\\taha\\Documents\\programming\\craftjpg\\jpglensdev\\tests\\footer-analysis.spec.js:77:16\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "\n\u001b[31m❌ jpglens Analysis Failed\u001b[0m\n"
+                        },
+                        {
+                          "text": "────────────────────────────────────────\n"
+                        },
+                        {
+                          "text": "❌ jpglens analysis failed: Cannot read properties of undefined (reading 'includes')\n"
+                        },
+                        {
+                          "text": "ℹ️ \u001b[2mDetails:\u001b[0m Check your configuration and try again\n"
+                        },
+                        {
+                          "text": "\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Analyze footer link interactions",
+                          "duration": 49,
+                          "error": {
+                            "message": "Error: locator.hover: Error: strict mode violation: locator('footer a[href*=\"github.com/tahabahrami/jpglens\"]') resolved to 6 elements:\n    1) <a href=\"https://github.com/tahabahrami/jpglens/releases\">Changelog</a> aka getByRole('link', { name: 'Changelog' })\n    2) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens\">GitHub</a> aka getByRole('link', { name: 'GitHub', exact: true })\n    3) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/issues\">Issues</a> aka getByRole('link', { name: 'Issues', exact: true })\n    4) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/CONTRIBUTING.md\">Contributing</a> aka getByRole('link', { name: 'Contributing', exact: true })\n    5) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/SECURITY.md\">Security</a> aka getByRole('link', { name: 'Security' })\n    6) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/LICENSE\">License</a> aka getByRole('link', { name: 'License' })\n\nCall log:\n\u001b[2m  - waiting for locator('footer a[href*=\"github.com/tahabahrami/jpglens\"]')\u001b[22m\n",
+                            "stack": "Error: locator.hover: Error: strict mode violation: locator('footer a[href*=\"github.com/tahabahrami/jpglens\"]') resolved to 6 elements:\n    1) <a href=\"https://github.com/tahabahrami/jpglens/releases\">Changelog</a> aka getByRole('link', { name: 'Changelog' })\n    2) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens\">GitHub</a> aka getByRole('link', { name: 'GitHub', exact: true })\n    3) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/issues\">Issues</a> aka getByRole('link', { name: 'Issues', exact: true })\n    4) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/CONTRIBUTING.md\">Contributing</a> aka getByRole('link', { name: 'Contributing', exact: true })\n    5) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/SECURITY.md\">Security</a> aka getByRole('link', { name: 'Security' })\n    6) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/LICENSE\">License</a> aka getByRole('link', { name: 'License' })\n\nCall log:\n\u001b[2m  - waiting for locator('footer a[href*=\"github.com/tahabahrami/jpglens\"]')\u001b[22m\n\n    at C:\\Users\\taha\\Documents\\programming\\craftjpg\\jpglensdev\\tests\\footer-analysis.spec.js:80:24\n    at C:\\Users\\taha\\Documents\\programming\\craftjpg\\jpglensdev\\tests\\footer-analysis.spec.js:77:16",
+                            "location": {
+                              "file": "C:\\Users\\taha\\Documents\\programming\\craftjpg\\jpglensdev\\tests\\footer-analysis.spec.js",
+                              "column": 24,
+                              "line": 80
+                            },
+                            "snippet": "\u001b[0m \u001b[90m 78 |\u001b[39m       \u001b[90m// Hover over GitHub link to test interaction\u001b[39m\n \u001b[90m 79 |\u001b[39m       \u001b[36mconst\u001b[39m githubLink \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'footer a[href*=\"github.com/tahabahrami/jpglens\"]'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 80 |\u001b[39m       \u001b[36mawait\u001b[39m githubLink\u001b[33m.\u001b[39mhover()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 81 |\u001b[39m       \n \u001b[90m 82 |\u001b[39m       \u001b[90m// Quick analysis of GitHub link prominence\u001b[39m\n \u001b[90m 83 |\u001b[39m       \u001b[36mawait\u001b[39m quickAnalyze(page\u001b[33m,\u001b[39m {\u001b[0m"
+                          }
+                        }
+                      ],
+                      "startTime": "2025-08-13T05:17:38.051Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\taha\\Documents\\programming\\craftjpg\\jpglensdev\\test-results\\footer-analysis-jpglens-We-c58b7-ehensive-footer-UX-analysis-mobile-chrome\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "C:\\Users\\taha\\Documents\\programming\\craftjpg\\jpglensdev\\test-results\\footer-analysis-jpglens-We-c58b7-ehensive-footer-UX-analysis-mobile-chrome\\video.webm"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\taha\\Documents\\programming\\craftjpg\\jpglensdev\\tests\\footer-analysis.spec.js",
+                        "column": 24,
+                        "line": 80
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "79f57f582a9fd3b624f9-c6fa4b5623ed4b12e4e6",
+              "file": "footer-analysis.spec.js",
+              "line": 8,
+              "column": 3
+            },
+            {
+              "title": "footer community engagement analysis",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 4,
+                      "status": "passed",
+                      "duration": 9442,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "\n\u001b[31m❌ jpglens Analysis Failed\u001b[0m\n"
+                        },
+                        {
+                          "text": "────────────────────────────────────────\n"
+                        },
+                        {
+                          "text": "❌ jpglens analysis failed: Cannot read properties of undefined (reading 'includes')\n"
+                        },
+                        {
+                          "text": "ℹ️ \u001b[2mDetails:\u001b[0m Check your configuration and try again\n"
+                        },
+                        {
+                          "text": "\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-13T05:17:38.036Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "79f57f582a9fd3b624f9-efe1275efe341e752391",
+              "file": "footer-analysis.spec.js",
+              "line": 201,
+              "column": 3
+            },
+            {
+              "title": "footer brand consistency analysis",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "mobile-chrome",
+                  "projectName": "mobile-chrome",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 5,
+                      "status": "passed",
+                      "duration": 8841,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "\n\u001b[31m❌ jpglens Analysis Failed\u001b[0m\n"
+                        },
+                        {
+                          "text": "────────────────────────────────────────\n"
+                        },
+                        {
+                          "text": "❌ jpglens analysis failed: Cannot read properties of undefined (reading 'includes')\n"
+                        },
+                        {
+                          "text": "ℹ️ \u001b[2mDetails:\u001b[0m Check your configuration and try again\n"
+                        },
+                        {
+                          "text": "\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-13T05:17:38.070Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "79f57f582a9fd3b624f9-22255021b5c1f1d76c08",
+              "file": "footer-analysis.spec.js",
+              "line": 247,
+              "column": 3
+            },
+            {
+              "title": "comprehensive footer UX analysis",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "tablet",
+                  "projectName": "tablet",
+                  "results": [
+                    {
+                      "workerIndex": 6,
+                      "parallelIndex": 6,
+                      "status": "failed",
+                      "duration": 8783,
+                      "error": {
+                        "message": "Error: locator.hover: Error: strict mode violation: locator('footer a[href*=\"github.com/tahabahrami/jpglens\"]') resolved to 6 elements:\n    1) <a href=\"https://github.com/tahabahrami/jpglens/releases\">Changelog</a> aka getByRole('link', { name: 'Changelog' })\n    2) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens\">GitHub</a> aka getByRole('contentinfo').getByRole('link', { name: 'GitHub' })\n    3) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/issues\">Issues</a> aka getByRole('link', { name: 'Issues', exact: true })\n    4) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/CONTRIBUTING.md\">Contributing</a> aka getByRole('link', { name: 'Contributing', exact: true })\n    5) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/SECURITY.md\">Security</a> aka getByRole('link', { name: 'Security' })\n    6) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/LICENSE\">License</a> aka getByRole('link', { name: 'License' })\n\nCall log:\n\u001b[2m  - waiting for locator('footer a[href*=\"github.com/tahabahrami/jpglens\"]')\u001b[22m\n",
+                        "stack": "Error: locator.hover: Error: strict mode violation: locator('footer a[href*=\"github.com/tahabahrami/jpglens\"]') resolved to 6 elements:\n    1) <a href=\"https://github.com/tahabahrami/jpglens/releases\">Changelog</a> aka getByRole('link', { name: 'Changelog' })\n    2) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens\">GitHub</a> aka getByRole('contentinfo').getByRole('link', { name: 'GitHub' })\n    3) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/issues\">Issues</a> aka getByRole('link', { name: 'Issues', exact: true })\n    4) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/CONTRIBUTING.md\">Contributing</a> aka getByRole('link', { name: 'Contributing', exact: true })\n    5) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/SECURITY.md\">Security</a> aka getByRole('link', { name: 'Security' })\n    6) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/LICENSE\">License</a> aka getByRole('link', { name: 'License' })\n\nCall log:\n\u001b[2m  - waiting for locator('footer a[href*=\"github.com/tahabahrami/jpglens\"]')\u001b[22m\n\n    at C:\\Users\\taha\\Documents\\programming\\craftjpg\\jpglensdev\\tests\\footer-analysis.spec.js:80:24\n    at C:\\Users\\taha\\Documents\\programming\\craftjpg\\jpglensdev\\tests\\footer-analysis.spec.js:77:16",
+                        "location": {
+                          "file": "C:\\Users\\taha\\Documents\\programming\\craftjpg\\jpglensdev\\tests\\footer-analysis.spec.js",
+                          "column": 24,
+                          "line": 80
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 78 |\u001b[39m       \u001b[90m// Hover over GitHub link to test interaction\u001b[39m\n \u001b[90m 79 |\u001b[39m       \u001b[36mconst\u001b[39m githubLink \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'footer a[href*=\"github.com/tahabahrami/jpglens\"]'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 80 |\u001b[39m       \u001b[36mawait\u001b[39m githubLink\u001b[33m.\u001b[39mhover()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 81 |\u001b[39m       \n \u001b[90m 82 |\u001b[39m       \u001b[90m// Quick analysis of GitHub link prominence\u001b[39m\n \u001b[90m 83 |\u001b[39m       \u001b[36mawait\u001b[39m quickAnalyze(page\u001b[33m,\u001b[39m {\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\taha\\Documents\\programming\\craftjpg\\jpglensdev\\tests\\footer-analysis.spec.js",
+                            "column": 24,
+                            "line": 80
+                          },
+                          "message": "Error: locator.hover: Error: strict mode violation: locator('footer a[href*=\"github.com/tahabahrami/jpglens\"]') resolved to 6 elements:\n    1) <a href=\"https://github.com/tahabahrami/jpglens/releases\">Changelog</a> aka getByRole('link', { name: 'Changelog' })\n    2) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens\">GitHub</a> aka getByRole('contentinfo').getByRole('link', { name: 'GitHub' })\n    3) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/issues\">Issues</a> aka getByRole('link', { name: 'Issues', exact: true })\n    4) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/CONTRIBUTING.md\">Contributing</a> aka getByRole('link', { name: 'Contributing', exact: true })\n    5) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/SECURITY.md\">Security</a> aka getByRole('link', { name: 'Security' })\n    6) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/LICENSE\">License</a> aka getByRole('link', { name: 'License' })\n\nCall log:\n\u001b[2m  - waiting for locator('footer a[href*=\"github.com/tahabahrami/jpglens\"]')\u001b[22m\n\n\n\u001b[0m \u001b[90m 78 |\u001b[39m       \u001b[90m// Hover over GitHub link to test interaction\u001b[39m\n \u001b[90m 79 |\u001b[39m       \u001b[36mconst\u001b[39m githubLink \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'footer a[href*=\"github.com/tahabahrami/jpglens\"]'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 80 |\u001b[39m       \u001b[36mawait\u001b[39m githubLink\u001b[33m.\u001b[39mhover()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 81 |\u001b[39m       \n \u001b[90m 82 |\u001b[39m       \u001b[90m// Quick analysis of GitHub link prominence\u001b[39m\n \u001b[90m 83 |\u001b[39m       \u001b[36mawait\u001b[39m quickAnalyze(page\u001b[33m,\u001b[39m {\u001b[0m\n\u001b[2m    at C:\\Users\\taha\\Documents\\programming\\craftjpg\\jpglensdev\\tests\\footer-analysis.spec.js:80:24\u001b[22m\n\u001b[2m    at C:\\Users\\taha\\Documents\\programming\\craftjpg\\jpglensdev\\tests\\footer-analysis.spec.js:77:16\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "\n\u001b[31m❌ jpglens Analysis Failed\u001b[0m\n"
+                        },
+                        {
+                          "text": "────────────────────────────────────────\n"
+                        },
+                        {
+                          "text": "❌ jpglens analysis failed: Cannot read properties of undefined (reading 'includes')\n"
+                        },
+                        {
+                          "text": "ℹ️ \u001b[2mDetails:\u001b[0m Check your configuration and try again\n"
+                        },
+                        {
+                          "text": "\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Analyze footer link interactions",
+                          "duration": 151,
+                          "error": {
+                            "message": "Error: locator.hover: Error: strict mode violation: locator('footer a[href*=\"github.com/tahabahrami/jpglens\"]') resolved to 6 elements:\n    1) <a href=\"https://github.com/tahabahrami/jpglens/releases\">Changelog</a> aka getByRole('link', { name: 'Changelog' })\n    2) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens\">GitHub</a> aka getByRole('contentinfo').getByRole('link', { name: 'GitHub' })\n    3) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/issues\">Issues</a> aka getByRole('link', { name: 'Issues', exact: true })\n    4) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/CONTRIBUTING.md\">Contributing</a> aka getByRole('link', { name: 'Contributing', exact: true })\n    5) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/SECURITY.md\">Security</a> aka getByRole('link', { name: 'Security' })\n    6) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/LICENSE\">License</a> aka getByRole('link', { name: 'License' })\n\nCall log:\n\u001b[2m  - waiting for locator('footer a[href*=\"github.com/tahabahrami/jpglens\"]')\u001b[22m\n",
+                            "stack": "Error: locator.hover: Error: strict mode violation: locator('footer a[href*=\"github.com/tahabahrami/jpglens\"]') resolved to 6 elements:\n    1) <a href=\"https://github.com/tahabahrami/jpglens/releases\">Changelog</a> aka getByRole('link', { name: 'Changelog' })\n    2) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens\">GitHub</a> aka getByRole('contentinfo').getByRole('link', { name: 'GitHub' })\n    3) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/issues\">Issues</a> aka getByRole('link', { name: 'Issues', exact: true })\n    4) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/CONTRIBUTING.md\">Contributing</a> aka getByRole('link', { name: 'Contributing', exact: true })\n    5) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/SECURITY.md\">Security</a> aka getByRole('link', { name: 'Security' })\n    6) <a target=\"_blank\" href=\"https://github.com/tahabahrami/jpglens/blob/main/LICENSE\">License</a> aka getByRole('link', { name: 'License' })\n\nCall log:\n\u001b[2m  - waiting for locator('footer a[href*=\"github.com/tahabahrami/jpglens\"]')\u001b[22m\n\n    at C:\\Users\\taha\\Documents\\programming\\craftjpg\\jpglensdev\\tests\\footer-analysis.spec.js:80:24\n    at C:\\Users\\taha\\Documents\\programming\\craftjpg\\jpglensdev\\tests\\footer-analysis.spec.js:77:16",
+                            "location": {
+                              "file": "C:\\Users\\taha\\Documents\\programming\\craftjpg\\jpglensdev\\tests\\footer-analysis.spec.js",
+                              "column": 24,
+                              "line": 80
+                            },
+                            "snippet": "\u001b[0m \u001b[90m 78 |\u001b[39m       \u001b[90m// Hover over GitHub link to test interaction\u001b[39m\n \u001b[90m 79 |\u001b[39m       \u001b[36mconst\u001b[39m githubLink \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'footer a[href*=\"github.com/tahabahrami/jpglens\"]'\u001b[39m)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 80 |\u001b[39m       \u001b[36mawait\u001b[39m githubLink\u001b[33m.\u001b[39mhover()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 81 |\u001b[39m       \n \u001b[90m 82 |\u001b[39m       \u001b[90m// Quick analysis of GitHub link prominence\u001b[39m\n \u001b[90m 83 |\u001b[39m       \u001b[36mawait\u001b[39m quickAnalyze(page\u001b[33m,\u001b[39m {\u001b[0m"
+                          }
+                        }
+                      ],
+                      "startTime": "2025-08-13T05:17:38.070Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\taha\\Documents\\programming\\craftjpg\\jpglensdev\\test-results\\footer-analysis-jpglens-We-c58b7-ehensive-footer-UX-analysis-tablet\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "C:\\Users\\taha\\Documents\\programming\\craftjpg\\jpglensdev\\test-results\\footer-analysis-jpglens-We-c58b7-ehensive-footer-UX-analysis-tablet\\video.webm"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\taha\\Documents\\programming\\craftjpg\\jpglensdev\\tests\\footer-analysis.spec.js",
+                        "column": 24,
+                        "line": 80
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "79f57f582a9fd3b624f9-0168efda9e985ef1a56c",
+              "file": "footer-analysis.spec.js",
+              "line": 8,
+              "column": 3
+            },
+            {
+              "title": "footer community engagement analysis",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "tablet",
+                  "projectName": "tablet",
+                  "results": [
+                    {
+                      "workerIndex": 7,
+                      "parallelIndex": 7,
+                      "status": "passed",
+                      "duration": 7450,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "\n\u001b[31m❌ jpglens Analysis Failed\u001b[0m\n"
+                        },
+                        {
+                          "text": "────────────────────────────────────────\n"
+                        },
+                        {
+                          "text": "❌ jpglens analysis failed: Cannot read properties of undefined (reading 'includes')\n"
+                        },
+                        {
+                          "text": "ℹ️ \u001b[2mDetails:\u001b[0m Check your configuration and try again\n"
+                        },
+                        {
+                          "text": "\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-13T05:17:38.121Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "79f57f582a9fd3b624f9-d425ff08e7b77c854369",
+              "file": "footer-analysis.spec.js",
+              "line": 201,
+              "column": 3
+            },
+            {
+              "title": "footer brand consistency analysis",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "tablet",
+                  "projectName": "tablet",
+                  "results": [
+                    {
+                      "workerIndex": 8,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 6515,
+                      "errors": [],
+                      "stdout": [
+                        {
+                          "text": "\n\u001b[31m❌ jpglens Analysis Failed\u001b[0m\n"
+                        },
+                        {
+                          "text": "────────────────────────────────────────\n"
+                        },
+                        {
+                          "text": "❌ jpglens analysis failed: Cannot read properties of undefined (reading 'includes')\n"
+                        },
+                        {
+                          "text": "ℹ️ \u001b[2mDetails:\u001b[0m Check your configuration and try again\n"
+                        },
+                        {
+                          "text": "\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-08-13T05:17:47.602Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "79f57f582a9fd3b624f9-6966e92856cb11b0c4e4",
+              "file": "footer-analysis.spec.js",
+              "line": 247,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2025-08-13T05:17:35.067Z",
+    "duration": 19220.498000000003,
+    "expected": 6,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  }
+}

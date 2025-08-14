@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examples - jpglens AI-Powered UI Testing</title>
+    <meta name="description" content="Real-world examples of jpglens in action. Learn how to implement AI-powered UI testing with Playwright, Cypress, Storybook, and more.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/src/styles/main.css">
+    <link rel="stylesheet" href="/src/styles/examples.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="/" class="brand-link">
+                    <span class="brand-icon">🔍</span>
+                    <span class="brand-text">jpglens</span>
+                </a>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="/#features" class="nav-link">Features</a>
+                <a href="/docs/" class="nav-link">Docs</a>
+                <a href="/examples/" class="nav-link active">Examples</a>
+                <a href="/comparison/" class="nav-link">Comparison</a>
+                <a href="/#community" class="nav-link">Community</a>
+                <a href="https://github.com/tahabahrami/jpglens" class="nav-link github-link" target="_blank">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    GitHub
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="examples-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>jpglens Examples</h1>
+                <p class="hero-subtitle">Real-world examples of AI-powered UI testing in action. Copy, paste, and adapt for your own projects.</p>
+                
+                <div class="example-categories">
+                    <a href="#playwright-examples" class="category-link">
+                        <span class="category-icon">🎭</span>
+                        <span>Playwright</span>
+                    </a>
+                    <a href="#cypress-examples" class="category-link">
+                        <span class="category-icon">🌲</span>
+                        <span>Cypress</span>
+                    </a>
+                    <a href="#storybook-examples" class="category-link">
+                        <span class="category-icon">📚</span>
+                        <span>Storybook</span>
+                    </a>
+                    <a href="#advanced-examples" class="category-link">
+                        <span class="category-icon">🚀</span>
+                        <span>Advanced</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Start Example -->
+    <section class="quick-start-example">
+        <div class="container">
+            <div class="example-header">
+                <h2>5-Minute Quick Start</h2>
+                <p>Get jpglens running in your existing tests in under 5 minutes</p>
+            </div>
+            
+            <div class="quick-start-steps">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Install jpglens</h3>
+                        <pre><code class="language-bash">npm install --save-dev jpglens</code></pre>
+                    </div>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Set your API key</h3>
+                        <pre><code class="language-bash"># .env
+JPGLENS_API_KEY="your-openrouter-or-openai-key"</code></pre>
+                    </div>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Add to your test</h3>
+                        <pre><code class="language-javascript">import { analyzeUserJourney } from 'jpglens/playwright';
+
+// Add this after your test actions
+await analyzeUserJourney(page, {
+  stage: 'checkout',
+  userIntent: 'complete purchase'
+});</code></pre>
+                    </div>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Run and get insights</h3>
+                        <pre><code class="language-bash">npx playwright test
+# ✅ UX Score: 8.2/10
+# 🚨 Found 2 critical issues
+# 💡 Generated 5 recommendations</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Playwright Examples -->
+    <section id="playwright-examples" class="examples-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>🎭 Playwright Examples</h2>
+                <p>Integrate jpglens with your Playwright tests for comprehensive UI analysis</p>
+            </div>
+            
+            <div class="examples-grid">
+                <!-- E-commerce Checkout -->
+                <div class="example-card">
+                    <div class="example-header">
+                        <h3>E-commerce Checkout Flow</h3>
+                        <div class="example-tags">
+                            <span class="tag">E-commerce</span>
+                            <span class="tag">Mobile</span>
+                            <span class="tag">Conversion</span>
+                        </div>
+                    </div>
+                    
+                    <div class="example-description">
+                        <p>Analyze a complete checkout flow with AI insights on conversion optimization, mobile usability, and trust signals.</p>
+                    </div>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-javascript">// tests/checkout-flow.spec.js
+import { test, expect } from '@playwright/test';
+import { analyzeUserJourney, analyzeCompleteJourney } from 'jpglens/playwright';
+
+test('checkout flow with AI analysis', async ({ page }) => {
+  // Navigate to product page
+  await page.goto('/products/wireless-headphones');
+  
+  // Add to cart
+  await page.click('[data-testid="add-to-cart"]');
+  await page.click('[data-testid="view-cart"]');
+  
+  // Analyze cart page UX
+  await analyzeUserJourney(page, {
+    stage: 'cart-review',
+    userIntent: 'review items before checkout',
+    userContext: {
+      persona: 'price-conscious-shopper',
+      device: 'mobile',
+      urgency: 'medium',
+      trustLevel: 'first-time-buyer'
+    },
+    criticalElements: ['cart-items', 'total-price', 'security-badges'],
+    analysisTypes: ['usability', 'conversion-optimization', 'trust-signals']
+  });
+  
+  // Proceed to checkout
+  await page.click('[data-testid="checkout"]');
+  
+  // Fill shipping information
+  await page.fill('[data-testid="email"]', 'customer@example.com');
+  await page.fill('[data-testid="first-name"]', 'John');
+  await page.fill('[data-testid="last-name"]', 'Doe');
+  await page.fill('[data-testid="address"]', '123 Main Street');
+  await page.fill('[data-testid="city"]', 'New York');
+  await page.selectOption('[data-testid="state"]', 'NY');
+  await page.fill('[data-testid="zip"]', '10001');
+  
+  // Analyze checkout form UX
+  await analyzeUserJourney(page, {
+    stage: 'checkout-form',
+    userIntent: 'provide shipping information quickly',
+    userContext: {
+      persona: 'mobile-user',
+      device: 'mobile',
+      expertise: 'novice',
+      timeConstraint: 'limited'
+    },
+    criticalElements: ['form-fields', 'validation-messages', 'progress-indicator'],
+    analysisTypes: ['form-usability', 'mobile-optimization', 'accessibility'],
+    customPrompts: {
+      'mobile-form-analysis': 'Focus on mobile form usability and keyboard navigation'
+    }
+  });
+  
+  // Continue to payment
+  await page.click('[data-testid="continue-to-payment"]');
+  
+  // Analyze payment page security and trust
+  await analyzeUserJourney(page, {
+    stage: 'payment',
+    userIntent: 'complete purchase securely',
+    userContext: {
+      persona: 'security-conscious',
+      device: 'mobile',
+      concernLevel: 'high'
+    },
+    criticalElements: ['payment-form', 'ssl-indicators', 'security-badges'],
+    analysisTypes: ['security-perception', 'trust-signals', 'accessibility']
+  });
+  
+  // Complete order (using test payment)
+  await page.fill('[data-testid="card-number"]', '4242424242424242');
+  await page.fill('[data-testid="expiry"]', '12/25');
+  await page.fill('[data-testid="cvc"]', '123');
+  await page.click('[data-testid="place-order"]');
+  
+  // Verify success page
+  await expect(page.locator('[data-testid="order-confirmation"]')).toBeVisible();
+  
+  // Final analysis of success page
+  await analyzeUserJourney(page, {
+    stage: 'order-confirmation',
+    userIntent: 'confirm successful purchase and next steps',
+    userContext: {
+      persona: 'relieved-customer',
+      emotionalState: 'satisfied',
+      nextAction: 'track-order'
+    },
+    criticalElements: ['confirmation-message', 'order-details', 'next-steps'],
+    analysisTypes: ['satisfaction-indicators', 'next-action-clarity']
+  });
+});</code></pre>
+                    </div>
+                    
+                    <div class="example-insights">
+                        <h4>Expected AI Insights:</h4>
+                        <ul>
+                            <li>🎯 Conversion optimization suggestions</li>
+                            <li>📱 Mobile usability improvements</li>
+                            <li>🔒 Security perception analysis</li>
+                            <li>♿ Accessibility compliance check</li>
+                            <li>📊 Form completion friction analysis</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Dashboard Analytics -->
+                <div class="example-card">
+                    <div class="example-header">
+                        <h3>SaaS Dashboard Analysis</h3>
+                        <div class="example-tags">
+                            <span class="tag">SaaS</span>
+                            <span class="tag">Dashboard</span>
+                            <span class="tag">Analytics</span>
+                        </div>
+                    </div>
+                    
+                    <div class="example-description">
+                        <p>Analyze complex dashboards for data comprehension, user workflow efficiency, and information hierarchy.</p>
+                    </div>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-javascript">// tests/dashboard-ux.spec.js
+import { test } from '@playwright/test';
+import { analyzeUserJourney } from 'jpglens/playwright';
+
+test('dashboard UX analysis for business users', async ({ page }) => {
+  await page.goto('/dashboard');
+  
+  // Login as business analyst
+  await page.fill('[data-testid="email"]', 'analyst@company.com');
+  await page.fill('[data-testid="password"]', 'password');
+  await page.click('[data-testid="login"]');
+  
+  // Wait for dashboard to load
+  await page.waitForSelector('[data-testid="dashboard-container"]');
+  
+  // Analyze main dashboard overview
+  await analyzeUserJourney(page, {
+    stage: 'dashboard-overview',
+    userIntent: 'quickly understand business performance',
+    userContext: {
+      persona: 'business-analyst',
+      expertise: 'expert',
+      device: 'desktop',
+      timeConstraint: 'daily-review',
+      dataLiteracy: 'high'
+    },
+    criticalElements: [
+      'kpi-cards',
+      'main-chart',
+      'data-filters',
+      'navigation-menu',
+      'date-selector'
+    ],
+    analysisTypes: [
+      'data-visualization',
+      'information-hierarchy',
+      'cognitive-load',
+      'workflow-efficiency'
+    ],
+    businessContext: {
+      industry: 'saas',
+      userRole: 'analyst',
+      primaryGoals: ['trend-identification', 'anomaly-detection', 'reporting']
+    }
+  });
+  
+  // Filter data by date range
+  await page.click('[data-testid="date-filter"]');
+  await page.click('[data-testid="last-30-days"]');
+  
+  // Navigate to detailed analytics
+  await page.click('[data-testid="revenue-chart"]');
+  
+  // Analyze detailed view
+  await analyzeUserJourney(page, {
+    stage: 'detailed-analytics',
+    userIntent: 'drill down into revenue metrics',
+    userContext: {
+      persona: 'data-analyst',
+      previousAction: 'clicked-revenue-chart',
+      currentFocus: 'revenue-trends',
+      urgency: 'high'
+    },
+    criticalElements: [
+      'detailed-chart',
+      'data-table',
+      'export-options',
+      'comparison-tools',
+      'breadcrumb-navigation'
+    ],
+    analysisTypes: [
+      'data-exploration',
+      'chart-readability',
+      'interaction-patterns',
+      'export-usability'
+    ]
+  });
+});</code></pre>
+                    </div>
+                </div>
+
+                <!-- Accessibility Testing -->
+                <div class="example-card">
+                    <div class="example-header">
+                        <h3>Accessibility-First Testing</h3>
+                        <div class="example-tags">
+                            <span class="tag">Accessibility</span>
+                            <span class="tag">WCAG</span>
+                            <span class="tag">Inclusive</span>
+                        </div>
+                    </div>
+                    
+                    <div class="example-description">
+                        <p>Comprehensive accessibility testing with AI insights on WCAG compliance, screen reader compatibility, and inclusive design.</p>
+                    </div>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-javascript">// tests/accessibility-comprehensive.spec.js
+import { test } from '@playwright/test';
+import { analyzeUserJourney } from 'jpglens/playwright';
+
+test('comprehensive accessibility analysis', async ({ page }) => {
+  await page.goto('/contact-form');
+  
+  // Analyze form accessibility for screen reader users
+  await analyzeUserJourney(page, {
+    stage: 'form-interaction',
+    userIntent: 'submit contact inquiry',
+    userContext: {
+      persona: 'screen-reader-user',
+      assistiveTechnology: 'NVDA',
+      device: 'desktop',
+      expertise: 'intermediate'
+    },
+    criticalElements: [
+      'form-labels',
+      'input-fields',
+      'error-messages',
+      'submit-button',
+      'form-instructions'
+    ],
+    analysisTypes: [
+      'wcag-compliance',
+      'screen-reader-compatibility',
+      'keyboard-navigation',
+      'focus-management',
+      'semantic-structure'
+    ],
+    accessibilityFocus: {
+      wcagLevel: 'AA',
+      priorities: ['perceivable', 'operable', 'understandable', 'robust'],
+      assistiveTech: ['screen-reader', 'keyboard-only', 'voice-control']
+    }
+  });
+  
+  // Test keyboard navigation
+  await page.keyboard.press('Tab'); // Focus first field
+  await page.keyboard.type('John Doe');
+  await page.keyboard.press('Tab'); // Move to email
+  await page.keyboard.type('john@example.com');
+  await page.keyboard.press('Tab'); // Move to message
+  await page.keyboard.type('Hello, I need help with accessibility.');
+  
+  // Analyze keyboard interaction flow
+  await analyzeUserJourney(page, {
+    stage: 'keyboard-navigation',
+    userIntent: 'complete form using only keyboard',
+    userContext: {
+      persona: 'motor-impaired-user',
+      inputMethod: 'keyboard-only',
+      device: 'desktop'
+    },
+    criticalElements: [
+      'focus-indicators',
+      'tab-order',
+      'skip-links',
+      'keyboard-shortcuts'
+    ],
+    analysisTypes: [
+      'keyboard-accessibility',
+      'focus-visibility',
+      'navigation-efficiency'
+    ]
+  });
+  
+  // Submit form and analyze feedback
+  await page.keyboard.press('Tab'); // Focus submit button
+  await page.keyboard.press('Enter'); // Submit
+  
+  // Analyze success/error feedback accessibility
+  await analyzeUserJourney(page, {
+    stage: 'form-feedback',
+    userIntent: 'understand form submission result',
+    userContext: {
+      persona: 'visually-impaired-user',
+      assistiveTechnology: 'screen-reader',
+      concernLevel: 'high'
+    },
+    criticalElements: [
+      'success-message',
+      'error-announcements',
+      'live-regions',
+      'status-indicators'
+    ],
+    analysisTypes: [
+      'feedback-accessibility',
+      'live-region-usage',
+      'error-handling',
+      'status-communication'
+    ]
+  });
+});</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cypress Examples -->
+    <section id="cypress-examples" class="examples-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>🌲 Cypress Examples</h2>
+                <p>Add AI-powered insights to your Cypress test suites</p>
+            </div>
+            
+            <div class="examples-grid">
+                <div class="example-card">
+                    <div class="example-header">
+                        <h3>User Onboarding Flow</h3>
+                        <div class="example-tags">
+                            <span class="tag">Onboarding</span>
+                            <span class="tag">User Experience</span>
+                        </div>
+                    </div>
+                    
+                    <div class="example-description">
+                        <p>Analyze user onboarding experience with AI insights on user engagement, clarity, and conversion.</p>
+                    </div>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-javascript">// cypress/e2e/onboarding-ux.cy.js
+import 'jpglens/cypress';
+
+describe('User Onboarding UX Analysis', () => {
+  it('analyzes complete onboarding experience', () => {
+    cy.visit('/signup');
+    
+    // Analyze landing/signup page
+    cy.analyzeUserExperience({
+      stage: 'signup-landing',
+      userIntent: 'understand value and sign up',
+      userContext: {
+        persona: 'first-time-visitor',
+        device: 'desktop',
+        trafficSource: 'organic-search',
+        motivationLevel: 'medium'
+      },
+      criticalElements: ['hero-section', 'signup-form', 'value-proposition'],
+      analysisTypes: ['first-impression', 'trust-building', 'conversion-optimization']
+    });
+    
+    // Fill signup form
+    cy.get('[data-cy="email"]').type('newuser@example.com');
+    cy.get('[data-cy="password"]').type('SecurePass123!');
+    cy.get('[data-cy="confirm-password"]').type('SecurePass123!');
+    cy.get('[data-cy="signup-button"]').click();
+    
+    // Analyze welcome screen
+    cy.url().should('include', '/welcome');
+    cy.analyzeUserExperience({
+      stage: 'welcome-screen',
+      userIntent: 'understand next steps and get started',
+      userContext: {
+        persona: 'new-user',
+        emotionalState: 'curious',
+        expectation: 'clear-guidance'
+      },
+      criticalElements: ['welcome-message', 'next-steps', 'progress-indicator'],
+      analysisTypes: ['onboarding-clarity', 'user-guidance', 'engagement']
+    });
+    
+    // Complete profile setup
+    cy.get('[data-cy="continue-setup"]').click();
+    cy.get('[data-cy="first-name"]').type('John');
+    cy.get('[data-cy="last-name"]').type('Doe');
+    cy.get('[data-cy="company"]').type('Acme Corp');
+    cy.get('[data-cy="role"]').select('Developer');
+    
+    // Analyze profile setup UX
+    cy.analyzeUserExperience({
+      stage: 'profile-setup',
+      userIntent: 'complete profile with minimal effort',
+      userContext: {
+        persona: 'busy-professional',
+        timeConstraint: 'limited',
+        completionMotivation: 'high'
+      },
+      criticalElements: ['form-fields', 'progress-bar', 'skip-options'],
+      analysisTypes: ['form-completion', 'progress-communication', 'optional-vs-required']
+    });
+    
+    cy.get('[data-cy="save-profile"]').click();
+    
+    // Analyze onboarding completion
+    cy.analyzeUserExperience({
+      stage: 'onboarding-complete',
+      userIntent: 'start using the product',
+      userContext: {
+        persona: 'activated-user',
+        emotionalState: 'accomplished',
+        nextGoal: 'explore-features'
+      },
+      criticalElements: ['success-message', 'main-dashboard', 'feature-highlights'],
+      analysisTypes: ['activation-success', 'feature-discovery', 'user-confidence']
+    });
+  });
+});</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Storybook Examples -->
+    <section id="storybook-examples" class="examples-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>📚 Storybook Examples</h2>
+                <p>Analyze component design and interaction patterns with AI insights</p>
+            </div>
+            
+            <div class="examples-grid">
+                <div class="example-card">
+                    <div class="example-header">
+                        <h3>Design System Component Analysis</h3>
+                        <div class="example-tags">
+                            <span class="tag">Design System</span>
+                            <span class="tag">Components</span>
+                        </div>
+                    </div>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-javascript">// Button.stories.js
+import { within, userEvent } from '@storybook/testing-library';
+import { analyzeComponentStates } from 'jpglens/storybook';
+
+export const InteractiveButton = {
+  args: {
+    variant: 'primary',
+    size: 'medium',
+    children: 'Click me'
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const button = canvas.getByRole('button');
+    
+    // Analyze default state
+    await analyzeComponentStates(canvas, {
+      component: 'Primary Button',
+      variant: 'primary',
+      states: ['default'],
+      context: 'design-system-review',
+      analysisTypes: ['visual-consistency', 'accessibility', 'brand-alignment']
+    });
+    
+    // Test hover state
+    await userEvent.hover(button);
+    await analyzeComponentStates(canvas, {
+      component: 'Primary Button',
+      states: ['hover'],
+      context: 'interaction-feedback',
+      analysisTypes: ['hover-feedback', 'visual-hierarchy']
+    });
+    
+    // Test focus state
+    await userEvent.tab();
+    await analyzeComponentStates(canvas, {
+      component: 'Primary Button',
+      states: ['focus'],
+      context: 'keyboard-navigation',
+      analysisTypes: ['focus-visibility', 'accessibility']
+    });
+    
+    // Test active state
+    await userEvent.click(button);
+    await analyzeComponentStates(canvas, {
+      component: 'Primary Button',
+      states: ['active', 'clicked'],
+      context: 'user-interaction',
+      analysisTypes: ['click-feedback', 'state-transitions']
+    });
+  }
+};</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advanced Examples -->
+    <section id="advanced-examples" class="examples-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>🚀 Advanced Examples</h2>
+                <p>Complex scenarios with custom prompts, multi-stage analysis, and advanced configurations</p>
+            </div>
+            
+            <div class="examples-grid">
+                <div class="example-card">
+                    <div class="example-header">
+                        <h3>Custom AI Prompts & Multi-Model Analysis</h3>
+                        <div class="example-tags">
+                            <span class="tag">Custom Prompts</span>
+                            <span class="tag">Multi-Model</span>
+                            <span class="tag">Advanced</span>
+                        </div>
+                    </div>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-javascript">// jpglens.config.js
+export default {
+  ai: {
+    provider: 'openrouter',
+    model: 'anthropic/claude-3-5-sonnet',
+    apiKey: process.env.JPGLENS_API_KEY
+  },
+  reporting: {
+    enabled: true,
+    format: 'html',
+    customPrompts: {
+      'fintech-compliance': `
+        Analyze this financial interface for:
+        1. Regulatory compliance indicators
+        2. Security trust signals
+        3. Data privacy transparency
+        4. Accessibility for users with disabilities
+        Focus on fintech industry standards and user trust.
+      `,
+      'mobile-first-ecommerce': `
+        Evaluate this mobile e-commerce interface for:
+        1. Thumb-friendly navigation
+        2. One-handed usability
+        3. Loading performance perception
+        4. Conversion optimization
+        Consider mobile-first shopping behaviors.
+      `
+    }
+  }
+};
+
+// tests/advanced-analysis.spec.js
+import { test } from '@playwright/test';
+import { analyzeUserJourney, analyzeCompleteJourney } from 'jpglens/playwright';
+
+test('fintech app compliance analysis', async ({ page }) => {
+  await page.goto('/banking/transfer');
+  
+  await analyzeUserJourney(page, {
+    stage: 'money-transfer-form',
+    userIntent: 'transfer money securely',
+    userContext: {
+      persona: 'security-conscious-user',
+      device: 'mobile',
+      transactionAmount: 'high-value',
+      regulatoryContext: 'PCI-DSS'
+    },
+    customPrompt: 'fintech-compliance',
+    analysisTypes: ['security-perception', 'compliance-indicators', 'trust-signals'],
+    industryContext: {
+      sector: 'fintech',
+      regulations: ['PCI-DSS', 'GDPR', 'PSD2'],
+      riskLevel: 'high'
+    }
+  });
+});
+
+// Multi-stage journey analysis
+const userJourney = {
+  name: 'complete-loan-application',
+  persona: 'first-time-borrower',
+  device: 'desktop',
+  stages: [
+    {
+      name: 'loan-calculator',
+      url: '/loans/calculator',
+      userGoal: 'understand loan terms',
+      analysisPrompt: 'Focus on financial clarity and trust building'
+    },
+    {
+      name: 'application-form',
+      url: '/loans/apply',
+      userGoal: 'complete application efficiently',
+      analysisPrompt: 'Analyze form complexity and data sensitivity handling'
+    },
+    {
+      name: 'document-upload',
+      url: '/loans/documents',
+      userGoal: 'upload required documents',
+      analysisPrompt: 'Evaluate security perception and upload UX'
+    },
+    {
+      name: 'application-review',
+      url: '/loans/review',
+      userGoal: 'review and submit application',
+      analysisPrompt: 'Focus on final decision confidence and security'
+    }
+  ]
+};
+
+test('complete loan journey analysis', async ({ page }) => {
+  const results = await analyzeCompleteJourney(userJourney, {
+    generateReport: true,
+    compareStages: true,
+    identifyDropoffRisks: true
+  });
+  
+  // Results contain comprehensive journey analysis
+  console.log('Journey Analysis:', results.summary);
+  console.log('Critical Issues:', results.criticalIssues);
+  console.log('Recommendations:', results.recommendations);
+});</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Example Repository -->
+    <section class="example-repository">
+        <div class="container">
+            <div class="repo-content">
+                <h2>Complete Example Repository</h2>
+                <p>Explore our comprehensive example repository with real-world scenarios, best practices, and advanced configurations.</p>
+                
+                <div class="repo-features">
+                    <div class="feature-grid">
+                        <div class="feature-item">
+                            <span class="feature-icon">🏪</span>
+                            <h3>E-commerce Examples</h3>
+                            <p>Complete shopping flows, product pages, and checkout optimization</p>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">💼</span>
+                            <h3>SaaS Applications</h3>
+                            <p>Dashboard analysis, onboarding flows, and feature adoption</p>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🏦</span>
+                            <h3>Financial Services</h3>
+                            <p>Security analysis, compliance checking, and trust optimization</p>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">♿</span>
+                            <h3>Accessibility Examples</h3>
+                            <p>WCAG compliance, screen reader testing, and inclusive design</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="repo-actions">
+                    <a href="https://github.com/tahabahrami/jpglens/tree/main/examples" class="btn btn-primary btn-large" target="_blank">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                        Browse Examples
+                    </a>
+                    <a href="/docs/" class="btn btn-secondary btn-large">
+                        Read Documentation
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="brand-link">
+                        <span class="brand-icon">🔍</span>
+                        <span class="brand-text">jpglens</span>
+                    </div>
+                    <p class="footer-tagline">See your interfaces through the lens of intelligence</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Product</h4>
+                        <a href="/docs/">Documentation</a>
+                        <a href="/examples/">Examples</a>
+                        <a href="/comparison/">Comparison</a>
+                        <a href="https://github.com/tahabahrami/jpglens/releases">Changelog</a>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4>Community</h4>
+                        <a href="https://github.com/tahabahrami/jpglens" target="_blank">GitHub</a>
+                        <a href="https://www.npmjs.com/package/jpglens" target="_blank">npm</a>
+                        <a href="https://github.com/tahabahrami/jpglens/issues" target="_blank">Issues</a>
+                        <a href="https://github.com/tahabahrami/jpglens/blob/main/CONTRIBUTING.md" target="_blank">Contributing</a>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4>Resources</h4>
+                        <a href="/docs/getting-started/">Getting Started</a>
+                        <a href="/docs/api/">API Reference</a>
+                        <a href="https://github.com/tahabahrami/jpglens/blob/main/SECURITY.md" target="_blank">Security</a>
+                        <a href="https://github.com/tahabahrami/jpglens/blob/main/LICENSE" target="_blank">License</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 jpglens. Created by <a href="https://github.com/tahabahrami" target="_blank">Taha Bahrami</a>. Licensed under MIT.</p>
+                <p class="footer-love">Built with ❤️ for the developer community</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script type="module" src="/src/scripts/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jpglens vs Competitors - AI-Powered UI Testing Comparison</title>
+    <meta name="description" content="Compare jpglens with other visual testing and UI automation tools. See how AI-powered testing stacks up against traditional solutions.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/src/styles/main.css">
+    <link rel="stylesheet" href="/src/styles/comparison.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="/" class="brand-link">
+                    <span class="brand-icon">🔍</span>
+                    <span class="brand-text">jpglens</span>
+                </a>
+            </div>
+            
+            <div class="nav-menu">
+                <a href="/#features" class="nav-link">Features</a>
+                <a href="/docs/" class="nav-link">Docs</a>
+                <a href="/examples/" class="nav-link">Examples</a>
+                <a href="/comparison/" class="nav-link active">Comparison</a>
+                <a href="/#community" class="nav-link">Community</a>
+                <a href="https://github.com/tahabahrami/jpglens" class="nav-link github-link" target="_blank">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    GitHub
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="comparison-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>How jpglens Compares</h1>
+                <p class="hero-subtitle">See how AI-powered UI testing stacks up against traditional visual testing and automation tools.</p>
+                
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">🧠</div>
+                        <div class="stat-label">AI-Powered</div>
+                        <div class="stat-desc">Context-aware analysis</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">5+</div>
+                        <div class="stat-label">Frameworks</div>
+                        <div class="stat-desc">Universal integration</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">MIT</div>
+                        <div class="stat-label">Open Source</div>
+                        <div class="stat-desc">Free to use</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Comparison Table -->
+    <section class="quick-comparison">
+        <div class="container">
+            <h2>Quick Comparison</h2>
+            <p>At a glance comparison of jpglens with popular testing tools</p>
+            
+            <div class="comparison-table-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th class="jpglens-col">
+                                <div class="tool-header">
+                                    <span class="tool-icon">🔍</span>
+                                    <span>jpglens</span>
+                                </div>
+                            </th>
+                            <th>Percy</th>
+                            <th>Applitools</th>
+                            <th>Chromatic</th>
+                            <th>Playwright</th>
+                            <th>Cypress</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="feature-name">AI-Powered Analysis</td>
+                            <td class="jpglens-col"><span class="check">✅</span></td>
+                            <td><span class="cross">❌</span></td>
+                            <td><span class="partial">🔶</span></td>
+                            <td><span class="cross">❌</span></td>
+                            <td><span class="cross">❌</span></td>
+                            <td><span class="cross">❌</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">User Context Understanding</td>
+                            <td class="jpglens-col"><span class="check">✅</span></td>
+                            <td><span class="cross">❌</span></td>
+                            <td><span class="cross">❌</span></td>
+                            <td><span class="cross">❌</span></td>
+                            <td><span class="cross">❌</span></td>
+                            <td><span class="cross">❌</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Multi-Framework Support</td>
+                            <td class="jpglens-col"><span class="check">✅</span></td>
+                            <td><span class="check">✅</span></td>
+                            <td><span class="check">✅</span></td>
+                            <td><span class="partial">🔶</span></td>
+                            <td><span class="partial">🔶</span></td>
+                            <td><span class="partial">🔶</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Visual Regression Testing</td>
+                            <td class="jpglens-col"><span class="partial">🔶</span></td>
+                            <td><span class="check">✅</span></td>
+                            <td><span class="check">✅</span></td>
+                            <td><span class="check">✅</span></td>
+                            <td><span class="check">✅</span></td>
+                            <td><span class="check">✅</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Accessibility Testing</td>
+                            <td class="jpglens-col"><span class="check">✅</span></td>
+                            <td><span class="cross">❌</span></td>
+                            <td><span class="partial">🔶</span></td>
+                            <td><span class="cross">❌</span></td>
+                            <td><span class="partial">🔶</span></td>
+                            <td><span class="partial">🔶</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">UX Insights</td>
+                            <td class="jpglens-col"><span class="check">✅</span></td>
+                            <td><span class="cross">❌</span></td>
+                            <td><span class="cross">❌</span></td>
+                            <td><span class="cross">❌</span></td>
+                            <td><span class="cross">❌</span></td>
+                            <td><span class="cross">❌</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Open Source</td>
+                            <td class="jpglens-col"><span class="check">✅</span></td>
+                            <td><span class="cross">❌</span></td>
+                            <td><span class="cross">❌</span></td>
+                            <td><span class="cross">❌</span></td>
+                            <td><span class="check">✅</span></td>
+                            <td><span class="check">✅</span></td>
+                        </tr>
+                        <tr>
+                            <td class="feature-name">Cloud Infrastructure</td>
+                            <td class="jpglens-col"><span class="cross">❌</span></td>
+                            <td><span class="check">✅</span></td>
+                            <td><span class="check">✅</span></td>
+                            <td><span class="check">✅</span></td>
+                            <td><span class="cross">❌</span></td>
+                            <td><span class="check">✅</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="legend">
+                <div class="legend-item">
+                    <span class="check">✅</span>
+                    <span>Full Support</span>
+                </div>
+                <div class="legend-item">
+                    <span class="partial">🔶</span>
+                    <span>Partial Support</span>
+                </div>
+                <div class="legend-item">
+                    <span class="cross">❌</span>
+                    <span>Not Available</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Comparisons -->
+    <section class="detailed-comparisons">
+        <div class="container">
+            <h2>Detailed Comparisons</h2>
+            
+            <!-- jpglens vs Percy -->
+            <div class="comparison-card">
+                <div class="comparison-header">
+                    <div class="vs-tools">
+                        <div class="tool">
+                            <span class="tool-icon">🔍</span>
+                            <span class="tool-name">jpglens</span>
+                        </div>
+                        <span class="vs">vs</span>
+                        <div class="tool">
+                            <span class="tool-icon">📸</span>
+                            <span class="tool-name">Percy</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="comparison-content">
+                    <div class="comparison-grid">
+                        <div class="comparison-section">
+                            <h3>jpglens Advantages</h3>
+                            <ul class="advantage-list">
+                                <li>🧠 <strong>AI-Powered Insights:</strong> Understands user context and provides actionable UX recommendations</li>
+                                <li>♿ <strong>Built-in Accessibility:</strong> WCAG compliance checking with contextual suggestions</li>
+                                <li>🗺️ <strong>User Journey Mapping:</strong> Analyzes complete user workflows, not just isolated screenshots</li>
+                                <li>💰 <strong>Open Source:</strong> Free to use with full source code access</li>
+                                <li>🎭 <strong>Universal Integration:</strong> Works with 5+ testing frameworks out of the box</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="comparison-section">
+                            <h3>Percy Advantages</h3>
+                            <ul class="advantage-list">
+                                <li>☁️ <strong>Cloud Infrastructure:</strong> Managed visual testing service</li>
+                                <li>📊 <strong>Visual Regression:</strong> Mature visual diff detection algorithms</li>
+                                <li>🔧 <strong>Enterprise Features:</strong> Advanced branching, parallel testing, and team management</li>
+                                <li>📈 <strong>Established Ecosystem:</strong> Large user base and extensive documentation</li>
+                                <li>🎯 <strong>Focused Scope:</strong> Specialized purely for visual testing</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="use-case-recommendation">
+                        <h4>When to choose jpglens:</h4>
+                        <p>Choose jpglens when you want AI-powered insights into user experience, accessibility compliance, and comprehensive UI analysis beyond just visual regression. Perfect for teams prioritizing UX quality and accessibility.</p>
+                        
+                        <h4>When to choose Percy:</h4>
+                        <p>Choose Percy for pure visual regression testing with enterprise-grade cloud infrastructure, especially if you need managed hosting and have budget for a commercial solution.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- jpglens vs Applitools -->
+            <div class="comparison-card">
+                <div class="comparison-header">
+                    <div class="vs-tools">
+                        <div class="tool">
+                            <span class="tool-icon">🔍</span>
+                            <span class="tool-name">jpglens</span>
+                        </div>
+                        <span class="vs">vs</span>
+                        <div class="tool">
+                            <span class="tool-icon">👁️</span>
+                            <span class="tool-name">Applitools</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="comparison-content">
+                    <div class="comparison-grid">
+                        <div class="comparison-section">
+                            <h3>jpglens Advantages</h3>
+                            <ul class="advantage-list">
+                                <li>🎯 <strong>User-Centric Analysis:</strong> Focuses on user experience and journey context</li>
+                                <li>💰 <strong>Cost-Effective:</strong> Open source with no per-test pricing</li>
+                                <li>🔧 <strong>Customizable:</strong> Full control over prompts, analysis types, and reporting</li>
+                                <li>📝 <strong>Rich Reporting:</strong> Generates detailed markdown, HTML, and JSON reports</li>
+                                <li>🚀 <strong>Local Development:</strong> Run everything locally without cloud dependencies</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="comparison-section">
+                            <h3>Applitools Advantages</h3>
+                            <ul class="advantage-list">
+                                <li>🤖 <strong>Visual AI:</strong> Advanced AI algorithms for visual comparison</li>
+                                <li>☁️ <strong>Cloud Platform:</strong> Comprehensive testing cloud with device labs</li>
+                                <li>📱 <strong>Cross-Browser Testing:</strong> Extensive browser and device coverage</li>
+                                <li>🏢 <strong>Enterprise Ready:</strong> Advanced team collaboration and compliance features</li>
+                                <li>📊 <strong>Analytics Dashboard:</strong> Comprehensive test analytics and insights</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="use-case-recommendation">
+                        <h4>When to choose jpglens:</h4>
+                        <p>Choose jpglens for comprehensive UX analysis, accessibility testing, and when you want full control over your testing infrastructure without per-test costs.</p>
+                        
+                        <h4>When to choose Applitools:</h4>
+                        <p>Choose Applitools for enterprise-scale visual testing with managed cloud infrastructure, extensive cross-browser coverage, and when budget allows for premium features.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- jpglens vs Traditional Testing -->
+            <div class="comparison-card">
+                <div class="comparison-header">
+                    <div class="vs-tools">
+                        <div class="tool">
+                            <span class="tool-icon">🔍</span>
+                            <span class="tool-name">jpglens</span>
+                        </div>
+                        <span class="vs">vs</span>
+                        <div class="tool">
+                            <span class="tool-icon">🎭</span>
+                            <span class="tool-name">Traditional Testing</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="comparison-content">
+                    <div class="comparison-grid">
+                        <div class="comparison-section">
+                            <h3>jpglens Advantages</h3>
+                            <ul class="advantage-list">
+                                <li>🧠 <strong>AI Understanding:</strong> Interprets UI context like a human user would</li>
+                                <li>🚀 <strong>Faster Insights:</strong> Immediate feedback on UX issues without manual review</li>
+                                <li>♿ <strong>Accessibility Built-in:</strong> Automatic WCAG compliance checking</li>
+                                <li>📊 <strong>Comprehensive Analysis:</strong> Tests usability, accessibility, and visual design together</li>
+                                <li>🎯 <strong>User-Focused:</strong> Evaluates from real user perspective, not just technical functionality</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="comparison-section">
+                            <h3>Traditional Testing Advantages</h3>
+                            <ul class="advantage-list">
+                                <li>🎯 <strong>Precise Control:</strong> Exact specification of what to test</li>
+                                <li>🔄 <strong>Deterministic:</strong> Consistent, repeatable results</li>
+                                <li>⚡ <strong>Fast Execution:</strong> No AI processing overhead</li>
+                                <li>🛠️ <strong>Mature Tooling:</strong> Extensive ecosystem and community</li>
+                                <li>💰 <strong>No AI Costs:</strong> No API costs for AI model usage</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="use-case-recommendation">
+                        <h4>When to choose jpglens:</h4>
+                        <p>Choose jpglens when you want to go beyond functional testing to understand user experience, accessibility, and usability. Perfect for modern applications where UX quality is critical.</p>
+                        
+                        <h4>When to choose Traditional Testing:</h4>
+                        <p>Choose traditional testing for precise functional validation, when you need deterministic results, or when working with legacy systems where UX analysis isn't the priority.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Migration Guide -->
+    <section class="migration-guide">
+        <div class="container">
+            <h2>Migration Guide</h2>
+            <p>Switching from another tool? Here's how to get started with jpglens:</p>
+            
+            <div class="migration-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="from-percy">From Percy</button>
+                    <button class="tab-button" data-tab="from-applitools">From Applitools</button>
+                    <button class="tab-button" data-tab="from-playwright">From Playwright</button>
+                </div>
+                
+                <div class="tab-content">
+                    <div class="tab-pane active" id="from-percy">
+                        <div class="migration-steps">
+                            <h3>Migrating from Percy</h3>
+                            
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h4>Install jpglens</h4>
+                                    <pre><code class="language-bash">npm install --save-dev jpglens</code></pre>
+                                </div>
+                            </div>
+                            
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h4>Replace Percy screenshots with AI analysis</h4>
+                                    <div class="code-comparison">
+                                        <div class="before">
+                                            <h5>Before (Percy)</h5>
+                                            <pre><code class="language-javascript">// Percy screenshot
+await percySnapshot(page, 'Checkout Page');</code></pre>
+                                        </div>
+                                        <div class="after">
+                                            <h5>After (jpglens)</h5>
+                                            <pre><code class="language-javascript">// jpglens AI analysis
+import { analyzeUserJourney } from 'jpglens/playwright';
+
+await analyzeUserJourney(page, {
+  stage: 'checkout',
+  userIntent: 'complete purchase',
+  userContext: { persona: 'returning-customer' }
+});</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h4>Configure reporting</h4>
+                                    <pre><code class="language-javascript">// jpglens.config.js
+export default {
+  reporting: {
+    enabled: true,
+    format: 'html', // vs Percy's dashboard
+    outputDir: './jpglens-reports'
+  }
+};</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane" id="from-applitools">
+                        <div class="migration-steps">
+                            <h3>Migrating from Applitools</h3>
+                            
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h4>Install jpglens</h4>
+                                    <pre><code class="language-bash">npm install --save-dev jpglens</code></pre>
+                                </div>
+                            </div>
+                            
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h4>Replace Eyes with jpglens analysis</h4>
+                                    <div class="code-comparison">
+                                        <div class="before">
+                                            <h5>Before (Applitools)</h5>
+                                            <pre><code class="language-javascript">// Applitools Eyes
+await eyes.check('Checkout', Target.window());</code></pre>
+                                        </div>
+                                        <div class="after">
+                                            <h5>After (jpglens)</h5>
+                                            <pre><code class="language-javascript">// jpglens comprehensive analysis
+import { analyzeUserJourney } from 'jpglens/playwright';
+
+await analyzeUserJourney(page, {
+  stage: 'checkout',
+  userIntent: 'complete purchase',
+  analysisTypes: ['visual-design', 'usability', 'accessibility']
+});</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane" id="from-playwright">
+                        <div class="migration-steps">
+                            <h3>Enhancing Playwright with jpglens</h3>
+                            
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h4>Add jpglens to existing Playwright tests</h4>
+                                    <pre><code class="language-bash">npm install --save-dev jpglens</code></pre>
+                                </div>
+                            </div>
+                            
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h4>Enhance tests with AI analysis</h4>
+                                    <div class="code-comparison">
+                                        <div class="before">
+                                            <h5>Before (Playwright only)</h5>
+                                            <pre><code class="language-javascript">test('checkout flow', async ({ page }) => {
+  await page.goto('/checkout');
+  await page.fill('#email', 'user@example.com');
+  await page.click('#submit');
+  await expect(page.locator('.success')).toBeVisible();
+});</code></pre>
+                                        </div>
+                                        <div class="after">
+                                            <h5>After (Playwright + jpglens)</h5>
+                                            <pre><code class="language-javascript">import { analyzeUserJourney } from 'jpglens/playwright';
+
+test('checkout flow with UX analysis', async ({ page }) => {
+  await page.goto('/checkout');
+  await page.fill('#email', 'user@example.com');
+  
+  // Add AI-powered UX analysis
+  await analyzeUserJourney(page, {
+    stage: 'form-completion',
+    userIntent: 'provide contact information',
+    userContext: { device: 'mobile', expertise: 'novice' }
+  });
+  
+  await page.click('#submit');
+  await expect(page.locator('.success')).toBeVisible();
+});</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="comparison-cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to try jpglens?</h2>
+                <p>Experience AI-powered UI testing and see the difference for yourself.</p>
+                
+                <div class="cta-actions">
+                    <a href="/docs/" class="btn btn-primary btn-large">
+                        Get Started
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14m-7-7 7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/tahabahrami/jpglens" class="btn btn-secondary btn-large" target="_blank">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                        View on GitHub
+                    </a>
+                </div>
+                
+                <div class="cta-note">
+                    <p>⭐ <strong>Open Source & Free:</strong> jpglens is MIT licensed and free to use in any project</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="brand-link">
+                        <span class="brand-icon">🔍</span>
+                        <span class="brand-text">jpglens</span>
+                    </div>
+                    <p class="footer-tagline">See your interfaces through the lens of intelligence</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Product</h4>
+                        <a href="/docs/">Documentation</a>
+                        <a href="/examples/">Examples</a>
+                        <a href="/comparison/">Comparison</a>
+                        <a href="https://github.com/tahabahrami/jpglens/releases">Changelog</a>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4>Community</h4>
+                        <a href="https://github.com/tahabahrami/jpglens" target="_blank">GitHub</a>
+                        <a href="https://www.npmjs.com/package/jpglens" target="_blank">npm</a>
+                        <a href="https://github.com/tahabahrami/jpglens/issues" target="_blank">Issues</a>
+                        <a href="https://github.com/tahabahrami/jpglens/blob/main/CONTRIBUTING.md" target="_blank">Contributing</a>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4>Resources</h4>
+                        <a href="/docs/getting-started/">Getting Started</a>
+                        <a href="/docs/api/">API Reference</a>
+                        <a href="https://github.com/tahabahrami/jpglens/blob/main/SECURITY.md" target="_blank">Security</a>
+                        <a href="https://github.com/tahabahrami/jpglens/blob/main/LICENSE" target="_blank">License</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 jpglens. Created by <a href="https://github.com/tahabahrami" target="_blank">Taha Bahrami</a>. Licensed under MIT.</p>
+                <p class="footer-love">Built with ❤️ for the developer community</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script type="module" src="/src/scripts/main.js"></script>
+</body>
+</html>

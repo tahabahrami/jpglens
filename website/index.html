@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jpglens - Universal AI-Powered UI Testing</title>
+    <meta name="description" content="Revolutionary AI-powered testing tool that analyzes your user interfaces through the context of real user journeys. Test not just functionality, but user experience.">
+    <meta name="keywords" content="AI testing, UI testing, Playwright, Cypress, user experience, accessibility, visual testing">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jpglens.dev">
+    <meta property="og:title" content="jpglens - Universal AI-Powered UI Testing">
+    <meta property="og:description" content="See your interfaces through the lens of intelligence. Revolutionary AI testing for modern web applications.">
+    <meta property="og:image" content="https://jpglens.dev/og-image.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://jpglens.dev">
+    <meta property="twitter:title" content="jpglens - Universal AI-Powered UI Testing">
+    <meta property="twitter:description" content="See your interfaces through the lens of intelligence. Revolutionary AI testing for modern web applications.">
+    <meta property="twitter:image" content="https://jpglens.dev/og-image.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/src/styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="/" class="brand-link">
+                    <span class="brand-icon">🔍</span>
+                    <span class="brand-text">jpglens</span>
+                </a>
+            </div>
+            
+            <div class="nav-menu" id="nav-menu">
+                <a href="#features" class="nav-link">Features</a>
+                <a href="/docs/" class="nav-link">Docs</a>
+                <a href="/mcp/" class="nav-link mcp-highlight">MCP</a>
+                <a href="/examples/" class="nav-link">Examples</a>
+                <a href="/comparison/" class="nav-link">Comparison</a>
+                <a href="#community" class="nav-link">Community</a>
+                <a href="https://github.com/tahabahrami/jpglens" class="nav-link github-link" target="_blank">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    GitHub
+                </a>
+            </div>
+            
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="badge-icon">🚀</span>
+                    <span>Now available on npm</span>
+                </div>
+                
+                <h1 class="hero-title">
+                    Universal AI-Powered
+                    <span class="gradient-text">UI Testing</span>
+                </h1>
+                
+                <p class="hero-description">
+                    See your interfaces through the lens of intelligence. jpglens analyzes your UI through the context of real user journeys, testing not just functionality, but user experience.
+                </p>
+                
+                <div class="hero-actions">
+                    <a href="#get-started" class="btn btn-primary btn-large">
+                        Get Started
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14m-7-7 7 7-7 7"/>
+                        </svg>
+                    </a>
+                    <a href="/docs/" class="btn btn-secondary btn-large">
+                        Read Docs
+                    </a>
+                </div>
+                
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">1.0.1</div>
+                        <div class="stat-label">Latest Version</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">5+</div>
+                        <div class="stat-label">Frameworks</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">MIT</div>
+                        <div class="stat-label">License</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-visual">
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <div class="terminal-buttons">
+                            <span class="terminal-button red"></span>
+                            <span class="terminal-button yellow"></span>
+                            <span class="terminal-button green"></span>
+                        </div>
+                        <div class="terminal-title">jpglens-analysis.js</div>
+                    </div>
+                    <div class="terminal-content">
+                        <div class="code-line">
+                            <span class="code-comment">// Analyze with AI-powered insights</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="code-keyword">import</span> { <span class="code-function">analyzeUserJourney</span> } <span class="code-keyword">from</span> <span class="code-string">'jpglens/playwright'</span>;
+                        </div>
+                        <div class="code-line"></div>
+                        <div class="code-line">
+                            <span class="code-keyword">await</span> <span class="code-function">analyzeUserJourney</span>(page, {
+                        </div>
+                        <div class="code-line code-indent">
+                            stage: <span class="code-string">'checkout-flow'</span>,
+                        </div>
+                        <div class="code-line code-indent">
+                            userIntent: <span class="code-string">'complete purchase'</span>,
+                        </div>
+                        <div class="code-line code-indent">
+                            userContext: {
+                        </div>
+                        <div class="code-line code-indent2">
+                            persona: <span class="code-string">'mobile-shopper'</span>,
+                        </div>
+                        <div class="code-line code-indent2">
+                            device: <span class="code-string">'mobile'</span>
+                        </div>
+                        <div class="code-line code-indent">
+                            }
+                        </div>
+                        <div class="code-line">
+                            });
+                        </div>
+                        <div class="code-line"></div>
+                        <div class="code-line">
+                            <span class="code-comment">// ✅ UX Score: 8.2/10</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="code-comment">// 🚨 Found 2 critical issues</span>
+                        </div>
+                        <div class="code-line">
+                            <span class="code-comment">// 💡 Generated 5 recommendations</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation Section -->
+    <section id="get-started" class="installation">
+        <div class="container">
+            <div class="installation-content">
+                <h2>Get Started in Seconds</h2>
+                <p>Install jpglens and start analyzing your UI with AI-powered insights.</p>
+                
+                <div class="install-tabs">
+                    <div class="tab-buttons">
+                        <button class="tab-button active" data-tab="npm">npm</button>
+                        <button class="tab-button" data-tab="yarn">yarn</button>
+                        <button class="tab-button" data-tab="pnpm">pnpm</button>
+                    </div>
+                    
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="npm">
+                            <pre><code class="language-bash">npm install --save-dev jpglens</code></pre>
+                        </div>
+                        <div class="tab-pane" id="yarn">
+                            <pre><code class="language-bash">yarn add --dev jpglens</code></pre>
+                        </div>
+                        <div class="tab-pane" id="pnpm">
+                            <pre><code class="language-bash">pnpm add -D jpglens</code></pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="quick-links">
+                    <a href="https://www.npmjs.com/package/jpglens" class="quick-link" target="_blank">
+                        <span class="quick-link-icon">📦</span>
+                        <span>View on npm</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/tahabahrami/jpglens" class="quick-link" target="_blank">
+                        <span class="quick-link-icon">⭐</span>
+                        <span>Star on GitHub</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why jpglens?</h2>
+                <p>Traditional testing tools check if buttons work. jpglens understands if they're intuitive, accessible, and delightful to use.</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3>AI-Powered Analysis</h3>
+                    <p>Advanced AI models analyze your UI through the lens of real user behavior, identifying usability issues humans might miss.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🎭</div>
+                    <h3>Universal Framework Support</h3>
+                    <p>Works seamlessly with Playwright, Cypress, Selenium, Storybook, and Testing Library. One tool for all your testing needs.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🗺️</div>
+                    <h3>User Journey Mapping</h3>
+                    <p>Analyze complete user workflows, not just isolated components. Understand how users flow through your application.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">♿</div>
+                    <h3>Accessibility First</h3>
+                    <p>Built-in WCAG compliance checking with contextual recommendations for improving accessibility across all user types.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Rich Reporting</h3>
+                    <p>Generate beautiful reports in Markdown, HTML, or JSON. Customizable templates and automated insights for your team.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔧</div>
+                    <h3>Highly Configurable</h3>
+                    <p>Customize analysis types, user personas, prompts, and output formats. Adapt jpglens to your specific needs.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Code Example Section -->
+    <section class="code-example">
+        <div class="container">
+            <div class="example-content">
+                <div class="example-text">
+                    <h2>See It In Action</h2>
+                    <p>jpglens integrates naturally with your existing tests, adding AI-powered insights without changing your workflow.</p>
+                    
+                    <div class="example-features">
+                        <div class="example-feature">
+                            <span class="feature-check">✅</span>
+                            <span>Contextual user analysis</span>
+                        </div>
+                        <div class="example-feature">
+                            <span class="feature-check">✅</span>
+                            <span>Accessibility compliance</span>
+                        </div>
+                        <div class="example-feature">
+                            <span class="feature-check">✅</span>
+                            <span>Performance insights</span>
+                        </div>
+                        <div class="example-feature">
+                            <span class="feature-check">✅</span>
+                            <span>Actionable recommendations</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="example-code">
+                    <div class="code-tabs">
+                        <button class="code-tab active" data-code="playwright">Playwright</button>
+                        <button class="code-tab" data-code="cypress">Cypress</button>
+                        <button class="code-tab" data-code="storybook">Storybook</button>
+                    </div>
+                    
+                    <div class="code-content">
+                        <div class="code-pane active" id="playwright">
+                            <pre><code class="language-javascript">// tests/checkout.spec.js
+import { test } from '@playwright/test';
+import { analyzeUserJourney } from 'jpglens/playwright';
+
+test('user can complete purchase', async ({ page }) => {
+  await page.goto('/checkout');
+  
+  // Standard Playwright actions
+  await page.fill('[data-testid="email"]', 'user@example.com');
+  await page.fill('[data-testid="address"]', '123 Main St');
+  
+  // 🔍 AI Analysis - Understands user context
+  await analyzeUserJourney(page, {
+    stage: 'checkout-completion',
+    userIntent: 'complete purchase securely',
+    userContext: {
+      persona: 'first-time-buyer',
+      device: 'mobile',
+      urgency: 'high'
+    },
+    criticalElements: ['payment-form', 'security-badges', 'total-price']
+  });
+  
+  await page.click('[data-testid="place-order"]');
+});</code></pre>
+                        </div>
+                        
+                        <div class="code-pane" id="cypress">
+                            <pre><code class="language-javascript">// cypress/e2e/dashboard.cy.js
+import 'jpglens/cypress';
+
+describe('Dashboard Analytics', () => {
+  it('user analyzes business metrics', () => {
+    cy.visit('/dashboard');
+    cy.get('[data-cy="date-filter"]').select('last-30-days');
+    
+    // 🔍 AI Analysis with Cypress
+    cy.analyzeUserExperience({
+      journey: 'data-analysis-workflow',
+      userType: 'business-analyst',
+      expectation: 'quickly understand key metrics',
+      context: 'daily business review preparation'
+    });
+  });
+});</code></pre>
+                        </div>
+                        
+                        <div class="code-pane" id="storybook">
+                            <pre><code class="language-javascript">// Button.stories.js
+import { analyzeComponentStates } from 'jpglens/storybook';
+
+export const InteractiveStates = {
+  args: { variant: 'primary' },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const button = canvas.getByRole('button');
+    
+    // Test different states
+    await userEvent.hover(button);
+    await userEvent.focus(button);
+    
+    // 🔍 AI Analysis of component states
+    await analyzeComponentStates(canvas, {
+      component: 'Primary Button',
+      states: ['default', 'hover', 'focus', 'active'],
+      context: 'critical call-to-action in checkout flow',
+      designSystem: 'company-design-system'
+    });
+  }
+};</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MCP Integration Section -->
+    <section class="mcp-integration-section">
+        <div class="container">
+            <div class="mcp-integration-content">
+                <div class="mcp-badge">
+                    <span>⚡</span>
+                    <span>MCP v6 Integration</span>
+                    <span style="background: #10b981; color: white; padding: 2px 8px; border-radius: 12px; font-size: 12px; font-weight: 600;">Production Ready</span>
+                </div>
+                
+                <h2>AI Agents with Vision</h2>
+                <p>Transform AI agents into UI testing experts with jpglens MCP integration. Give your AI agents the power to "see" and analyze user interfaces through standardized Model Context Protocol.</p>
+                
+                <div class="mcp-features-grid">
+                    <div class="mcp-feature">
+                        <span class="mcp-feature-icon">🎭</span>
+                        <h3>8 MCP Tools</h3>
+                        <p>Complete v6 toolset for comprehensive UI analysis</p>
+                    </div>
+                    <div class="mcp-feature">
+                        <span class="mcp-feature-icon">🧠</span>
+                        <h3>AI Agent Vision</h3>
+                        <p>Enable agents to understand UI context and user experience</p>
+                    </div>
+                    <div class="mcp-feature">
+                        <span class="mcp-feature-icon">⚡</span>
+                        <h3>Dual Transport</h3>
+                        <p>Stdio + SSE bridge support for any architecture</p>
+                    </div>
+                    <div class="mcp-feature">
+                        <span class="mcp-feature-icon">🏭</span>
+                        <h3>Production Grade</h3>
+                        <p>100% test coverage, Docker ready, enterprise validated</p>
+                    </div>
+                </div>
+                
+                <div class="mcp-cta-buttons">
+                    <a href="/mcp/" class="mcp-cta-button primary">
+                        <span>🚀</span>
+                        Explore MCP Integration
+                    </a>
+                    <a href="#" class="mcp-cta-button secondary" onclick="copyInstallCommand(); return false;">
+                        <span>📦</span>
+                        Install MCP Server
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section id="community" class="community">
+        <div class="container">
+            <div class="community-content">
+                <h2>Join the Community</h2>
+                <p>jpglens is open source and thrives on community contributions. Help us build the future of AI-powered testing.</p>
+                
+                <div class="community-grid">
+                    <a href="https://github.com/tahabahrami/jpglens" class="community-card" target="_blank">
+                        <div class="community-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </div>
+                        <h3>Star on GitHub</h3>
+                        <p>Give us a ⭐ if jpglens helps your testing workflow</p>
+                        <span class="community-link">github.com/tahabahrami/jpglens →</span>
+                    </a>
+                    
+                    <a href="https://www.npmjs.com/package/jpglens" class="community-card" target="_blank">
+                        <div class="community-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M0 7.334v8.666l6.666 3.333v-8.666l-6.666-3.333zm6.667-3.334l6.666 3.334 6.667-3.334-6.667-3.333-6.666 3.333zm13.333 3.334l6.667 3.333v8.666l-6.667-3.333v-8.666z"/>
+                            </svg>
+                        </div>
+                        <h3>npm Package</h3>
+                        <p>Install jpglens from the npm registry</p>
+                        <span class="community-link">npmjs.com/package/jpglens →</span>
+                    </a>
+                    
+                    <a href="https://github.com/tahabahrami/jpglens/issues" class="community-card" target="_blank">
+                        <div class="community-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 6v6l4 2"/>
+                            </svg>
+                        </div>
+                        <h3>Report Issues</h3>
+                        <p>Found a bug or have a feature request?</p>
+                        <span class="community-link">github.com/tahabahrami/jpglens/issues →</span>
+                    </a>
+                    
+                    <a href="https://github.com/tahabahrami/jpglens/blob/main/CONTRIBUTING.md" class="community-card" target="_blank">
+                        <div class="community-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                        </div>
+                        <h3>Contribute</h3>
+                        <p>Help us improve jpglens for everyone</p>
+                        <span class="community-link">Contributing Guide →</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="brand-link">
+                        <span class="brand-icon">🔍</span>
+                        <span class="brand-text">jpglens</span>
+                    </div>
+                    <p class="footer-tagline">See your interfaces through the lens of intelligence</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Product</h4>
+                        <a href="/docs/">Documentation</a>
+                        <a href="/examples/">Examples</a>
+                        <a href="/comparison/">Comparison</a>
+                        <a href="https://github.com/tahabahrami/jpglens/releases">Changelog</a>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4>Community</h4>
+                        <a href="https://github.com/tahabahrami/jpglens" target="_blank">GitHub</a>
+                        <a href="https://www.npmjs.com/package/jpglens" target="_blank">npm</a>
+                        <a href="https://github.com/tahabahrami/jpglens/issues" target="_blank">Issues</a>
+                        <a href="https://github.com/tahabahrami/jpglens/blob/main/CONTRIBUTING.md" target="_blank">Contributing</a>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4>Resources</h4>
+                        <a href="/docs/getting-started/">Getting Started</a>
+                        <a href="/docs/api/">API Reference</a>
+                        <a href="https://github.com/tahabahrami/jpglens/blob/main/SECURITY.md" target="_blank">Security</a>
+                        <a href="https://github.com/tahabahrami/jpglens/blob/main/LICENSE" target="_blank">License</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 jpglens. Created by <a href="https://github.com/tahabahrami" target="_blank">Taha Bahrami</a>. Licensed under MIT.</p>
+                <p class="footer-love">Built with ❤️ for the developer community</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script type="module" src="/src/scripts/main.js"></script>
+</body>
+</html>
+< ! - -   A u t o m a t e d   d e p l o y m e n t   t e s t   - - >  
+ < ! - -   T e s t   a u t o m a t e d   d e p l o y m e n t   0 8 / 1 5 / 2 0 2 5   0 1 : 2 7 : 3 5   - - >  
+ < ! - -   D e p l o y m e n t   t e s t   2 0 2 5 - 0 8 - 1 5   0 1 : 3 2 : 1 7   - - >  
+ 
