@@ -104,7 +104,7 @@
       ]
     },
     {
-      "source": "/(.*\\.(js|css|woff2|woff|ttf|otf|eot))",
+      "source": "/(.*)\\.(js|css|woff2|woff|ttf|otf|eot)$",
       "headers": [
         {
           "key": "Cache-Control",
@@ -113,7 +113,7 @@
       ]
     },
     {
-      "source": "/(.*\\.(png|jpg|jpeg|gif|webp|svg|ico))",
+      "source": "/(.*)\\.(png|jpg|jpeg|gif|webp|svg|ico)$",
       "headers": [
         {
           "key": "Cache-Control",
