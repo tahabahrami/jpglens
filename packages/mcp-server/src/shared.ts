@@ -1,5 +1,6 @@
 // shared utilities for reporters, retries, and structured issues
 import * as fs from "fs-extra";
+import { appendFile } from "node:fs/promises";
 import path from "node:path";
 import { glob } from "glob";
 
@@ -15,7 +16,7 @@ export type StructuredIssue = {
   codeHint?: { file?: string; line?: number; suggestion?: string };
 };
 
-export function normalizeIssues(result:any, pageUrl?:string): StructuredIssue[] {
+export function normalizeIssues(result: any, pageUrl?: string): StructuredIssue[] {
   // If jpglens already returns machine-readable issues, just map fields
   const issues: StructuredIssue[] = [];
   const src = result?.issues || result?.data?.issues || [];
@@ -53,9 +54,9 @@ export async function makeJsonlReporter(runId: string, reportDir: string): Promi
   await fs.mkdirp(reportDir);
   const file = path.join(reportDir, `events-${runId}.jsonl`);
   return {
-    async onStart(ctx){ await fs.appendFile(file, JSON.stringify({ type:"start", ...ctx, ts:Date.now() })+"\n"); },
-    async onItem(ev){ await fs.appendFile(file, JSON.stringify({ type:"item", ...ev, ts:Date.now() })+"\n"); },
-    async onComplete(sum){ await fs.appendFile(file, JSON.stringify({ type:"complete", ...sum, ts:Date.now() })+"\n"); }
+    async onStart(ctx){ await fs.outputFile(file, JSON.stringify({ type:"start", ...ctx, ts:Date.now() })+"\n"); },
+    async onItem(ev){ await appendFile(file, JSON.stringify({ type:"item", ...ev, ts:Date.now() })+"\n"); },
+    async onComplete(sum){ await appendFile(file, JSON.stringify({ type:"complete", ...sum, ts:Date.now() })+"\n"); }
   };
 }
 
@@ -88,16 +89,25 @@ export async function pickReporters(runId:string, reportDir:string, kind?:string
 }
 
 // Retry helpers
-export async function withRetry<T>(fn:()=>Promise<T>, opts:{max:number, baseMs:number, jitter:boolean}) : Promise<T> {
-  let attempt = 0; let lastErr:any = null;
+export async function withRetry<T>(
+  fn: () => Promise<T>, 
+  opts: { max: number, baseMs: number, jitter: boolean }
+): Promise<T> {
+  let attempt = 0; 
+  let lastErr: any = null;
+  
   while (attempt <= opts.max) {
-    try { return await fn(); } catch (e) {
+    try { 
+      return await fn(); 
+    } catch (e) {
       lastErr = e; 
       if (attempt === opts.max) break;
+      
       const backoff = opts.baseMs * Math.pow(2, attempt) * (opts.jitter ? (0.5 + Math.random()) : 1);
       await new Promise(r => setTimeout(r, backoff));
       attempt++;
     }
   }
+  
   throw lastErr;
 }

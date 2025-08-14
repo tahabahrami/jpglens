@@ -10,9 +10,9 @@ import AdmZip from "adm-zip";
 import { normalizeIssues, pickReporters, withRetry } from "./shared.js";
 
 const CWD = process.cwd();
-async function ensureDir(dir) { await fs.mkdirp(dir); }
-async function writeJSONSafe(file, data) { await ensureDir(path.dirname(file)); await fs.writeJSON(file, data, { spaces: 2 }); }
-async function maybeImport(imp) { try { return await imp(); } catch { return null; } }
+async function ensureDir(dir: string): Promise<void> { await fs.mkdirp(dir); }
+async function writeJSONSafe(file: string, data: any): Promise<void> { await ensureDir(path.dirname(file)); await fs.writeJSON(file, data, { spaces: 2 }); }
+async function maybeImport(imp: () => Promise<any>): Promise<any> { try { return await imp(); } catch { return null; } }
 
 const UserContextSchema = z.object({ persona: z.string().optional(), device: z.string().optional(), deviceContext: z.string().optional(), expertise: z.string().optional(), urgency: z.string().optional(), goals: z.array(z.string()).optional() });
 const AnalysisOptionsSchema = z.object({ stage: z.string().optional(), userIntent: z.string().optional(), userContext: UserContextSchema.optional(), criticalElements: z.array(z.string()).optional(), businessContext: z.record(z.string()).optional(), depth: z.enum(["quick","standard","comprehensive"]).optional(), types: z.array(z.enum(["usability","accessibility","visual-design","performance"])).optional(), includeScreenshots: z.boolean().optional(), customPromptKey: z.string().optional() });
@@ -26,7 +26,7 @@ const app = express();
 app.use(cors());
 app.use(express.json({ limit: "10mb" }));
 
-const clients = new Set();
+const clients = new Set<any>();
 app.get("/sse", (req, res) => {
   res.set({ "Content-Type": "text/event-stream", "Cache-Control": "no-cache", Connection: "keep-alive" });
   res.flushHeaders();
@@ -34,7 +34,12 @@ app.get("/sse", (req, res) => {
   clients.add(res);
   req.on("close", () => clients.delete(res));
 });
-function broadcast(event, data) { const msg = `event: ${event}\ndata: ${JSON.stringify(data)}\n\n`; for (const res of clients) { try { res.write(msg); } catch {} } }
+function broadcast(event: string, data: any): void { 
+  const msg = `event: ${event}\ndata: ${JSON.stringify(data)}\n\n`; 
+  for (const res of clients) { 
+    try { res.write(msg); } catch {} 
+  } 
+}
 
 app.get("/health", (_req, res) => res.json({ ok: true, transport: "sse" }));
 
@@ -83,8 +88,8 @@ app.post("/rpc/batch_analyze", async (req, res) => {
         const entry = { url: item.url, ok:true, workerId:id, seq:item._seq, structuredIssues: structured };
         results.push(entry);
         await Promise.all(reps.map(rep => rep.onItem?.(entry)));
-      } catch (e) {
-        const entry = { url: item.url, ok:false, workerId:id, seq:item._seq, error: (e && e.message) || String(e) };
+      } catch (e: any) {
+        const entry = { url: item.url, ok:false, workerId:id, seq:item._seq, error: e?.message || String(e) };
         results.push(entry);
         await Promise.all(reps.map(rep => rep.onItem?.(entry)));
       }
@@ -133,8 +138,8 @@ app.post("/rpc/run_journey", async (req, res) => {
         const entry = { stage: stage.name, ok:true, seq:i+1, url, structuredIssues: structured };
         results.push(entry);
         await Promise.all(reps.map(rep => rep.onItem?.(entry)));
-      } catch (e) {
-        const entry = { stage: stage.name, ok:false, seq:i+1, error: (e && e.message) || String(e) };
+      } catch (e: any) {
+        const entry = { stage: stage.name, ok:false, seq:i+1, error: e?.message || String(e) };
         results.push(entry);
         await Promise.all(reps.map(rep => rep.onItem?.(entry)));
       }
