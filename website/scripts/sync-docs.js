@@ -74,8 +74,34 @@ class DocumentationSync {
   async syncReadmeContent() {
     console.log('📚 Syncing README content...');
 
-    const readmePath = path.join(rootDir, 'README.md');
-    const readmeContent = await fs.readFile(readmePath, 'utf8');
+    // Try multiple possible paths for README.md
+    const possiblePaths = [
+      path.join(rootDir, 'README.md'),
+      path.join(process.cwd(), '../README.md'),
+      path.join(process.cwd(), '../../README.md'),
+      '/vercel/source0/README.md', // Vercel build path
+      process.env.README_PATH || ''
+    ].filter(Boolean);
+
+    let readmeContent = '';
+    let foundPath = '';
+
+    for (const readmePath of possiblePaths) {
+      try {
+        readmeContent = await fs.readFile(readmePath, 'utf8');
+        foundPath = readmePath;
+        console.log(`✅ Found README at: ${readmePath}`);
+        break;
+      } catch (error) {
+        console.log(`❌ README not found at: ${readmePath}`);
+        continue;
+      }
+    }
+
+    if (!readmeContent) {
+      console.log('⚠️ README.md not found, using fallback content...');
+      readmeContent = `# jpglens\n\nUniversal AI-Powered UI Testing\n\nPlease visit [GitHub](https://github.com/tahabahrami/jpglens) for the latest documentation.`;
+    }
 
     // Extract sections from README
     const sections = this.extractReadmeSections(readmeContent);
