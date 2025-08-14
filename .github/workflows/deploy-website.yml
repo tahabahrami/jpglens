@@ -1,0 +1,99 @@
+name: 🌐 Deploy Website to Vercel
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'website/**'
+      - 'README.md'
+      - 'package.json'
+      - 'packages/mcp-server/package.json'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'website/**'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: 🚀 Deploy Website
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: 'website/package-lock.json'
+
+      - name: Install dependencies
+        working-directory: ./website
+        run: npm ci
+
+      - name: Sync documentation
+        working-directory: ./website
+        run: |
+          node scripts/sync-docs.js
+          echo "Documentation synced successfully"
+
+      - name: Build website
+        working-directory: ./website
+        run: npm run build
+
+      - name: Deploy to Vercel (Production)
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          working-directory: ./website
+          vercel-args: '--prod'
+
+      - name: Deploy to Vercel (Preview)
+        if: github.event_name == 'pull_request'
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          working-directory: ./website
+          github-comment: true
+
+  # Separate job for package updates (triggers doc sync)
+  sync-on-package-update:
+    name: 📚 Sync Documentation
+    runs-on: ubuntu-latest
+    if: contains(github.event.head_commit.message, 'chore(release)') || contains(github.event.head_commit.message, 'version bump')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: 'website/package-lock.json'
+
+      - name: Install dependencies
+        working-directory: ./website
+        run: npm ci
+
+      - name: Sync docs and deploy
+        working-directory: ./website
+        run: |
+          node scripts/sync-docs.js
+          npm run build
+
+      - name: Deploy updated docs
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          working-directory: ./website
+          vercel-args: '--prod'
