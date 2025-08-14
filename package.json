@@ -1,6 +1,6 @@
 {
   "name": "jpglens",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "type": "module",
   "description": "🔍 Universal AI-Powered UI Testing - See your interfaces through the lens of intelligence",
   "keywords": [
@@ -18,7 +18,11 @@
     "llm-testing",
     "openrouter",
     "gpt-vision",
-    "claude-vision"
+    "claude-vision",
+    "mcp",
+    "model-context-protocol",
+    "ai-agents",
+    "cursor-ide"
   ],
   "author": {
     "name": "Taha Bahrami (Kaito)",
