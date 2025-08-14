@@ -674,8 +674,8 @@ const artifacts = await mcp.call('export_artifacts', {
 {
   "servers": {
     "jpglens": {
-      "command": "node",
-      "args": ["./packages/mcp-server/dist/index.js"],
+      "command": "npx",
+      "args": ["jpglens-mcp-server"],
       "transport": "stdio"
     }
   }
@@ -685,7 +685,7 @@ const artifacts = await mcp.call('export_artifacts', {
 **With HTTP/SSE Bridge**
 ```bash
 # Start SSE server for web-based AI agents
-PORT=3333 node packages/mcp-server/dist/sse.js
+PORT=3333 npx jpglens-mcp-server-sse
 
 # Health check
 curl http://localhost:3333/health
@@ -700,14 +700,14 @@ curl -X POST http://localhost:3333/rpc/run_playwright_analysis \
 **Docker Deployment**
 ```bash
 # Build production container
-docker build -t jpglens-mcp ./packages/mcp-server
+docker build -t jpglens-mcp-server ./packages/mcp-server
 
 # Run with environment configuration
 docker run -p 3333:3333 \
   -e JPGLENS_API_KEY=your_key \
   -e JPGLENS_REPORTER=both \
   -e JPGLENS_S3_BUCKET=your_bucket \
-  jpglens-mcp
+  jpglens-mcp-server
 ```
 
 ### 📈 **Technical Achievements Showcase**
@@ -761,14 +761,19 @@ Let AI agents (Cursor/Claude/OpenAI) run jpglens analyses via an MCP server.
 ### Quickstart
 1. Build:
 ```bash
-pnpm -F @jpglens/mcp-server build
+# Install MCP server
+npm install -g jpglens-mcp-server
+
+# Or build from source
+pnpm -F jpglens-mcp-server build
 ```
 2. Cursor → Settings → Features → MCP → **Add**
 - Type: `stdio`
-- Command: `/ABS/PATH/TO/repo/packages/mcp-server/dist/index.js`
+- Command: `npx jpglens-mcp-server` (if installed globally)
+- Or: `/ABS/PATH/TO/repo/packages/mcp-server/dist/index.js` (from source)
 
 **SSE (optional):**
-Run `PORT=3333 node packages/mcp-server/dist/sse.js` and point hosted agents to `http://localhost:3333`.
+Run `PORT=3333 npx jpglens-mcp-server-sse` and point hosted agents to `http://localhost:3333`.
 
 ### Advanced
 - Retries/backoff in batch runs
