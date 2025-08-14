@@ -1,0 +1,35 @@
+name: publish-mcp-ghcr
+on:
+  push:
+    tags:
+      - "mcp-v*"
+      - "mcp-server-v*"
+      - "v*"
+  workflow_dispatch:
+permissions:
+  contents: read
+  packages: write
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm i -g pnpm
+      - run: pnpm i
+      - run: pnpm -F @jpglens/mcp-server build
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: packages/mcp-server/Dockerfile
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/jpglens-mcp-server:latest
+            ghcr.io/${{ github.repository_owner }}/jpglens-mcp-server:${{ github.sha }}

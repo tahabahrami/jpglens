@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "jpglens": {
+      "command": "/ABS/PATH/TO/REPO/packages/mcp-server/dist/index.js",
+      "args": []
+    }
+  }
+}

@@ -1,0 +1,11 @@
+[33mcommit 4011b319b9e994c34ae069f32f182cccf69f1880[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Ashkan Sirous <39720083+ashkansirous@users.noreply.github.com>
+Date:   Wed Aug 13 17:49:05 2025 +0100
+
+    Allow changing baseURL for openAI (#1)
+    
+    Co-authored-by: Ashkan Sirous <asi@templafy.com>
+
+ README.md               | 63 [32m++++++++++++++++++++++++++++++++++++++++++++++++[m[31m-[m
+ src/providers/openai.ts |  3 [32m++[m[31m-[m
+ 2 files changed, 64 insertions(+), 2 deletions(-)
