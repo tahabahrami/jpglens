@@ -1,40 +1,47 @@
 {
+  "version": 2,
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "installCommand": "npm install",
   "framework": null,
-  "public": true,
+  "public": false,
+  "cleanUrls": true,
+  "trailingSlash": false,
   "rewrites": [
     {
-      "source": "/docs/(.*)",
-      "destination": "/docs/index.html"
+      "source": "/",
+      "destination": "/index.html"
     },
     {
       "source": "/docs",
       "destination": "/docs/index.html"
     },
     {
-      "source": "/examples/(.*)",
-      "destination": "/examples/index.html"
+      "source": "/docs/(.*)",
+      "destination": "/docs/index.html"
     },
     {
       "source": "/examples",
       "destination": "/examples/index.html"
     },
     {
-      "source": "/comparison/(.*)",
-      "destination": "/comparison/index.html"
+      "source": "/examples/(.*)",
+      "destination": "/examples/index.html"
     },
     {
       "source": "/comparison",
       "destination": "/comparison/index.html"
     },
     {
-      "source": "/mcp/(.*)",
-      "destination": "/mcp/index.html"
+      "source": "/comparison/(.*)",
+      "destination": "/comparison/index.html"
     },
     {
       "source": "/mcp",
+      "destination": "/mcp/index.html"
+    },
+    {
+      "source": "/mcp/(.*)",
       "destination": "/mcp/index.html"
     },
     {
