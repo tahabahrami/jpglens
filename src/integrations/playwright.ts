@@ -237,7 +237,7 @@ export class PlaywrightJPGLens {
       const frameworks: string[] = [];
 
       // React
-      if (window.React || document.querySelector('[data-reactroot]') || document.querySelector('[data-react-helmet]')) {
+      if ((window as any).React || document.querySelector('[data-reactroot]') || document.querySelector('[data-react-helmet]')) {
         frameworks.push('React');
       }
 

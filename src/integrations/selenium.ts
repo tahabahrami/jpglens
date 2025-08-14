@@ -272,7 +272,7 @@ export class SeleniumJPGLens {
       return await this.driver.executeScript(() => {
         const frameworks: string[] = [];
 
-        if (window.React || document.querySelector('[data-reactroot]')) {
+        if ((window as any).React || document.querySelector('[data-reactroot]')) {
           frameworks.push('React');
         }
 
