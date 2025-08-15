@@ -43,15 +43,33 @@ jobs:
         working-directory: ./website
         run: npm run build
 
-      - name: Deploy to Vercel (Production)
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      - name: Setup Vercel Project
         working-directory: ./website
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
         run: |
-          npx vercel@latest --prod --token $VERCEL_TOKEN --scope kaitos-projects-a4aa0591
+          mkdir -p .vercel
+          echo '{"orgId":"${{ secrets.VERCEL_ORG_ID }}","projectId":"${{ secrets.VERCEL_PROJECT_ID }}"}' > .vercel/project.json
+          
+      - name: Deploy to Vercel (Production)
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        working-directory: ./website
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          npx vercel@latest --prod --token $VERCEL_TOKEN
+
+      - name: Setup Vercel Project (Preview)
+        if: github.event_name == 'pull_request'
+        working-directory: ./website
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          mkdir -p .vercel
+          echo '{"orgId":"${{ secrets.VERCEL_ORG_ID }}","projectId":"${{ secrets.VERCEL_PROJECT_ID }}"}' > .vercel/project.json
 
       - name: Deploy to Vercel (Preview)
         if: github.event_name == 'pull_request'
@@ -88,6 +106,15 @@ jobs:
         run: |
           node scripts/sync-docs.js
           npm run build
+
+      - name: Setup Vercel Project (Sync)
+        working-directory: ./website
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          mkdir -p .vercel
+          echo '{"orgId":"${{ secrets.VERCEL_ORG_ID }}","projectId":"${{ secrets.VERCEL_PROJECT_ID }}"}' > .vercel/project.json
 
       - name: Deploy updated docs
         uses: amondnet/vercel-action@v25
