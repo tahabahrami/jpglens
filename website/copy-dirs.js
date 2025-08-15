@@ -31,6 +31,7 @@ try {
   copyDirectory('docs', 'dist/docs');
   copyDirectory('examples', 'dist/examples');
   copyDirectory('comparison', 'dist/comparison');
+  copyDirectory('mcp', 'dist/mcp');
   
   // Copy src directory for assets
   console.log('📁 Copying src directory for assets...');
