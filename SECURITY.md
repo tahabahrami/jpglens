@@ -17,7 +17,7 @@ We take security vulnerabilities seriously. If you discover a security vulnerabi
 
 **Please do not report security vulnerabilities through public GitHub issues.**
 
-Instead, please report them via email to: **security@jpgos.com**
+Instead, please report them via email to: **security@jpglens.dev**
 
 Include the following information:
 - Description of the vulnerability

@@ -26,8 +26,8 @@
   ],
   "author": {
     "name": "Taha Bahrami (Kaito)",
-    "email": "taha@jpgos.com",
-    "url": "https://github.com/kaito"
+    "x": "tahabahrami",
+    "url": "https://github.com/tahabahrami"
   },
   "contributors": [
     {
@@ -190,7 +190,7 @@
     "type": "git",
     "url": "https://github.com/tahabahrami/jpglens.git"
   },
-  "homepage": "https://github.com/tahabahrami/jpglens",
+  "homepage": "https://jpglens.dev",
   "bugs": {
     "url": "https://github.com/tahabahrami/jpglens/issues"
   },
