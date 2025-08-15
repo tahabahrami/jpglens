@@ -1,8 +1,8 @@
 {
   "version": "1.1.0",
   "mcpVersion": "1.1.0",
-  "lastSync": "2025-08-15T01:42:22.463Z",
-  "buildTime": "2025-08-15T01:42:22.504Z",
+  "lastSync": "2025-08-15T01:45:49.008Z",
+  "buildTime": "2025-08-15T01:45:49.027Z",
   "features": {
     "mcpIntegration": true,
     "aiAgentSupport": true,
