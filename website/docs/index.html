@@ -383,7 +383,172 @@ test('analyze complete user journey', async ({ page }) => {
                     </div>
                 </section>
 
-                <!-- More sections would continue here... -->
+                <!-- API Reference Section -->
+                <section id="api-core" class="docs-section">
+                    <h2>Core API</h2>
+                    <p>The core jpglens API provides powerful functions for AI-powered UI analysis and testing.</p>
+                    
+                    <div class="api-method">
+                        <h3><code>quickAnalyze(page, options?)</code></h3>
+                        <p>Performs a rapid AI analysis of the current page state. Perfect for development and quick feedback.</p>
+                        
+                        <div class="api-params">
+                            <h4>Parameters</h4>
+                            <ul>
+                                <li><strong>page</strong> <code>Page</code> - Playwright page object</li>
+                                <li><strong>options</strong> <code>QuickAnalyzeOptions?</code> - Optional configuration</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="api-returns">
+                            <h4>Returns</h4>
+                            <p><code>Promise&lt;QuickAnalysisResult&gt;</code> - Analysis results with insights and recommendations</p>
+                        </div>
+                        
+                        <div class="code-example">
+                            <h4>Example</h4>
+                            <pre><code class="language-javascript">import { quickAnalyze } from 'jpglens/playwright';
+
+test('analyze login page', async ({ page }) => {
+  await page.goto('/login');
+  
+  const analysis = await quickAnalyze(page, {
+    focus: 'usability',
+    includeAccessibility: true
+  });
+  
+  console.log(analysis.insights);
+  expect(analysis.score).toBeGreaterThan(0.8);
+});</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="api-method">
+                        <h3><code>analyzeUserJourney(journey, options?)</code></h3>
+                        <p>Analyzes a complete user journey across multiple pages and interactions.</p>
+                        
+                        <div class="api-params">
+                            <h4>Parameters</h4>
+                            <ul>
+                                <li><strong>journey</strong> <code>UserJourney</code> - Journey definition with stages</li>
+                                <li><strong>options</strong> <code>JourneyAnalysisOptions?</code> - Optional configuration</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="api-returns">
+                            <h4>Returns</h4>
+                            <p><code>Promise&lt;JourneyAnalysisResult&gt;</code> - Comprehensive journey analysis</p>
+                        </div>
+                        
+                        <div class="code-example">
+                            <h4>Example</h4>
+                            <pre><code class="language-javascript">const userJourney = {
+  name: 'checkout-flow',
+  persona: 'returning-customer',
+  stages: [
+    { name: 'cart', page: '/cart', userGoal: 'review items' },
+    { name: 'checkout', page: '/checkout', userGoal: 'complete purchase' }
+  ]
+};
+
+const results = await analyzeUserJourney(userJourney);
+console.log(results.overallScore);
+console.log(results.stageAnalysis);</code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Types Section -->
+                <section id="api-types" class="docs-section">
+                    <h2>Types & Interfaces</h2>
+                    <p>TypeScript definitions for jpglens API components.</p>
+                    
+                    <div class="type-definition">
+                        <h3><code>QuickAnalyzeOptions</code></h3>
+                        <pre><code class="language-typescript">interface QuickAnalyzeOptions {
+  focus?: 'usability' | 'performance' | 'accessibility' | 'visual' | 'all';
+  includeAccessibility?: boolean;
+  includePerformance?: boolean;
+  customPrompts?: string[];
+  outputFormat?: 'detailed' | 'summary' | 'json';
+  aiProvider?: 'openai' | 'anthropic' | 'openrouter';
+  model?: string;
+}</code></pre>
+                    </div>
+                    
+                    <div class="type-definition">
+                        <h3><code>QuickAnalysisResult</code></h3>
+                        <pre><code class="language-typescript">interface QuickAnalysisResult {
+  score: number; // 0-1
+  insights: string[];
+  recommendations: Recommendation[];
+  issues: Issue[];
+  metadata: {
+    timestamp: string;
+    url: string;
+    viewport: { width: number; height: number; };
+    analysisTime: number;
+  };
+}</code></pre>
+                    </div>
+                    
+                    <div class="type-definition">
+                        <h3><code>UserJourney</code></h3>
+                        <pre><code class="language-typescript">interface UserJourney {
+  name: string;
+  persona?: string;
+  device?: 'desktop' | 'mobile' | 'tablet';
+  stages: JourneyStage[];
+}
+
+interface JourneyStage {
+  name: string;
+  page: string;
+  userGoal: string;
+  aiAnalysis?: string;
+  actions?: Action[];
+}</code></pre>
+                    </div>
+                </section>
+
+                <!-- Utilities Section -->
+                <section id="api-utilities" class="docs-section">
+                    <h2>Utilities</h2>
+                    <p>Helper functions and utilities for enhanced testing workflows.</p>
+                    
+                    <div class="api-method">
+                        <h3><code>generateReport(results, options?)</code></h3>
+                        <p>Generate comprehensive reports from analysis results.</p>
+                        
+                        <div class="code-example">
+                            <pre><code class="language-javascript">import { generateReport } from 'jpglens/utils';
+
+const report = await generateReport(analysisResults, {
+  format: 'html',
+  includeScreenshots: true,
+  theme: 'dark'
+});
+
+await fs.writeFile('report.html', report);</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="api-method">
+                        <h3><code>createCustomPrompt(template, variables?)</code></h3>
+                        <p>Create custom AI analysis prompts for specialized testing scenarios.</p>
+                        
+                        <div class="code-example">
+                            <pre><code class="language-javascript">const customPrompt = createCustomPrompt(
+  'Analyze this {{pageType}} for {{userType}} users focusing on {{criteria}}',
+  {
+    pageType: 'e-commerce product page',
+    userType: 'mobile',
+    criteria: 'conversion optimization'
+  }
+);</code></pre>
+                        </div>
+                    </div>
+                </section>
                 
                 <!-- Footer Navigation -->
                 <div class="docs-footer-nav">

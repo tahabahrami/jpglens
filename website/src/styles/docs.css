@@ -423,3 +423,88 @@
     background: var(--color-background-tertiary);
     color: var(--color-text-primary);
 }
+
+/* API Documentation Styles */
+.api-method {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-6);
+    margin-bottom: var(--spacing-6);
+}
+
+.api-method h3 {
+    color: var(--color-primary);
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--spacing-3);
+    background: var(--color-background-tertiary);
+    padding: var(--spacing-2) var(--spacing-3);
+    border-radius: var(--border-radius);
+    border-left: 3px solid var(--color-primary);
+}
+
+.api-params, .api-returns {
+    margin: var(--spacing-4) 0;
+}
+
+.api-params h4, .api-returns h4 {
+    font-size: var(--font-size-base);
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-2);
+    font-weight: var(--font-weight-semibold);
+}
+
+.api-params ul {
+    list-style: none;
+    padding: 0;
+}
+
+.api-params li {
+    padding: var(--spacing-2) 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.api-params li:last-child {
+    border-bottom: none;
+}
+
+.api-params code {
+    background: var(--color-background-tertiary);
+    color: var(--color-primary);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: var(--font-size-sm);
+}
+
+.type-definition {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-6);
+    margin-bottom: var(--spacing-6);
+}
+
+.type-definition h3 {
+    color: var(--color-success);
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--spacing-4);
+    padding-bottom: var(--spacing-2);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.type-definition pre {
+    background: var(--color-background-tertiary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-4);
+    margin: 0;
+    overflow-x: auto;
+}
+
+.type-definition code {
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+}
