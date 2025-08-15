@@ -406,7 +406,838 @@ test('analyze complete user journey', async ({ page }) => {
                     </div>
                 </section>
 
-                <!-- API Reference Section -->
+                <!-- Cypress Integration Section -->
+            <section id="cypress" class="docs-section">
+                <h2>Cypress Integration</h2>
+                <p>jpglens integrates seamlessly with Cypress for end-to-end testing with AI-powered insights.</p>
+                
+                <h3>Installation</h3>
+                <pre><code class="language-bash">npm install --save-dev jpglens</code></pre>
+                
+                <h3>Basic Usage</h3>
+                <pre><code class="language-javascript">// cypress/e2e/example.cy.js
+import 'jpglens/cypress';
+
+describe('User Experience Analysis', () => {
+  it('analyzes checkout flow', () => {
+    cy.visit('/checkout');
+    
+    // Your existing test actions
+    cy.get('[data-cy="email"]').type('user@example.com');
+    cy.get('[data-cy="continue"]').click();
+    
+    // Add AI analysis
+    cy.analyzeUserExperience({
+      stage: 'checkout-form',
+      userIntent: 'complete purchase',
+      userContext: {
+        persona: 'first-time-buyer',
+        device: 'mobile'
+      }
+    });
+  });
+});</code></pre>
+                
+                <h3>Advanced Features</h3>
+                <pre><code class="language-javascript">// Analyze specific elements
+cy.get('.product-grid').analyzeElement({
+  focus: 'usability',
+  userContext: { device: 'mobile' }
+});
+
+// Journey analysis
+cy.analyzeJourney({
+  name: 'product-discovery',
+  stages: ['landing', 'search', 'product-detail', 'cart']
+});</code></pre>
+            </section>
+            
+            <!-- Selenium Integration Section -->
+            <section id="selenium" class="docs-section">
+                <h2>Selenium Integration</h2>
+                <p>Use jpglens with Selenium WebDriver for cross-browser AI-powered testing.</p>
+                
+                <h3>Basic Setup</h3>
+                <pre><code class="language-javascript">import { WebDriver } from 'selenium-webdriver';
+import { analyzeCurrentState, analyzeUserJourney } from 'jpglens/selenium';
+
+const driver = new WebDriver(/* your driver config */);
+
+// Quick analysis
+await analyzeCurrentState(driver, {
+  focus: 'accessibility',
+  userContext: { device: 'desktop' }
+});
+
+// Journey analysis
+await analyzeUserJourney(driver, {
+  name: 'user-registration',
+  persona: 'new-user',
+  stages: [
+    { name: 'form', actions: ['fill-email', 'fill-password'] },
+    { name: 'verification', actions: ['click-verify'] }
+  ]
+});</code></pre>
+                
+                <h3>Cross-Browser Testing</h3>
+                <pre><code class="language-javascript">import { analyzeCrossBrowser } from 'jpglens/selenium';
+
+const browsers = ['chrome', 'firefox', 'safari'];
+const results = await analyzeCrossBrowser(browsers, {
+  url: 'https://example.com',
+  scenarios: ['mobile-nav', 'form-submission']
+});
+
+console.log(results.browserComparison);</code></pre>
+            </section>
+            
+            <!-- Storybook Integration Section -->
+            <section id="storybook" class="docs-section">
+                <h2>Storybook Integration</h2>
+                <p>Analyze component states and design systems within Storybook stories.</p>
+                
+                <h3>Story Analysis</h3>
+                <pre><code class="language-javascript">// Button.stories.js
+import { analyzeComponent } from 'jpglens/storybook';
+
+export default {
+  title: 'Button',
+  component: Button,
+};
+
+export const Primary = {
+  args: { variant: 'primary', children: 'Click me' },
+  play: async ({ canvasElement }) => {
+    await analyzeComponent(canvasElement, 'Button', {
+      states: ['default', 'hover', 'focus', 'disabled'],
+      focus: 'accessibility'
+    });
+  }
+};</code></pre>
+                
+                <h3>Component Library Analysis</h3>
+                <pre><code class="language-javascript">import { analyzeComponentLibrary } from 'jpglens/storybook';
+
+const components = [
+  { name: 'Button', canvas: buttonCanvas, states: ['default', 'hover'] },
+  { name: 'Input', canvas: inputCanvas, states: ['empty', 'filled', 'error'] }
+];
+
+const libraryAnalysis = await analyzeComponentLibrary(components);
+console.log(libraryAnalysis.designSystemConsistency);</code></pre>
+            </section>
+            
+            <!-- Testing Library Integration Section -->
+            <section id="testing-library" class="docs-section">
+                <h2>Testing Library Integration</h2>
+                <p>Enhance React Testing Library tests with AI-powered component analysis.</p>
+                
+                <h3>Component Testing</h3>
+                <pre><code class="language-javascript">import { render, screen } from '@testing-library/react';
+import { analyzeRenderedComponent } from 'jpglens/testing-library';
+import MyComponent from './MyComponent';
+
+test('analyzes component accessibility', async () => {
+  render(&lt;MyComponent /&gt;);
+  
+  const analysis = await analyzeRenderedComponent(screen.getByTestId('component'), {
+    focus: 'accessibility',
+    includeAriaAnalysis: true
+  });
+  
+  expect(analysis.accessibilityScore).toBeGreaterThan(0.9);
+});</code></pre>
+                
+                <h3>User Interaction Analysis</h3>
+                <pre><code class="language-javascript">import userEvent from '@testing-library/user-event';
+
+test('analyzes user interaction flow', async () => {
+  const user = userEvent.setup();
+  render(&lt;LoginForm /&gt;);
+  
+  // Perform user actions
+  await user.type(screen.getByLabelText(/email/i), 'user@example.com');
+  await user.type(screen.getByLabelText(/password/i), 'password123');
+  
+  // Analyze the interaction
+  await analyzeUserInteraction(screen.getByRole('form'), {
+    interactionType: 'form-submission',
+    userContext: { expertise: 'novice' }
+  });
+});</code></pre>
+            </section>
+            
+            <!-- Core Concepts Sections -->
+            <section id="user-journeys" class="docs-section">
+                <h2>User Journeys</h2>
+                <p>Define and analyze complete user workflows across multiple pages and interactions.</p>
+                
+                <h3>Journey Definition</h3>
+                <pre><code class="language-javascript">const userJourney = {
+  name: 'e-commerce-purchase',
+  persona: 'first-time-buyer',
+  device: 'mobile',
+  stages: [
+    {
+      name: 'product-discovery',
+      page: '/products',
+      userGoal: 'find desired product',
+      criticalElements: ['search', 'filters', 'product-grid']
+    },
+    {
+      name: 'product-detail',
+      page: '/product/123',
+      userGoal: 'evaluate product details',
+      criticalElements: ['images', 'description', 'reviews', 'add-to-cart']
+    },
+    {
+      name: 'checkout',
+      page: '/checkout',
+      userGoal: 'complete purchase',
+      criticalElements: ['form', 'payment', 'shipping-options']
+    }
+  ]
+};</code></pre>
+                
+                <h3>Journey Templates</h3>
+                <pre><code class="language-javascript">import { getJourneyTemplate } from 'jpglens';
+
+// Pre-built journey templates
+const ecommerceJourney = getJourneyTemplate('e-commerce');
+const saasOnboarding = getJourneyTemplate('saas-onboarding');
+const contentConsumption = getJourneyTemplate('content-consumption');</code></pre>
+            </section>
+            
+            <section id="analysis-types" class="docs-section">
+                <h2>Analysis Types</h2>
+                <p>jpglens supports multiple analysis types to evaluate different aspects of your UI.</p>
+                
+                <h3>Available Analysis Types</h3>
+                <div class="analysis-types-grid">
+                    <div class="analysis-type">
+                        <h4>🎯 Usability</h4>
+                        <p>Evaluates user interface design, navigation clarity, and interaction patterns.</p>
+                        <code>types: ['usability']</code>
+                    </div>
+                    
+                    <div class="analysis-type">
+                        <h4>♿ Accessibility</h4>
+                        <p>Checks WCAG compliance, screen reader compatibility, and inclusive design.</p>
+                        <code>types: ['accessibility']</code>
+                    </div>
+                    
+                    <div class="analysis-type">
+                        <h4>🎨 Visual Design</h4>
+                        <p>Analyzes visual hierarchy, color contrast, typography, and layout consistency.</p>
+                        <code>types: ['visual-design']</code>
+                    </div>
+                    
+                    <div class="analysis-type">
+                        <h4>⚡ Performance</h4>
+                        <p>Evaluates loading speed, responsiveness, and performance impact on UX.</p>
+                        <code>types: ['performance']</code>
+                    </div>
+                    
+                    <div class="analysis-type">
+                        <h4>📱 Mobile Optimization</h4>
+                        <p>Focuses on mobile-specific usability, touch targets, and responsive design.</p>
+                        <code>types: ['mobile-optimization']</code>
+                    </div>
+                    
+                    <div class="analysis-type">
+                        <h4>💰 Conversion Optimization</h4>
+                        <p>Analyzes conversion funnels, call-to-action effectiveness, and user flow.</p>
+                        <code>types: ['conversion-optimization']</code>
+                    </div>
+                </div>
+                
+                <h3>Configuration Example</h3>
+                <pre><code class="language-javascript">const config = {
+  analysis: {
+    types: ['usability', 'accessibility', 'performance'],
+    depth: 'comprehensive',
+    includeScreenshots: true
+  }
+};</code></pre>
+            </section>
+            
+            <section id="user-personas" class="docs-section">
+                <h2>User Personas</h2>
+                <p>Define user personas to tailor AI analysis for specific user types and contexts.</p>
+                
+                <h3>Built-in Personas</h3>
+                <pre><code class="language-javascript">import { getUserPersona } from 'jpglens';
+
+// Pre-defined personas
+const businessUser = getUserPersona('business-user');
+const mobileConsumer = getUserPersona('mobile-consumer');
+const powerUser = getUserPersona('power-user');
+const accessibilityUser = getUserPersona('accessibility-user');</code></pre>
+                
+                <h3>Custom Persona Definition</h3>
+                <pre><code class="language-javascript">const customPersona = {
+  name: 'Senior Citizen',
+  expertise: 'novice',
+  device: 'tablet',
+  urgency: 'low',
+  goals: ['simplicity', 'large-text', 'clear-navigation'],
+  painPoints: ['small-text', 'complex-interfaces', 'fast-animations'],
+  context: 'Limited tech experience, values clarity and patience',
+  assistiveTech: ['reading-glasses', 'voice-control']
+};</code></pre>
+                
+                <h3>Persona-Based Analysis</h3>
+                <pre><code class="language-javascript">await analyzeUserJourney(page, {
+  userContext: {
+    persona: customPersona,
+    deviceContext: 'tablet-portrait',
+    expertise: 'novice'
+  },
+  stage: 'account-setup',
+  userIntent: 'create account with minimal frustration'
+});</code></pre>
+            </section>
+            
+            <section id="reporting" class="docs-section">
+                <h2>Reporting</h2>
+                <p>Generate comprehensive reports from jpglens analysis results.</p>
+                
+                <h3>Report Formats</h3>
+                <pre><code class="language-javascript">import { generateReport } from 'jpglens/utils';
+
+// HTML Report
+const htmlReport = await generateReport(analysisResults, {
+  format: 'html',
+  template: 'executive-summary',
+  includeScreenshots: true,
+  theme: 'professional'
+});
+
+// Markdown Report
+const markdownReport = await generateReport(analysisResults, {
+  format: 'markdown',
+  includeMetrics: true,
+  groupByPriority: true
+});
+
+// JSON Report for CI/CD
+const jsonReport = await generateReport(analysisResults, {
+  format: 'json',
+  structuredData: true,
+  includeRawAnalysis: false
+});</code></pre>
+                
+                <h3>Custom Report Templates</h3>
+                <pre><code class="language-javascript">const customTemplate = {
+  name: 'accessibility-focused',
+  sections: ['executive-summary', 'accessibility-issues', 'remediation-steps'],
+  prioritize: ['critical-accessibility', 'wcag-violations'],
+  includeScreenshots: true,
+  format: 'html'
+};
+
+const report = await generateReport(results, { template: customTemplate });</code></pre>
+                
+                <h3>Real-time Reporting</h3>
+                <pre><code class="language-javascript">// Stream results to dashboard
+const reportStream = createReportStream({
+  destination: 'dashboard',
+  realtime: true,
+  filters: ['critical', 'high-priority']
+});
+
+await analyzeUserJourney(page, {
+  // ... analysis config
+  reporting: {
+    stream: reportStream,
+    immediate: true
+  }
+});</code></pre>
+            </section>
+            
+            <!-- AI Integration Sections -->
+            <section id="ai-analysis" class="docs-section">
+                <h2>AI Analysis</h2>
+                <p>Deep dive into jpglens AI-powered analysis capabilities and configuration.</p>
+                
+                <h3>AI Provider Configuration</h3>
+                <pre><code class="language-javascript">const aiConfig = {
+  provider: 'openrouter', // 'openai', 'anthropic', 'openrouter'
+  model: 'anthropic/claude-3-5-sonnet',
+  apiKey: process.env.JPGLENS_API_KEY,
+  maxTokens: 4000,
+  temperature: 0.1,
+  fallbackModel: 'openai/gpt-4-vision-preview'
+};</code></pre>
+                
+                <h3>Custom Analysis Prompts</h3>
+                <pre><code class="language-javascript">const customPrompts = {
+  'e-commerce-focus': `
+    Analyze this e-commerce interface focusing on:
+    - Product discoverability
+    - Purchase flow friction
+    - Trust signals and security indicators
+    - Mobile checkout optimization
+  `,
+  'accessibility-deep': `
+    Perform comprehensive accessibility analysis:
+    - WCAG 2.1 AA compliance
+    - Screen reader compatibility
+    - Keyboard navigation
+    - Color contrast ratios
+  `
+};
+
+await analyzeUserJourney(page, {
+  customPrompts: customPrompts['e-commerce-focus']
+});</code></pre>
+                
+                <h3>AI Model Selection</h3>
+                <div class="model-comparison">
+                    <h4>Recommended Models</h4>
+                    <ul>
+                        <li><strong>Claude 3.5 Sonnet</strong> - Best for detailed UI analysis and accessibility</li>
+                        <li><strong>GPT-4 Vision</strong> - Excellent for visual design evaluation</li>
+                        <li><strong>GPT-4o</strong> - Fast and cost-effective for basic analysis</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <section id="vision-testing" class="docs-section">
+                <h2>Vision Testing</h2>
+                <p>Leverage AI vision capabilities for advanced visual UI testing and analysis.</p>
+                
+                <h3>Visual Regression Testing</h3>
+                <pre><code class="language-javascript">import { compareVisualStates } from 'jpglens/vision';
+
+// Compare two visual states
+const comparison = await compareVisualStates({
+  baseline: baselineScreenshot,
+  current: currentScreenshot,
+  threshold: 0.95,
+  ignoreRegions: ['.timestamp', '.dynamic-content'],
+  aiAnalysis: true
+});
+
+if (comparison.hasSignificantChanges) {
+  console.log('Visual changes detected:', comparison.changes);
+}</code></pre>
+                
+                <h3>Component Visual Testing</h3>
+                <pre><code class="language-javascript">// Test component across different states
+const componentStates = ['default', 'hover', 'focus', 'disabled', 'error'];
+
+for (const state of componentStates) {
+  await page.setComponentState(state);
+  
+  const analysis = await analyzeVisualState(page, {
+    component: 'Button',
+    state: state,
+    focus: ['visual-consistency', 'accessibility', 'brand-compliance']
+  });
+  
+  expect(analysis.brandConsistency).toBeGreaterThan(0.9);
+}</code></pre>
+                
+                <h3>Cross-Device Vision Testing</h3>
+                <pre><code class="language-javascript">const devices = [
+  { name: 'iPhone 13', viewport: { width: 390, height: 844 } },
+  { name: 'iPad Pro', viewport: { width: 1024, height: 1366 } },
+  { name: 'Desktop', viewport: { width: 1920, height: 1080 } }
+];
+
+const crossDeviceResults = await analyzeCrossDevice(devices, {
+  url: '/product/123',
+  scenarios: ['product-view', 'add-to-cart', 'quick-buy'],
+  visionAnalysis: {
+    checkLayoutShifts: true,
+    validateResponsiveDesign: true,
+    assessTouchTargets: true
+  }
+});</code></pre>
+            </section>
+            
+            <!-- Advanced Sections -->
+            <section id="custom-prompts" class="docs-section">
+                <h2>Custom Prompts</h2>
+                <p>Create specialized AI analysis prompts for specific testing scenarios and requirements.</p>
+                
+                <h3>Prompt Templates</h3>
+                <pre><code class="language-javascript">import { createCustomPrompt } from 'jpglens/utils';
+
+// Template with variables
+const promptTemplate = `
+Analyze this {{pageType}} for {{userType}} users focusing on {{criteria}}.
+Consider the following context: {{businessContext}}
+
+Specific requirements:
+- {{requirement1}}
+- {{requirement2}}
+- {{requirement3}}
+
+Provide actionable recommendations for improvement.
+`;
+
+const customPrompt = createCustomPrompt(promptTemplate, {
+  pageType: 'e-commerce checkout',
+  userType: 'mobile',
+  criteria: 'conversion optimization',
+  businessContext: 'high-value B2B sales',
+  requirement1: 'minimize form fields',
+  requirement2: 'build trust through security indicators',
+  requirement3: 'optimize for one-handed mobile use'
+});</code></pre>
+                
+                <h3>Industry-Specific Prompts</h3>
+                <pre><code class="language-javascript">const industryPrompts = {
+  healthcare: `
+    Analyze this healthcare interface for:
+    - HIPAA compliance indicators
+    - Patient safety considerations
+    - Medical terminology clarity
+    - Emergency access patterns
+  `,
+  
+  fintech: `
+    Evaluate this financial interface for:
+    - Security and trust signals
+    - Regulatory compliance (PCI DSS)
+    - Transaction clarity
+    - Risk communication
+  `,
+  
+  education: `
+    Assess this educational platform for:
+    - Learning accessibility (diverse abilities)
+    - Age-appropriate design
+    - Progress tracking clarity
+    - Engagement patterns
+  `
+};</code></pre>
+                
+                <h3>Dynamic Prompt Generation</h3>
+                <pre><code class="language-javascript">function generateContextualPrompt(userJourney, businessGoals) {
+  const basePrompt = `Analyze this ${userJourney.stage} interface`;
+  const contextPrompt = `for ${userJourney.persona} users`;
+  const goalPrompt = `focusing on ${businessGoals.join(', ')}`;
+  
+  return `${basePrompt} ${contextPrompt} ${goalPrompt}.
+    
+    Consider:
+    - User's current goal: ${userJourney.userIntent}
+    - Device context: ${userJourney.device}
+    - Business priorities: ${businessGoals.join(', ')}
+    
+    Provide specific, actionable recommendations.`;
+}
+
+const prompt = generateContextualPrompt(
+  { stage: 'checkout', persona: 'returning-customer', userIntent: 'quick purchase', device: 'mobile' },
+  ['conversion-rate', 'user-satisfaction', 'cart-abandonment-reduction']
+);</code></pre>
+            </section>
+            
+            <section id="plugins" class="docs-section">
+                <h2>Plugins</h2>
+                <p>Extend jpglens functionality with custom plugins and integrations.</p>
+                
+                <h3>Plugin Architecture</h3>
+                <pre><code class="language-javascript">// Custom plugin structure
+const customPlugin = {
+  name: 'brand-consistency-checker',
+  version: '1.0.0',
+  
+  // Plugin initialization
+  init(config) {
+    this.brandGuidelines = config.brandGuidelines;
+    this.colorPalette = config.colorPalette;
+    this.typography = config.typography;
+  },
+  
+  // Analysis hook
+  async analyze(screenshot, context) {
+    const brandAnalysis = await this.checkBrandConsistency(screenshot);
+    return {
+      score: brandAnalysis.score,
+      violations: brandAnalysis.violations,
+      recommendations: brandAnalysis.recommendations
+    };
+  },
+  
+  // Custom analysis method
+  async checkBrandConsistency(screenshot) {
+    // Custom brand analysis logic
+    return {
+      score: 0.85,
+      violations: ['incorrect-font-weight', 'off-brand-color'],
+      recommendations: ['Use brand primary color #007bff', 'Apply medium font weight']
+    };
+  }
+};</code></pre>
+                
+                <h3>Plugin Registration</h3>
+                <pre><code class="language-javascript">import { registerPlugin } from 'jpglens';
+
+// Register custom plugin
+registerPlugin(customPlugin, {
+  brandGuidelines: './brand-guidelines.json',
+  colorPalette: ['#007bff', '#28a745', '#dc3545'],
+  typography: { primary: 'Inter', secondary: 'JetBrains Mono' }
+});
+
+// Use plugin in analysis
+await analyzeUserJourney(page, {
+  plugins: ['brand-consistency-checker'],
+  pluginConfig: {
+    'brand-consistency-checker': {
+      strictMode: true,
+      includeColorAnalysis: true
+    }
+  }
+});</code></pre>
+                
+                <h3>Available Plugin Types</h3>
+                <div class="plugin-types">
+                    <div class="plugin-type">
+                        <h4>🎨 Visual Plugins</h4>
+                        <p>Brand consistency, design system validation, visual regression</p>
+                    </div>
+                    <div class="plugin-type">
+                        <h4>♿ Accessibility Plugins</h4>
+                        <p>WCAG validation, screen reader testing, color contrast</p>
+                    </div>
+                    <div class="plugin-type">
+                        <h4>⚡ Performance Plugins</h4>
+                        <p>Core Web Vitals, loading analysis, optimization suggestions</p>
+                    </div>
+                    <div class="plugin-type">
+                        <h4>🔒 Security Plugins</h4>
+                        <p>Security headers, vulnerability scanning, trust indicators</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="performance" class="docs-section">
+                <h2>Performance</h2>
+                <p>Optimize jpglens for speed and efficiency in your testing workflows.</p>
+                
+                <h3>Performance Configuration</h3>
+                <pre><code class="language-javascript">const performanceConfig = {
+  // Concurrent analysis
+  concurrency: 3,
+  
+  // Cache settings
+  cache: {
+    enabled: true,
+    ttl: 300000, // 5 minutes
+    maxSize: 100  // 100 cached results
+  },
+  
+  // Request optimization
+  requests: {
+    timeout: 30000,
+    retries: 3,
+    batchSize: 5
+  },
+  
+  // Screenshot optimization
+  screenshots: {
+    quality: 80,
+    format: 'webp',
+    maxWidth: 1920,
+    compression: true
+  }
+};</code></pre>
+                
+                <h3>Batch Analysis</h3>
+                <pre><code class="language-javascript">import { batchAnalyze } from 'jpglens/performance';
+
+// Analyze multiple pages efficiently
+const pages = [
+  { url: '/home', name: 'homepage' },
+  { url: '/products', name: 'product-listing' },
+  { url: '/checkout', name: 'checkout' }
+];
+
+const batchResults = await batchAnalyze(pages, {
+  concurrency: 3,
+  sharedContext: {
+    userContext: { persona: 'mobile-user' },
+    analysisTypes: ['usability', 'performance']
+  },
+  optimization: {
+    reuseSession: true,
+    cacheScreenshots: true,
+    parallelProcessing: true
+  }
+});
+
+console.log(`Analyzed ${pages.length} pages in ${batchResults.totalTime}ms`);</code></pre>
+                
+                <h3>Memory Management</h3>
+                <pre><code class="language-javascript">// Optimize memory usage for large test suites
+const memoryConfig = {
+  // Clear screenshots after analysis
+  autoCleanup: true,
+  
+  // Limit concurrent analyses
+  maxConcurrentAnalyses: 2,
+  
+  // Stream results instead of storing in memory
+  streamResults: true,
+  
+  // Garbage collection hints
+  forceGC: true
+};
+
+await analyzeUserJourney(page, {
+  ...standardConfig,
+  performance: memoryConfig
+});</code></pre>
+                
+                <h3>Performance Monitoring</h3>
+                <pre><code class="language-javascript">import { PerformanceMonitor } from 'jpglens/performance';
+
+const monitor = new PerformanceMonitor();
+
+monitor.on('analysis-start', (data) => {
+  console.log(`Starting analysis: ${data.analysisId}`);
+});
+
+monitor.on('analysis-complete', (data) => {
+  console.log(`Analysis completed in ${data.duration}ms`);
+  console.log(`Memory usage: ${data.memoryUsage}MB`);
+});
+
+monitor.on('bottleneck-detected', (data) => {
+  console.warn(`Performance bottleneck: ${data.bottleneck}`);
+  console.warn(`Recommendation: ${data.recommendation}`);
+});</code></pre>
+            </section>
+            
+            <section id="troubleshooting" class="docs-section">
+                <h2>Troubleshooting</h2>
+                <p>Common issues and solutions for jpglens implementation and usage.</p>
+                
+                <h3>Common Issues</h3>
+                <div class="troubleshooting-section">
+                    <h4>🔑 API Key Issues</h4>
+                    <div class="issue">
+                        <strong>Problem:</strong> "API key is required" error
+                        <br>
+                        <strong>Solution:</strong>
+                        <pre><code class="language-bash"># Set environment variable
+export JPGLENS_API_KEY="your-api-key-here"
+
+# Or in .env file
+JPGLENS_API_KEY=your-api-key-here</code></pre>
+                    </div>
+                    
+                    <div class="issue">
+                        <strong>Problem:</strong> "Invalid API key" error
+                        <br>
+                        <strong>Solution:</strong> Verify your API key is correct and has proper permissions:
+                        <pre><code class="language-javascript">// Test API key
+import { testAPIConnection } from 'jpglens/utils';
+
+const isValid = await testAPIConnection();
+if (!isValid) {
+  console.error('API key is invalid or expired');
+}</code></pre>
+                    </div>
+                </div>
+                
+                <div class="troubleshooting-section">
+                    <h4>🖼️ Screenshot Issues</h4>
+                    <div class="issue">
+                        <strong>Problem:</strong> Screenshots are blank or corrupted
+                        <br>
+                        <strong>Solution:</strong>
+                        <pre><code class="language-javascript">// Wait for page to fully load
+await page.waitForLoadState('networkidle');
+await page.waitForTimeout(1000); // Additional wait
+
+// Ensure viewport is set
+await page.setViewportSize({ width: 1920, height: 1080 });</code></pre>
+                    </div>
+                    
+                    <div class="issue">
+                        <strong>Problem:</strong> Dynamic content not captured
+                        <br>
+                        <strong>Solution:</strong>
+                        <pre><code class="language-javascript">// Wait for specific elements
+await page.waitForSelector('.dynamic-content');
+await page.waitForFunction(() => document.readyState === 'complete');</code></pre>
+                    </div>
+                </div>
+                
+                <div class="troubleshooting-section">
+                    <h4>⚡ Performance Issues</h4>
+                    <div class="issue">
+                        <strong>Problem:</strong> Analysis taking too long
+                        <br>
+                        <strong>Solutions:</strong>
+                        <pre><code class="language-javascript">// Reduce analysis scope
+const quickConfig = {
+  analysis: {
+    types: ['usability'], // Focus on one type
+    depth: 'quick',       // Use quick analysis
+    includeScreenshots: false
+  }
+};
+
+// Use caching
+const cachedConfig = {
+  cache: {
+    enabled: true,
+    ttl: 600000 // 10 minutes
+  }
+};</code></pre>
+                    </div>
+                </div>
+                
+                <h3>Debug Mode</h3>
+                <pre><code class="language-javascript">// Enable debug logging
+process.env.JPGLENS_DEBUG = 'true';
+
+// Or in configuration
+const config = {
+  debug: {
+    enabled: true,
+    logLevel: 'verbose', // 'error', 'warn', 'info', 'verbose'
+    saveScreenshots: true,
+    saveRequests: true
+  }
+};
+
+await analyzeUserJourney(page, config);</code></pre>
+                
+                <h3>Health Check</h3>
+                <pre><code class="language-javascript">import { healthCheck } from 'jpglens/diagnostics';
+
+// Run comprehensive health check
+const health = await healthCheck();
+
+console.log('API Connection:', health.apiConnection);
+console.log('Browser Support:', health.browserSupport);
+console.log('Dependencies:', health.dependencies);
+console.log('Configuration:', health.configuration);
+
+if (!health.overall) {
+  console.log('Issues found:', health.issues);
+  console.log('Recommendations:', health.recommendations);
+}</code></pre>
+                
+                <h3>Support Resources</h3>
+                <ul>
+                    <li>📚 <a href="https://github.com/tahabahrami/jpglens/wiki">Documentation Wiki</a></li>
+                    <li>💬 <a href="https://github.com/tahabahrami/jpglens/discussions">Community Discussions</a></li>
+                    <li>🐛 <a href="https://github.com/tahabahrami/jpglens/issues">Bug Reports</a></li>
+                    <li>📧 <a href="mailto:support@jpglens.dev">Email Support</a></li>
+                </ul>
+            </section>
+
+            <!-- API Reference Section -->
                 <section id="api-core" class="docs-section">
                     <h2>Core API</h2>
                     <p>The core jpglens API provides powerful functions for AI-powered UI analysis and testing.</p>

@@ -158,13 +158,17 @@ program
 
     try {
       // Dynamic import to avoid loading heavy dependencies during init
-      const { runAnalysis } = await import('../dist/cli/analyzer.js');
+      const { quickAnalyze } = await import('../dist/playwright.esm.js');
+      const { chromium } = await import('playwright');
       
-      const result = await runAnalysis(url || 'http://localhost:3000', {
-        config: options.config,
-        output: options.output || './jpglens-reports',
-        depth: options.depth
-      });
+      // Launch browser and navigate to URL
+      const browser = await chromium.launch();
+      const page = await browser.newPage();
+      await page.goto(url || 'http://localhost:3000');
+      
+      const result = await quickAnalyze(page, 'page');
+      
+      await browser.close();
 
       spinner.succeed(chalk.green(`Analysis completed! Score: ${result.overallScore}/10`));
 
@@ -203,9 +207,9 @@ program
     const spinner = ora('Analyzing user journey...').start();
 
     try {
-      const { runJourneyAnalysis } = await import('../dist/cli/journey-analyzer.js');
+      const { playwrightAnalyzeJourney } = await import('../dist/playwright.esm.js');
       
-      const results = await runJourneyAnalysis(file, {
+      const results = await playwrightAnalyzeJourney(file, {
         config: options.config,
         output: options.output || './jpglens-reports'
       });
@@ -522,4 +526,3 @@ function getRunCommand(framework) {
 
 // Parse command line arguments
 program.parse();
-`;
