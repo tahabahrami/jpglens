@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initTableOfContents();
     initSearchFunctionality();
     initCodeExamples();
+    initMobileSidebar();
 });
 
 // Documentation navigation
@@ -209,6 +210,78 @@ function initCodeExamples() {
         });
         
         example.appendChild(tryButton);
+    });
+}
+
+// Mobile sidebar functionality
+function initMobileSidebar() {
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    const sidebar = document.getElementById('docs-sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+    
+    if (!sidebarToggle || !sidebar || !overlay) return;
+    
+    // Toggle sidebar
+    function toggleSidebar() {
+        sidebar.classList.toggle('open');
+        overlay.classList.toggle('active');
+        
+        // Update toggle button icon
+        const icon = sidebarToggle.querySelector('svg');
+        if (sidebar.classList.contains('open')) {
+            icon.innerHTML = `
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            `;
+        } else {
+            icon.innerHTML = `
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            `;
+        }
+    }
+    
+    // Close sidebar
+    function closeSidebar() {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('active');
+        
+        // Reset toggle button icon
+        const icon = sidebarToggle.querySelector('svg');
+        icon.innerHTML = `
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+        `;
+    }
+    
+    // Event listeners
+    sidebarToggle.addEventListener('click', toggleSidebar);
+    overlay.addEventListener('click', closeSidebar);
+    
+    // Close sidebar when clicking on nav items (mobile)
+    const navItems = sidebar.querySelectorAll('.nav-item');
+    navItems.forEach(item => {
+        item.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                closeSidebar();
+            }
+        });
+    });
+    
+    // Close sidebar on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && sidebar.classList.contains('open')) {
+            closeSidebar();
+        }
+    });
+    
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            closeSidebar();
+        }
     });
 }
 
