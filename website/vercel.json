@@ -5,6 +5,7 @@
   "installCommand": "npm install",
   "framework": null,
   "public": false,
+
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [

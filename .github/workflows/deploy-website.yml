@@ -51,7 +51,7 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
         run: |
           mkdir -p .vercel
-          echo '{"orgId":"${{ secrets.VERCEL_ORG_ID }}","projectId":"${{ secrets.VERCEL_PROJECT_ID }}"}' > .vercel/project.json
+          echo '{"orgId":"team_qjAylPRWiD3YA7GeHMAD6UdN","projectId":"prj_J8TUOCkbwiLyYUunKBHK4h6pPS8x"}' > .vercel/project.json
           
       - name: Deploy to Vercel (Production)
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
@@ -69,7 +69,7 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
         run: |
           mkdir -p .vercel
-          echo '{"orgId":"${{ secrets.VERCEL_ORG_ID }}","projectId":"${{ secrets.VERCEL_PROJECT_ID }}"}' > .vercel/project.json
+          echo '{"orgId":"team_qjAylPRWiD3YA7GeHMAD6UdN","projectId":"prj_J8TUOCkbwiLyYUunKBHK4h6pPS8x"}' > .vercel/project.json
 
       - name: Deploy to Vercel (Preview)
         if: github.event_name == 'pull_request'
@@ -114,7 +114,7 @@ jobs:
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
         run: |
           mkdir -p .vercel
-          echo '{"orgId":"${{ secrets.VERCEL_ORG_ID }}","projectId":"${{ secrets.VERCEL_PROJECT_ID }}"}' > .vercel/project.json
+          echo '{"orgId":"team_qjAylPRWiD3YA7GeHMAD6UdN","projectId":"prj_J8TUOCkbwiLyYUunKBHK4h6pPS8x"}' > .vercel/project.json
 
       - name: Deploy updated docs
         uses: amondnet/vercel-action@v25
