@@ -36,28 +36,57 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar" id="navbar">
         <div class="nav-container">
             <div class="nav-brand">
                 <a href="/" class="brand-link">
                     <span class="brand-icon">🔍</span>
                     <span class="brand-text">jpglens</span>
+                    <span class="brand-version">v1.1.0</span>
                 </a>
             </div>
             
             <div class="nav-menu" id="nav-menu">
-                <a href="#features" class="nav-link">Features</a>
-                <a href="/docs/" class="nav-link">Docs</a>
-                <a href="/mcp/" class="nav-link mcp-highlight">MCP</a>
-                <a href="/examples/" class="nav-link">Examples</a>
-                <a href="/comparison/" class="nav-link">Comparison</a>
-                <a href="#community" class="nav-link">Community</a>
-                <a href="https://github.com/tahabahrami/jpglens" class="nav-link github-link" target="_blank">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                    </svg>
-                    GitHub
-                </a>
+                <div class="nav-section">
+                    <a href="#features" class="nav-link">
+                        <span class="nav-icon">✨</span>
+                        <span>Features</span>
+                    </a>
+                    <a href="/docs/" class="nav-link">
+                        <span class="nav-icon">📚</span>
+                        <span>Docs</span>
+                    </a>
+                    <a href="/mcp/" class="nav-link mcp-highlight">
+                        <span class="nav-icon">🤖</span>
+                        <span>MCP</span>
+                        <span class="nav-badge">New</span>
+                    </a>
+                    <a href="/examples/" class="nav-link">
+                        <span class="nav-icon">💡</span>
+                        <span>Examples</span>
+                    </a>
+                    <a href="/comparison/" class="nav-link">
+                        <span class="nav-icon">⚖️</span>
+                        <span>Compare</span>
+                    </a>
+                </div>
+                
+                <div class="nav-actions">
+                    <a href="#community" class="nav-link">
+                        <span class="nav-icon">👥</span>
+                        <span>Community</span>
+                    </a>
+                    <a href="https://github.com/tahabahrami/jpglens" class="nav-link github-link" target="_blank">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                        <span>GitHub</span>
+                    </a>
+                    <a href="https://www.npmjs.com/package/jpglens" class="nav-cta" target="_blank">
+                        <span class="cta-icon">📦</span>
+                        <span>Install</span>
+                    </a>
+                </div>
             </div>
             
             <div class="nav-toggle" id="nav-toggle">
@@ -70,32 +99,65 @@
 
     <!-- Hero Section -->
     <section class="hero">
+        <div class="hero-background">
+            <div class="hero-grid"></div>
+            <div class="hero-gradient-orb hero-orb-1"></div>
+            <div class="hero-gradient-orb hero-orb-2"></div>
+            <div class="hero-gradient-orb hero-orb-3"></div>
+        </div>
         <div class="hero-container">
             <div class="hero-content">
-                <div class="hero-badge">
+                <div class="hero-badge animate-fade-in">
                     <span class="badge-icon">🚀</span>
                     <span>Now available on npm</span>
+                    <div class="badge-pulse"></div>
                 </div>
                 
-                <h1 class="hero-title">
+                <h1 class="hero-title animate-fade-in-up">
                     Universal AI-Powered
-                    <span class="gradient-text">UI Testing</span>
+                    <span class="gradient-text typing-effect">UI Testing</span>
                 </h1>
                 
-                <p class="hero-description">
+                <p class="hero-description animate-fade-in-up">
                     See your interfaces through the lens of intelligence. jpglens analyzes your UI through the context of real user journeys, testing not just functionality, but user experience.
                 </p>
                 
-                <div class="hero-actions">
-                    <a href="#get-started" class="btn btn-primary btn-large">
-                        Get Started
+                <div class="hero-actions animate-fade-in-up">
+                    <a href="#get-started" class="btn btn-primary btn-large btn-glow">
+                        <span class="btn-text">Get Started</span>
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M5 12h14m-7-7 7 7-7 7"/>
                         </svg>
+                        <div class="btn-shine"></div>
                     </a>
-                    <a href="/docs/" class="btn btn-secondary btn-large">
-                        Read Docs
+                    <a href="/docs/" class="btn btn-secondary btn-large btn-hover-lift">
+                        <span class="btn-icon">📚</span>
+                        <span class="btn-text">Read Docs</span>
                     </a>
+                </div>
+                
+                <div class="hero-demo animate-fade-in-up">
+                    <div class="demo-window">
+                        <div class="demo-header">
+                            <div class="demo-dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                            <div class="demo-title">Terminal</div>
+                        </div>
+                        <div class="demo-content">
+                            <div class="demo-line">
+                                <span class="demo-prompt">$</span>
+                                <span class="demo-command typing-animation">npm install jpglens</span>
+                                <span class="demo-cursor">|</span>
+                            </div>
+                            <div class="demo-output">
+                                <div class="demo-success">✅ jpglens@1.1.0 installed successfully</div>
+                                <div class="demo-info">🤖 AI-powered testing ready to use</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="hero-stats">
@@ -493,46 +555,150 @@ export const InteractiveStates = {
 
     <!-- Footer -->
     <footer class="footer">
+        <div class="footer-gradient"></div>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
                     <div class="brand-link">
                         <span class="brand-icon">🔍</span>
                         <span class="brand-text">jpglens</span>
+                        <span class="brand-version">v1.1.0</span>
                     </div>
                     <p class="footer-tagline">See your interfaces through the lens of intelligence</p>
+                    <div class="footer-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">10K+</span>
+                            <span class="stat-label">Downloads</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">500+</span>
+                            <span class="stat-label">GitHub Stars</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">50+</span>
+                            <span class="stat-label">Contributors</span>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="footer-links">
                     <div class="footer-section">
-                        <h4>Product</h4>
-                        <a href="/docs/">Documentation</a>
-                        <a href="/examples/">Examples</a>
-                        <a href="/comparison/">Comparison</a>
-                        <a href="https://github.com/tahabahrami/jpglens/releases">Changelog</a>
+                        <h4>
+                            <span class="section-icon">📚</span>
+                            Product
+                        </h4>
+                        <a href="/docs/">
+                            <span class="link-icon">📖</span>
+                            Documentation
+                        </a>
+                        <a href="/examples/">
+                            <span class="link-icon">💡</span>
+                            Examples
+                        </a>
+                        <a href="/comparison/">
+                            <span class="link-icon">⚖️</span>
+                            Comparison
+                        </a>
+                        <a href="https://github.com/tahabahrami/jpglens/releases">
+                            <span class="link-icon">🚀</span>
+                            Changelog
+                        </a>
                     </div>
                     
                     <div class="footer-section">
-                        <h4>Community</h4>
-                        <a href="https://github.com/tahabahrami/jpglens" target="_blank">GitHub</a>
-                        <a href="https://www.npmjs.com/package/jpglens" target="_blank">npm</a>
-                        <a href="https://github.com/tahabahrami/jpglens/issues" target="_blank">Issues</a>
-                        <a href="https://github.com/tahabahrami/jpglens/blob/main/CONTRIBUTING.md" target="_blank">Contributing</a>
+                        <h4>
+                            <span class="section-icon">🤖</span>
+                            AI Features
+                        </h4>
+                        <a href="/mcp/">
+                            <span class="link-icon">🔗</span>
+                            MCP Integration
+                            <span class="new-badge">New</span>
+                        </a>
+                        <a href="/docs/ai-analysis/">
+                            <span class="link-icon">🧠</span>
+                            AI Analysis
+                        </a>
+                        <a href="/docs/vision-testing/">
+                            <span class="link-icon">👁️</span>
+                            Vision Testing
+                        </a>
+                        <a href="/docs/smart-reporting/">
+                            <span class="link-icon">📊</span>
+                            Smart Reports
+                        </a>
                     </div>
                     
                     <div class="footer-section">
-                        <h4>Resources</h4>
-                        <a href="/docs/getting-started/">Getting Started</a>
-                        <a href="/docs/api/">API Reference</a>
-                        <a href="https://github.com/tahabahrami/jpglens/blob/main/SECURITY.md" target="_blank">Security</a>
-                        <a href="https://github.com/tahabahrami/jpglens/blob/main/LICENSE" target="_blank">License</a>
+                        <h4>
+                            <span class="section-icon">👥</span>
+                            Community
+                        </h4>
+                        <a href="https://github.com/tahabahrami/jpglens" target="_blank">
+                            <span class="link-icon">⭐</span>
+                            GitHub
+                        </a>
+                        <a href="https://www.npmjs.com/package/jpglens" target="_blank">
+                            <span class="link-icon">📦</span>
+                            npm Package
+                        </a>
+                        <a href="https://github.com/tahabahrami/jpglens/discussions" target="_blank">
+                            <span class="link-icon">💬</span>
+                            Discussions
+                        </a>
+                        <a href="https://github.com/tahabahrami/jpglens/blob/main/CONTRIBUTING.md" target="_blank">
+                            <span class="link-icon">🤝</span>
+                            Contributing
+                        </a>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4>
+                            <span class="section-icon">🛠️</span>
+                            Resources
+                        </h4>
+                        <a href="/docs/getting-started/">
+                            <span class="link-icon">🚀</span>
+                            Quick Start
+                        </a>
+                        <a href="/docs/api/">
+                            <span class="link-icon">🔧</span>
+                            API Reference
+                        </a>
+                        <a href="https://github.com/tahabahrami/jpglens/blob/main/SECURITY.md" target="_blank">
+                            <span class="link-icon">🔒</span>
+                            Security
+                        </a>
+                        <a href="https://github.com/tahabahrami/jpglens/blob/main/LICENSE" target="_blank">
+                            <span class="link-icon">⚖️</span>
+                            MIT License
+                        </a>
                     </div>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2025 jpglens. Created by <a href="https://github.com/tahabahrami" target="_blank">Taha Bahrami</a>. Licensed under MIT.</p>
-                <p class="footer-love">Built with ❤️ for the developer community</p>
+                <div class="footer-bottom-left">
+                    <p>&copy; 2025 jpglens. Created by <a href="https://github.com/tahabahrami" target="_blank" class="creator-link">Taha Bahrami</a>.</p>
+                    <p class="footer-love">Built with ❤️ for the developer community</p>
+                </div>
+                <div class="footer-social">
+                    <a href="https://github.com/tahabahrami/jpglens" target="_blank" class="social-link" title="GitHub">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.npmjs.com/package/jpglens" target="_blank" class="social-link" title="npm">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M1.763 0C.786 0 0 .786 0 1.763v20.474C0 23.214.786 24 1.763 24h20.474c.977 0 1.763-.786 1.763-1.763V1.763C24 .786 23.214 0 22.237 0H1.763zM5.13 5.323l13.837.019-.009 13.836h-3.464l.01-10.382h-3.456L12.04 19.17H5.113L5.13 5.323z"/>
+                        </svg>
+                    </a>
+                    <a href="https://twitter.com/intent/tweet?text=Check%20out%20jpglens%20-%20Universal%20AI-Powered%20UI%20Testing&url=https://jpglens.dev" target="_blank" class="social-link" title="Share on Twitter">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                        </svg>
+                    </a>
+                </div>
             </div>
         </div>
     </footer>
