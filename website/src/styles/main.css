@@ -501,6 +501,8 @@ body {
     display: flex;
     gap: var(--spacing-4);
     margin-bottom: var(--spacing-12);
+    justify-content: center;
+    align-items: center;
 }
 
 .btn {
@@ -1178,9 +1180,10 @@ body {
 
 .footer-content {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: var(--spacing-12);
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    gap: var(--spacing-8);
     margin-bottom: var(--spacing-12);
+    align-items: start;
 }
 
 .footer-brand .brand-link {
@@ -1335,8 +1338,14 @@ body {
 
 @media (max-width: 1024px) {
     .footer-content {
-        grid-template-columns: 1fr 1fr;
-        gap: var(--spacing-8);
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: var(--spacing-6);
+    }
+    
+    .footer-brand {
+        grid-column: 1 / -1;
+        text-align: center;
+        margin-bottom: var(--spacing-6);
     }
 }
 
@@ -1345,6 +1354,11 @@ body {
         grid-template-columns: 1fr;
         gap: var(--spacing-6);
         text-align: center;
+    }
+    
+    .footer-brand {
+        grid-column: 1;
+        margin-bottom: var(--spacing-8);
     }
     
     .footer-stats {

@@ -508,3 +508,38 @@
     font-size: var(--font-size-sm);
     line-height: 1.6;
 }
+
+/* Sidebar Navigation Enhancements */
+.nav-item.mcp-highlight {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+    border: 1px solid var(--color-primary);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-2) var(--spacing-3);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    position: relative;
+}
+
+.nav-item .nav-icon {
+    font-size: var(--font-size-sm);
+    opacity: 0.8;
+}
+
+.nav-item .nav-badge {
+    background: var(--color-success);
+    color: white;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-left: auto;
+}
+
+.nav-section-title {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+}
